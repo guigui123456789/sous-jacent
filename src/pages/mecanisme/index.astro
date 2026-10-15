@@ -12,8 +12,8 @@ const entrees = (await getCollection('mecanisme'))
   titre="Le mécanisme de la semaine"
   description="Un seul fait de marché par semaine, et la mécanique qui l'a produit. Huit cents mots, chaque lundi."
 >
-  <div class="index-tete gutter">
-    <div class="wrap">
+  <div class="index-tete">
+    <div class="enveloppe">
       <h1>Le mécanisme de la semaine</h1>
       <p class="mesure intro">
         Pas un résumé de l'actualité : un seul fait, et ce qui l'a produit. Non pas « la banque centrale a baissé ses
@@ -23,13 +23,13 @@ const entrees = (await getCollection('mecanisme'))
     </div>
   </div>
 
-  <section class="section gutter">
-    <div class="wrap"><Liste entrees={entrees} base="/mecanisme" /></div>
+  <section class="section">
+    <div class="enveloppe"><Liste entrees={entrees} base="/mecanisme" /></div>
   </section>
 </Base>
 
 <style>
-  .index-tete { padding-block: clamp(2.5rem, 5vw, 4.5rem) 0; }
-  .index-tete h1 { font-size: var(--t-2xl); }
-  .intro { margin-top: 1.2rem; font-size: var(--t-md); line-height: 1.62; color: var(--encre-douce); }
+  .index-tete { padding-bottom: 0; }
+  .index-tete h1 { font-size: var(--h2); }
+  .intro { margin-top: 1.2rem; font-size: 1.0625rem; line-height: 1.62; color: var(--graphite-80); }
 </style>

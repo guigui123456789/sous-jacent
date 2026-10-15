@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import Embleme from '../components/Embleme.astro';
 import { getCollection } from 'astro:content';
 
 const publie = (c) => c.filter((e) => !e.data.brouillon).sort((a, b) => b.data.date - a.data.date);
@@ -16,121 +15,122 @@ const recents = [...meca, ...fonda]
     titre: e.data.titre,
     chapo: e.data.chapo,
     lien: (e.data.rubrique ? '/fondamentaux/' : '/mecanisme/') + e.id,
-    etiquette: e.data.rubrique ? `Les fondamentaux — ${e.data.rubrique}` : 'Le mécanisme de la semaine',
-    date: e.data.date,
+    categorie: e.data.rubrique ? `Fondamentaux — ${e.data.rubrique}` : 'Le mécanisme',
   }));
+
+const formats = [
+  {
+    image: '/images/parc-haussmann.png',
+    titre: "L'étude",
+    texte:
+      "Vingt et un exercices de comptes repris et retraités au même gabarit, un DCF inversé, trois scénarios, et le fichier de données en téléchargement.",
+    lien: '/etudes',
+    libelle: 'Voir les études',
+  },
+  {
+    image: '/images/pantheon-dome.jpg',
+    titre: 'Le mécanisme',
+    texte:
+      "Un seul fait de marché par semaine, et la mécanique qui l'a produit. Pas le résumé de l'actualité : ce qui se passe dessous.",
+    lien: '/mecanisme',
+    libelle: 'Lire les mécanismes',
+  },
+  {
+    image: '/images/salle-conseil.webp',
+    titre: 'Les fondamentaux',
+    texte:
+      "Chaque retraitement expliqué une fois — loyers, éléments non récurrents, capital employé — puis cité en note dans les études.",
+    lien: '/fondamentaux',
+    libelle: 'Voir les fondamentaux',
+  },
+];
+
+const chiffres = [
+  { valeur: 2005, suffixe: '', texte: "Première année de la série : celle du passage obligatoire aux IFRS, pour que les comptes restent comparables d'un bout à l'autre." },
+  { valeur: 21, suffixe: '', texte: "Exercices repris un à un, à partir des documents d'enregistrement universels et des rapports annuels." },
+  { valeur: 3, suffixe: '', texte: "Jeux d'hypothèses publiés côte à côte, avec ce que chacun suppose écrit noir sur blanc." },
+  { valeur: 0, suffixe: '', texte: "Objectif de cours. La méthode est montrée, la conclusion revient au lecteur." },
+];
 ---
 
 <Base
   titreComplet="sous-jacent — l'analyse d'une société cotée, vingt et un exercices, en public"
   titre="sous-jacent"
   description="Une société cotée française peu suivie, vingt et un exercices de comptes retraités au même gabarit, publiés avec les données et le modèle. La méthode, pas le verdict."
-  enteteSurPhoto={true}
+  enteteTransparente={true}
 >
-  <!-- ============ OUVERTURE ============ -->
-  <section class="ouverture" data-zone-photo>
-    <img
-      class="ouverture-photo"
-      src="/images/ouverture-feuillage.jpg"
-      alt=""
-      width="2400"
-      height="1400"
-      fetchpriority="high"
-    />
-    <div class="ouverture-voile"></div>
-    <div class="ouverture-contenu gutter">
-      <Embleme taille={54} classe="ouverture-embleme" />
-      <h1>Ce que le cours<br />ne dit pas encore</h1>
-      <p>
-        Une société cotée française peu suivie, reprise exercice par exercice depuis 2005.
-        Les comptes retraités, le modèle et les hypothèses sont publiés avec l'analyse.
-      </p>
+  <!-- ============== OUVERTURE ============== -->
+  <section class="hero" data-hero>
+    <div class="hero-image">
+      <img src="/images/facade-verre.png" alt="" width="1600" height="900" fetchpriority="high" />
     </div>
-    <a class="ouverture-suite" href="#publications" aria-label="Lire la suite">
-      <span></span>
-    </a>
+    <div class="hero-voile"></div>
+    <div class="enveloppe hero-contenu">
+      <p class="sur hero-sur">Analyse financière indépendante</p>
+      <h1>Ce que le cours<br />ne dit pas encore</h1>
+      <p class="hero-texte">
+        Une société cotée française peu suivie, reprise exercice par exercice depuis 2005. Les comptes
+        retraités, le modèle et les hypothèses sont publiés avec l'analyse.
+      </p>
+      <div class="hero-actions">
+        <a class="bouton bouton--clair" href="/etudes">Voir les études</a>
+        <a class="bouton bouton--clair" href="/methode">La méthode</a>
+      </div>
+    </div>
   </section>
 
-  <!-- ============ CE QUE JE PUBLIE ============ -->
-  <section class="section gutter" id="publications">
-    <div class="wrap">
-      <div class="tete-centree monte">
+  <!-- ============== CE QUE JE PUBLIE ============== -->
+  <section class="section">
+    <div class="enveloppe">
+      <div class="tete reveler">
         <p class="sur">Ce que je publie</p>
-        <h2 class="section-titre">Une seule société, traitée en profondeur</h2>
-        <p class="section-chapo">
+        <h2>Une seule société, traitée en profondeur</h2>
+        <p class="tete-texte">
           Les bureaux indépendants couvrent quatre cents valeurs, en surface, derrière un abonnement.
           Ici c'est l'inverse : une société à la fois, tout montré, en accès libre.
         </p>
       </div>
 
       <div class="trio">
-        <article class="carte monte">
-          <a href="/etudes">
-            <img src="/images/feuillage-foret.jpg" alt="" width="1400" height="1000" loading="lazy" />
-            <h3>L'étude</h3>
-            <p>
-              Vingt et un exercices de comptes repris et retraités au même gabarit, un DCF inversé,
-              trois scénarios, et le fichier de données en téléchargement.
-            </p>
-            <span class="lien-carte">Voir les études</span>
-          </a>
-        </article>
-
-        <article class="carte monte">
-          <a href="/mecanisme">
-            <img src="/images/cartes-anciennes.jpg" alt="" width="1400" height="1000" loading="lazy" />
-            <h3>Le mécanisme</h3>
-            <p>
-              Un seul fait de marché par semaine, et la mécanique qui l'a produit. Pas le résumé de
-              l'actualité : ce qui se passe dessous.
-            </p>
-            <span class="lien-carte">Lire les mécanismes</span>
-          </a>
-        </article>
-
-        <article class="carte monte">
-          <a href="/fondamentaux">
-            <img src="/images/pages-anciennes.jpg" alt="" width="1400" height="1000" loading="lazy" />
-            <h3>Les fondamentaux</h3>
-            <p>
-              Chaque retraitement expliqué une fois — loyers, non-récurrents, capital employé —
-              puis cité en note dans les études.
-            </p>
-            <span class="lien-carte">Voir les fondamentaux</span>
-          </a>
-        </article>
+        {formats.map((f, i) => (
+          <article class="carte reveler" data-rang={i}>
+            <a href={f.lien}>
+              <div class="cadre-image carte-image" data-rang={i}>
+                <img src={f.image} alt="" loading="lazy" />
+              </div>
+              <h3>{f.titre}</h3>
+              <p>{f.texte}</p>
+              <span class="lien carte-lien">{f.libelle}</span>
+            </a>
+          </article>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ============ CHIFFRES ============ -->
-  <section class="chiffres gutter">
-    <div class="wrap">
-      <div class="chiffres-grille">
-        <div class="monte">
-          <span class="chiffre-valeur">2005</span>
-          <p>Première année de la série, celle du passage obligatoire aux IFRS, pour que les comptes restent comparables.</p>
-        </div>
-        <div class="monte">
-          <span class="chiffre-valeur">21</span>
-          <p>Exercices repris un à un dans chaque étude, à partir des documents d'enregistrement universels.</p>
-        </div>
-        <div class="monte">
-          <span class="chiffre-valeur">3</span>
-          <p>Jeux d'hypothèses publiés côte à côte, avec ce que chacun suppose écrit noir sur blanc.</p>
-        </div>
-        <div class="monte">
-          <span class="chiffre-valeur">0</span>
-          <p>Objectif de cours. La méthode est montrée, la conclusion revient au lecteur.</p>
-        </div>
+  <!-- ============== CHIFFRES ============== -->
+  <section class="section section--pierre">
+    <div class="enveloppe">
+      <p class="sur sur--graphite reveler" style="margin-bottom:var(--e-10)">La série</p>
+      <div class="grille-4">
+        {chiffres.map((c, i) => (
+          <div class="chiffre reveler" data-rang={i}>
+            <span class="chiffre-valeur" data-compte={c.valeur}>0</span>
+            <hr class="filet" />
+            <p>{c.texte}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- ============ L'ÉTUDE ============ -->
-  <section class="etude gutter">
-    <div class="wrap etude-grille">
-      <div class="etude-texte monte">
+  <!-- ============== L'ÉTUDE ============== -->
+  <section class="etude">
+    <div class="etude-grille">
+      <div class="cadre-image etude-image">
+        <img src="/images/grande-arche.jpg" alt="" width="1376" height="768" loading="lazy" />
+      </div>
+      <div class="etude-texte reveler">
         <p class="sur">L'étude</p>
         <h2>{etude ? etude.data.titre : 'La première étude est en préparation'}</h2>
         <p class="etude-chapo">
@@ -138,12 +138,7 @@ const recents = [...meca, ...fonda]
             ? etude.data.chapo
             : "Le gabarit d'analyse et le modèle de retraitement sont en construction. Voici ce que chaque étude contiendra."}
         </p>
-        <a class="bouton" href={etude ? `/etudes/${etude.id}` : '/methode'}>
-          {etude ? "Lire l'étude" : 'Lire la méthode'}
-        </a>
-      </div>
 
-      <div class="etude-detail monte">
         {etude ? (
           <dl class="fiche">
             <div><dt>Société</dt><dd>{etude.data.societe}</dd></div>
@@ -159,28 +154,33 @@ const recents = [...meca, ...fonda]
             <li><strong>Le DCF inversé</strong> — trois curseurs, et la valeur implicite qui bouge avec eux.</li>
           </ul>
         )}
+
+        <a class="bouton" href={etude ? `/etudes/${etude.id}` : '/methode'}>
+          {etude ? "Lire l'étude" : 'Lire la méthode'}
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ============ DERNIÈRES PUBLICATIONS ============ -->
+  <!-- ============== DERNIÈRES PUBLICATIONS ============== -->
   {recents.length > 0 && (
-    <section class="section gutter">
-      <div class="wrap">
-        <div class="tete-ligne monte">
-          <h2 class="section-titre" style="margin-bottom:0">Dernières publications</h2>
+    <section class="section">
+      <div class="enveloppe">
+        <div class="tete-ligne reveler">
+          <h2>Dernières publications</h2>
           <a class="lien" href="/mecanisme">Tout voir</a>
         </div>
-        <div class="liste monte">
-          {recents.map((r) => (
-            <a class="item" href={r.lien}>
-              <div>
-                <span class="rubrique">{r.etiquette}</span>
-              </div>
+        <div class="liste">
+          {recents.map((r, i) => (
+            <a class="entree reveler" href={r.lien} data-rang={i}>
+              <span class="categorie">{r.categorie}</span>
               <div>
                 <h3>{r.titre}</h3>
                 <p>{r.chapo}</p>
               </div>
+              <span class="rond" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
             </a>
           ))}
         </div>
@@ -188,202 +188,157 @@ const recents = [...meca, ...fonda]
     </section>
   )}
 
-  <!-- ============ LA MÉTHODE ============ -->
-  <section class="bandeau gutter">
-    <div class="wrap bandeau-contenu monte">
-      <p class="sur" style="color:#A9B8CC">La méthode, pas le verdict</p>
-      <h2>Publier un prix cible, c'est vieillir en une semaine.<br />Publier une méthode, c'est se laisser contredire.</h2>
-      <p class="bandeau-texte">
-        Aucun objectif de cours n'est publié ici. Les hypothèses sont écrites et modifiables, les données
-        se téléchargent, et chaque graphique renvoie au document et à la page dont il est tiré.
-      </p>
-      <a class="bouton clair" href="/methode">Comment c'est calculé</a>
+  <!-- ============== LA MÉTHODE ============== -->
+  <section class="section section--bleu methode">
+    <div class="enveloppe methode-grille">
+      <div class="reveler">
+        <p class="sur">La méthode, pas le verdict</p>
+        <h2>Un prix cible vieillit en une semaine.<br />Une méthode se laisse contredire.</h2>
+      </div>
+      <div class="reveler" data-rang="1">
+        <p class="methode-texte">
+          Aucun objectif de cours n'est publié ici. Les hypothèses sont écrites et modifiables, les
+          données se téléchargent, et chaque graphique renvoie au document et à la page dont il est
+          tiré. Vous pouvez refaire le calcul et aboutir à autre chose que moi — c'est le but.
+        </p>
+        <a class="bouton bouton--clair" href="/methode">Comment c'est calculé</a>
+      </div>
     </div>
   </section>
 </Base>
 
 <style>
   /* ---------- ouverture ---------- */
-  .ouverture {
+  .hero {
     position: relative;
     min-height: 100svh;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
     overflow: hidden;
   }
-  .ouverture-photo {
-    position: absolute;
-    inset: 0;
+  .hero-image { position: absolute; inset: 0; }
+  .hero-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    animation: respire 18s ease-out forwards;
+    transform: scale(1.08);
+    animation: ample 14s var(--ease-ample) forwards;
   }
-  @keyframes respire { from { transform: scale(1.06); } to { transform: scale(1); } }
-  .ouverture-voile {
+  @keyframes ample { to { transform: scale(1); } }
+
+  .hero-voile {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to bottom, rgba(10, 22, 38, .52) 0%, rgba(10, 22, 38, .3) 45%, rgba(10, 22, 38, .55) 100%);
+      linear-gradient(100deg, rgba(22, 43, 75, .92) 0%, rgba(22, 43, 75, .78) 34%, rgba(22, 43, 75, .34) 58%, rgba(22, 43, 75, .12) 100%);
   }
-  .ouverture-contenu {
-    position: relative;
-    text-align: center;
-    max-width: 58rem;
-    padding-block: 8rem 4rem;
+  @media (max-width: 860px) {
+    .hero-voile { background: linear-gradient(to bottom, rgba(22,43,75,.86) 0%, rgba(22,43,75,.7) 60%, rgba(22,43,75,.78) 100%); }
   }
-  .ouverture-contenu :global(.ouverture-embleme) {
-    color: #fff;
-    margin: 0 auto 2.5rem;
-    opacity: 0;
-    animation: venir 1.1s cubic-bezier(.22, 1, .36, 1) .2s forwards;
-  }
-  .ouverture h1 {
-    color: #fff;
-    font-size: var(--d1);
-    line-height: 1.06;
-    letter-spacing: -0.02em;
-    opacity: 0;
-    animation: venir 1.2s cubic-bezier(.22, 1, .36, 1) .45s forwards;
-  }
-  .ouverture-contenu > p {
-    margin: 2rem auto 0;
-    max-width: 34rem;
-    color: rgba(255, 255, 255, .88);
-    font-size: var(--t-md);
-    line-height: 1.65;
-    opacity: 0;
-    animation: venir 1.2s cubic-bezier(.22, 1, .36, 1) .75s forwards;
-  }
-  @keyframes venir { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
 
-  .ouverture-suite {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1px;
-    height: 3.5rem;
-    background: rgba(255, 255, 255, .35);
-    overflow: hidden;
+  .hero-contenu { position: relative; width: 100%; padding-block: 9rem 5rem; }
+  .hero-sur { opacity: 0; animation: entrer .8s var(--ease) .15s forwards; }
+  .hero h1 {
+    color: #fff;
+    margin-top: var(--e-7);
+    max-width: 16ch;
+    opacity: 0;
+    animation: entrer 1.2s var(--ease) .3s forwards;
   }
-  .ouverture-suite span {
-    display: block;
-    width: 1px;
-    height: 100%;
-    background: #fff;
-    animation: glisse 2.6s ease-in-out infinite;
+  @media (max-width: 640px) { .hero h1 { font-size: min(var(--h1), 3rem); } }
+  .hero-texte {
+    margin-top: var(--e-8);
+    max-width: 34rem;
+    color: rgba(255, 255, 255, .86);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    opacity: 0;
+    animation: entrer 1.2s var(--ease) .5s forwards;
   }
-  @keyframes glisse {
-    0% { transform: translateY(-100%); }
-    60%, 100% { transform: translateY(100%); }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-5);
+    margin-top: var(--e-10);
+    opacity: 0;
+    animation: entrer 1.2s var(--ease) .68s forwards;
   }
+  @keyframes entrer { from { opacity: 0; transform: translateY(2rem); } to { opacity: 1; transform: none; } }
 
   @media (prefers-reduced-motion: reduce) {
-    .ouverture-photo { animation: none; }
-    .ouverture-contenu :global(.ouverture-embleme),
-    .ouverture h1,
-    .ouverture-contenu > p { opacity: 1; animation: none; }
-    .ouverture-suite span { animation: none; }
+    .hero-image img { animation: none; transform: none; }
+    .hero-sur, .hero h1, .hero-texte, .hero-actions { opacity: 1; animation: none; }
   }
 
-  /* ---------- têtes de section ---------- */
-  .tete-centree {
-    max-width: 44rem;
-    margin: 0 auto 4.5rem;
-    text-align: center;
-  }
-  .tete-centree .sur { display: block; margin-bottom: 1.5rem; }
+  /* ---------- têtes ---------- */
+  .tete { max-width: 44rem; margin-bottom: var(--e-13); }
+  .tete h2 { margin-top: var(--e-6); }
+  .tete-texte { margin-top: var(--e-7); font-size: 1.0625rem; line-height: 1.6; }
   .tete-ligne {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
-    gap: 2rem;
+    gap: var(--e-8);
     flex-wrap: wrap;
-    margin-bottom: 3rem;
+    margin-bottom: var(--e-10);
   }
 
   /* ---------- trois cartes ---------- */
-  .trio {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 3rem;
-  }
-  @media (max-width: 900px) { .trio { grid-template-columns: 1fr; gap: 3.5rem; } }
-  .carte a { text-decoration: none; display: block; }
-  .carte img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    margin-bottom: 2rem;
-    transition: opacity .4s ease;
-  }
-  .carte a:hover img { opacity: .88; }
-  .carte h3 { font-size: var(--d3); margin-bottom: 1rem; }
-  .carte p { color: var(--gris); line-height: 1.65; }
-  .lien-carte {
-    display: inline-block;
-    margin-top: 1.5rem;
-    font-size: var(--t-xs);
-    font-weight: 600;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--nuit);
-    border-bottom: 1px solid var(--filet-fort);
-    padding-bottom: .35rem;
-  }
-  .carte a:hover .lien-carte { border-bottom-color: var(--nuit); }
+  .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e-10); }
+  @media (max-width: 980px) { .trio { grid-template-columns: 1fr; gap: var(--e-13); } }
+  .carte a { text-decoration: none; display: block; transition: transform .2s ease-out; }
+  .carte a:hover { transform: translateY(-4px); }
+  .carte-image { aspect-ratio: 4 / 5; margin-bottom: var(--e-8); background: var(--pierre-40); }
+  .carte h3 { font-size: var(--h5); }
+  .carte p { margin-top: var(--e-5); color: var(--graphite); line-height: 1.6; }
+  .carte-lien { display: inline-block; margin-top: var(--e-7); }
 
   /* ---------- chiffres ---------- */
-  .chiffres { padding-block: var(--pas); background: var(--creme-ombre); }
-  .chiffres-grille {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 3rem;
-  }
-  @media (max-width: 900px) { .chiffres-grille { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; } }
-  @media (max-width: 560px) { .chiffres-grille { grid-template-columns: 1fr; } }
   .chiffre-valeur {
     display: block;
     font-family: var(--serif);
     font-weight: 300;
-    font-size: clamp(3rem, 2rem + 3.5vw, 4.5rem);
+    font-size: clamp(3rem, 2rem + 3vw, 4.25rem);
     line-height: 1;
-    color: var(--nuit);
-    margin-bottom: 1.25rem;
-    font-variant-numeric: lining-nums;
+    color: var(--bleu);
+    margin-bottom: var(--e-6);
+    font-variant-numeric: lining-nums tabular-nums;
   }
-  .chiffres p { font-size: var(--t-sm); line-height: 1.6; color: var(--gris); }
+  .chiffre .filet { margin-bottom: var(--e-6); }
+  .chiffre p { font-size: .9375rem; line-height: 1.6; color: var(--graphite); }
 
   /* ---------- l'étude ---------- */
-  .etude { padding-block: var(--pas); }
-  .etude-grille {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-    gap: clamp(2.5rem, 6vw, 6rem);
-    align-items: start;
+  .etude { padding-block: 0; }
+  .etude-grille { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; }
+  @media (max-width: 980px) { .etude-grille { grid-template-columns: 1fr; } }
+  .etude-image { min-height: 32rem; }
+  @media (max-width: 980px) { .etude-image { min-height: 20rem; } }
+  .etude-texte {
+    padding: var(--rythme) clamp(1.25rem, 4vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 44rem;
   }
-  @media (max-width: 900px) { .etude-grille { grid-template-columns: 1fr; gap: 2.5rem; } }
-  .etude-texte { max-width: 34rem; }
-  .etude-texte .sur { display: block; margin-bottom: 1.5rem; }
-  .etude h2 { font-size: var(--d2); }
-  .etude-chapo { margin-top: 1.5rem; margin-bottom: 2.5rem; font-size: var(--t-md); line-height: 1.65; }
-  .etude-detail { padding-top: .5rem; }
+  .etude-texte h2 { margin-top: var(--e-6); }
+  .etude-chapo { margin-top: var(--e-7); font-size: 1.0625rem; line-height: 1.6; }
 
-  .fiche { margin: 0; display: grid; grid-template-columns: 1fr; }
-  .fiche > div { display: flex; justify-content: space-between; gap: 1rem; padding-block: .85rem; border-bottom: 1px solid var(--filet); }
-  .fiche dt { color: var(--gris-clair); font-size: var(--t-sm); }
-  .fiche dd { margin: 0; color: var(--nuit); font-size: var(--t-sm); }
+  .fiche { margin: var(--e-9) 0; }
+  .fiche > div { display: flex; justify-content: space-between; gap: var(--e-7); padding-block: var(--e-4); border-bottom: 1px solid var(--graphite-20); }
+  .fiche > div:first-child { border-top: 1px solid var(--graphite-20); }
+  .fiche dt { color: var(--graphite-80); font-size: .9375rem; }
+  .fiche dd { margin: 0; color: var(--bleu); font-size: .9375rem; }
 
-  .livrables { list-style: none; margin: 0; padding: 0; }
-  .livrables li { padding-block: 1.1rem; border-bottom: 1px solid var(--filet); font-size: var(--t-sm); line-height: 1.6; }
-  .livrables li:first-child { border-top: 1px solid var(--filet); }
-  .livrables strong { color: var(--nuit); font-weight: 600; }
+  .livrables { list-style: none; margin: var(--e-9) 0; padding: 0; }
+  .livrables li { padding-block: var(--e-5); border-bottom: 1px solid var(--graphite-20); font-size: .9375rem; line-height: 1.6; }
+  .livrables li:first-child { border-top: 1px solid var(--graphite-20); }
+  .livrables strong { color: var(--bleu); font-weight: 600; }
 
-  /* ---------- bandeau méthode ---------- */
-  .bandeau { background: var(--nuit); padding-block: var(--pas); }
-  .bandeau-contenu { max-width: 52rem; }
-  .bandeau-contenu .sur { display: block; margin-bottom: 1.75rem; }
-  .bandeau h2 { color: #fff; font-size: var(--d3); line-height: 1.22; }
-  .bandeau-texte { margin: 2rem 0 2.75rem; color: #BFCBDA; font-size: var(--t-md); line-height: 1.65; max-width: 38rem; }
+  .etude-texte .bouton { align-self: flex-start; }
+
+  /* ---------- méthode ---------- */
+  .methode-grille { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  @media (max-width: 980px) { .methode-grille { grid-template-columns: 1fr; gap: var(--e-9); } }
+  .methode h2 { margin-top: var(--e-6); line-height: 1.2; }
+  .methode-texte { color: var(--bleu-20); font-size: 1.0625rem; line-height: 1.65; margin-bottom: var(--e-10); }
 </style>

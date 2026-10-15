@@ -1,28 +1,35 @@
 ---
 import Base from './Base.astro';
 
-const { titre, chapo, date, rubrique, fait, retour, retourLibelle } = Astro.props;
+const { titre, chapo, date, categorie, fait, retour, retourLibelle } = Astro.props;
 const d = new Date(date);
 const affiche = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
 ---
 
 <Base titre={titre} description={chapo}>
-  <article class="article gutter">
-    <div class="wrap">
+  <article class="article">
+    <div class="enveloppe">
       <div class="article-tete">
-        {retour && <a class="retour" href={retour}>&#8249; {retourLibelle}</a>}
-        {rubrique && <p class="rubrique-article">{rubrique}</p>}
+        {retour && (
+          <a class="retour" href={retour}>
+            <span class="rond rond--petit" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+            </span>
+            {retourLibelle}
+          </a>
+        )}
+        {categorie && <p class="sur">{categorie}</p>}
         <h1>{titre}</h1>
         <p class="chapo">{chapo}</p>
         <div class="article-meta">
-          <time class="chiffre" datetime={d.toISOString()}>{affiche}</time>
+          <time datetime={d.toISOString()}>{affiche}</time>
           <span>Guillaume Le Mérour</span>
         </div>
       </div>
 
       {fait && (
         <aside class="fait">
-          <p class="fait-label">Le fait</p>
+          <p class="sur">Le fait</p>
           <p class="fait-texte">{fait}</p>
         </aside>
       )}
@@ -31,8 +38,8 @@ const affiche = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', y
 
       <div class="article-pied">
         <p>
-          Cet article décrit une méthode et des mécanismes. Il ne contient ni recommandation, ni objectif de cours.
-          <a href="/methode">Lire la méthode</a>.
+          Cet article décrit une méthode et des mécanismes. Il ne contient ni recommandation, ni
+          objectif de cours. <a href="/methode">Lire la méthode</a>.
         </p>
       </div>
     </div>
@@ -40,41 +47,38 @@ const affiche = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', y
 </Base>
 
 <style>
+  .article-tete .sur { margin-bottom: var(--e-6); }
   .retour {
-    display: inline-block;
-    font-size: var(--t-sm);
-    font-weight: 500;
-    color: var(--encre-douce);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--e-4);
+    margin-bottom: var(--e-9);
+    font-size: .875rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
     text-decoration: none;
-    margin-bottom: 1.5rem;
+    color: var(--bleu);
   }
-  .retour:hover { color: var(--cuivre); }
-
-  .rubrique-article {
-    font-size: var(--t-sm);
-    font-weight: 600;
-    color: var(--cuivre);
-    margin-bottom: .6rem;
-  }
+  .rond--petit { width: 2.25rem; height: 2.25rem; }
+  .retour:hover .rond--petit { background: var(--bleu); color: #fff; transform: translateX(-3px); }
 
   .fait {
     max-width: 36rem;
-    margin-top: 2.75rem;
-    padding: 1.2rem 1.3rem;
-    background: var(--sable);
-    border-left: 2px solid var(--cuivre);
-    border-radius: var(--rayon);
+    margin-top: var(--e-10);
+    padding: var(--e-7);
+    background: var(--pierre-20);
+    border-left: 1px solid var(--or);
   }
-  .fait-label { font-size: var(--t-xs); font-weight: 600; color: var(--cuivre); margin-bottom: .4rem; }
-  .fait-texte { font-family: var(--serif); font-size: var(--t-md); line-height: 1.5; }
+  .fait .sur { margin-bottom: var(--e-3); }
+  .fait-texte { font-family: var(--serif); font-weight: 300; font-size: 1.25rem; line-height: 1.45; color: var(--bleu); }
 
   .article-pied {
     max-width: 36rem;
-    margin-top: 3.5rem;
-    padding-top: 1.2rem;
-    border-top: 1px solid var(--filet);
-    font-size: var(--t-sm);
-    color: var(--encre-douce);
+    margin-top: var(--e-12);
+    padding-top: var(--e-6);
+    border-top: 1px solid var(--graphite-20);
+    font-size: .9375rem;
+    color: var(--graphite-80);
   }
-  .article-pied a { color: var(--vert); }
+  .article-pied a { color: var(--bleu); }
 </style>

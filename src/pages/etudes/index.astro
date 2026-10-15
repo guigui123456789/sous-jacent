@@ -12,8 +12,8 @@ const entrees = (await getCollection('etudes'))
   titre="Les études"
   description="Une société cotée française peu suivie, vingt et un exercices de comptes retraités au même gabarit, publiés avec les données."
 >
-  <div class="index-tete gutter">
-    <div class="wrap">
+  <div class="index-tete">
+    <div class="enveloppe">
       <h1>Les études</h1>
       <p class="mesure intro">
         Une société à la fois, traitée en profondeur. Les comptes sont repris exercice par exercice depuis 2005,
@@ -23,8 +23,8 @@ const entrees = (await getCollection('etudes'))
     </div>
   </div>
 
-  <section class="section gutter">
-    <div class="wrap">
+  <section class="section">
+    <div class="enveloppe">
       {entrees.length > 0 ? (
         <Liste entrees={entrees} base="/etudes" />
       ) : (
@@ -36,7 +36,7 @@ const entrees = (await getCollection('etudes'))
           </p>
           <div class="vide-actions">
             <a class="bouton" href="/methode">Lire la méthode</a>
-            <a class="bouton creux" href="/fondamentaux">Voir les fondamentaux</a>
+            <a class="bouton bouton--ligne" href="/fondamentaux">Voir les fondamentaux</a>
           </div>
         </div>
       )}
@@ -45,11 +45,11 @@ const entrees = (await getCollection('etudes'))
 </Base>
 
 <style>
-  .index-tete { padding-block: clamp(2.5rem, 5vw, 4.5rem) 0; }
-  .index-tete h1 { font-size: var(--t-2xl); }
-  .intro { margin-top: 1.2rem; font-size: var(--t-md); line-height: 1.62; color: var(--encre-douce); }
-  .vide { border-top: 1.5px solid var(--encre); padding-top: 1.75rem; }
-  .vide-titre { font-family: var(--serif); font-size: var(--t-lg); line-height: 1.4; margin-bottom: .9rem; }
-  .vide p { color: var(--encre-douce); }
+  .index-tete { padding-bottom: 0; }
+  .index-tete h1 { font-size: var(--h2); }
+  .intro { margin-top: 1.2rem; font-size: 1.0625rem; line-height: 1.62; color: var(--graphite-80); }
+  .vide { border-top: 1.5px solid var(--bleu); padding-top: 1.75rem; }
+  .vide-titre { font-family: var(--serif); font-size: 1.375rem; line-height: 1.4; margin-bottom: .9rem; }
+  .vide p { color: var(--graphite-80); }
   .vide-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
 </style>
