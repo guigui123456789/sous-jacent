@@ -1,9 +1,10 @@
 ---
 import '../styles/global.css';
+import Embleme from '../components/Embleme.astro';
 
-const { titre, description, titreComplet } = Astro.props;
+const { titre, description, titreComplet, enteteSurPhoto = false } = Astro.props;
 const path = Astro.url.pathname;
-const actif = (prefixe) => (path === prefixe || path.startsWith(prefixe + '/') ? 'page' : undefined);
+const actif = (p) => (path === p || path.startsWith(p + '/') ? 'page' : undefined);
 const annee = new Date().getFullYear();
 ---
 <!doctype html>
@@ -17,22 +18,21 @@ const annee = new Date().getFullYear();
   <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="fr_FR" />
-  <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href={new URL(path, Astro.site ?? 'https://sousjacent.com')} />
   <link rel="alternate" type="application/rss+xml" title="sous-jacent" href="/rss.xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=Source+Sans+3:wght@400;600&display=swap"
   />
 </head>
 <body>
-  <header class="site gutter" id="entete">
+  <header class="site gutter" id="entete" data-fond={enteteSurPhoto ? 'photo' : 'clair'} data-sur-photo={enteteSurPhoto ? 'oui' : 'non'}>
     <div class="wrap bar">
       <a class="marque" href="/">
+        <Embleme taille={26} />
         <span>sous&#8209;jacent</span>
-        <span class="trait" aria-hidden="true"></span>
       </a>
 
       <button class="menu-bouton" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
@@ -51,17 +51,10 @@ const annee = new Date().getFullYear();
 
   <footer class="site gutter">
     <div class="wrap">
-      <div class="avert">
-        <strong>Ceci n'est pas un conseil en investissement.</strong> Les contenus publiés ici ont une vocation
-        pédagogique. Ils ne constituent ni une recommandation d'investissement, ni une incitation à acheter ou vendre un
-        instrument financier, et ne tiennent compte d'aucune situation patrimoniale particulière. Aucun objectif de
-        cours n'est publié.
-      </div>
-
-      <div class="pied-grille" style="margin-top:2.5rem">
+      <div class="pied-grille">
         <div>
-          <h3>sous-jacent</h3>
-          <p class="mesure">
+          <span class="pied-marque"><Embleme taille={26} /> sous-jacent</span>
+          <p style="max-width:28rem">
             Les comptes d'une société cotée française sur vingt et un exercices, retraités au même gabarit et publiés
             avec les données. Écrit par Guillaume Le Mérour.
           </p>
@@ -83,6 +76,13 @@ const annee = new Date().getFullYear();
           </ul>
         </div>
       </div>
+
+      <p class="pied-avert">
+        <strong style="color:#fff">Ceci n'est pas un conseil en investissement.</strong> Les contenus publiés ici ont
+        une vocation pédagogique. Ils ne constituent ni une recommandation d'investissement, ni une incitation à
+        acheter ou vendre un instrument financier, et ne tiennent compte d'aucune situation patrimoniale
+        particulière. Aucun objectif de cours n'est publié.
+      </p>
 
       <div class="pied-bas">
         <span>© {annee} sousjacent.com</span>
@@ -106,12 +106,35 @@ const annee = new Date().getFullYear();
         });
       }
 
-      if (entete) {
-        var marquer = function () {
-          entete.setAttribute('data-defile', window.scrollY > 8 ? 'oui' : 'non');
+      /* au-dessus d'une photo, l'en-tête est transparent et blanc ;
+         dès qu'on quitte la photo, il repasse en crème */
+      if (entete && entete.getAttribute('data-sur-photo') === 'oui') {
+        var seuil = function () {
+          var h = document.querySelector('[data-zone-photo]');
+          return h ? h.offsetHeight - 80 : 200;
         };
-        marquer();
-        window.addEventListener('scroll', marquer, { passive: true });
+        var majuscule = function () {
+          entete.setAttribute('data-fond', window.scrollY > seuil() ? 'clair' : 'photo');
+        };
+        majuscule();
+        window.addEventListener('scroll', majuscule, { passive: true });
+        window.addEventListener('resize', majuscule);
+      }
+
+      /* révélation à l'approche, une seule fois par élément */
+      var cibles = document.querySelectorAll('.monte');
+      if (cibles.length && 'IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entrees) {
+          entrees.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.setAttribute('data-vu', 'oui');
+              obs.unobserve(e.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -12% 0px' });
+        cibles.forEach(function (c) { obs.observe(c); });
+      } else {
+        cibles.forEach(function (c) { c.setAttribute('data-vu', 'oui'); });
       }
     })();
   </script>
