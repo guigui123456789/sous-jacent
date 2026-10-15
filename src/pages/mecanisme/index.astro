@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import EnTetePage from '../../components/EnTetePage.astro';
 import Liste from '../../components/Liste.astro';
 import { getCollection } from 'astro:content';
 
@@ -11,25 +12,16 @@ const entrees = (await getCollection('mecanisme'))
 <Base
   titre="Le mécanisme de la semaine"
   description="Un seul fait de marché par semaine, et la mécanique qui l'a produit. Huit cents mots, chaque lundi."
+  enteteTransparente={true}
 >
-  <div class="index-tete">
-    <div class="enveloppe">
-      <h1>Le mécanisme de la semaine</h1>
-      <p class="mesure intro">
-        Pas un résumé de l'actualité : un seul fait, et ce qui l'a produit. Non pas « la banque centrale a baissé ses
-        taux », mais pourquoi la courbe s'était déjà pentifiée avant l'annonce, et ce que cela dit des anticipations.
-        Huit cents mots, chaque lundi.
-      </p>
-    </div>
-  </div>
+  <EnTetePage
+    sur="Chaque lundi"
+    titre="Le mécanisme de la semaine"
+    intro="Pas un résumé de l'actualité : un seul fait, et ce qui l'a produit. Non pas « la banque centrale a baissé ses taux », mais pourquoi la courbe s'était déjà pentifiée avant l'annonce, et ce que cela dit des anticipations."
+    image="/images/grande-arche.jpg"
+  />
 
   <section class="section">
     <div class="enveloppe"><Liste entrees={entrees} base="/mecanisme" /></div>
   </section>
 </Base>
-
-<style>
-  .index-tete { padding-bottom: 0; }
-  .index-tete h1 { font-size: var(--h2); }
-  .intro { margin-top: 1.2rem; font-size: 1.0625rem; line-height: 1.62; color: var(--graphite-80); }
-</style>

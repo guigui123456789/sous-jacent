@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import EnTetePage from '../components/EnTetePage.astro';
 
 const etapes = [
   {
@@ -23,28 +24,33 @@ const etapes = [
       "Trois scénarios, leurs hypothèses écrites, et le fichier des comptes retraités en téléchargement. Chaque graphique renvoie au document et à la page dont il est tiré. Vous pouvez refaire le calcul, changer une hypothèse et obtenir un autre résultat que le mien — c'est le but.",
   },
 ];
+
+const engagements = [
+  ['Aucune position', 'détenue sur les sociétés étudiées, à l’achat comme à la vente.'],
+  ['Aucune affiliation', 'pas de lien courtier, pas de contenu sponsorisé, pas de commission.'],
+  ['Aucune commande', 'les sociétés étudiées ne sont ni prévenues, ni consultées, ni payantes.'],
+  ['Les erreurs sont corrigées', 'en haut de l’article, avec la date et ce qui a changé.'],
+];
 ---
 
 <Base
   titre="La méthode"
   description="Comment une étude est construite : vingt et un exercices retraités au même gabarit, un DCF inversé, trois scénarios, et les données publiées."
+  enteteTransparente={true}
 >
-  <div class="section section--bleu methode-tete">
-    <div class="enveloppe">
-      <h1>La méthode, pas le verdict</h1>
-      <p class="mesure accroche">
-        Ce site ne publie pas d'objectif de cours. Il publie la manière dont on arriverait à un chiffre, et vous laisse
-        le produire vous-même.
-      </p>
-    </div>
-  </div>
+  <EnTetePage
+    sur="La méthode, pas le verdict"
+    titre="Montrer le calcul plutôt que le résultat"
+    intro="Ce site ne publie pas d'objectif de cours. Il publie la manière dont on arriverait à un chiffre, et vous laisse le produire vous-même."
+    image="/images/parc-haussmann.png"
+  />
 
   <section class="section">
     <div class="enveloppe">
       <ol class="etapes">
         {etapes.map((e, i) => (
-          <li>
-            <span class="rang chiffre">{String(i + 1).padStart(2, '0')}</span>
+          <li class="reveler" data-rang={i}>
+            <span class="rang">{String(i + 1).padStart(2, '0')}</span>
             <div>
               <h2>{e.titre}</h2>
               <p>{e.texte}</p>
@@ -55,71 +61,64 @@ const etapes = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--pierre">
+    <div class="enveloppe pourquoi">
+      <div class="reveler">
+        <p class="sur">Le point réglementaire</p>
+        <h2>Pourquoi aucun prix cible</h2>
+      </div>
+      <div class="reveler" data-rang="1">
+        <p>
+          Publier une valeur de référence assortie d'un avis relève de la recommandation
+          d'investissement au sens du règlement européen sur les abus de marché. Cela impose des
+          obligations de présentation — méthodologie, identité de l'auteur, positions détenues,
+          historique des recommandations passées — qu'un avertissement en pied de page ne remplace pas.
+        </p>
+        <p>
+          Le choix fait ici n'est pas un repli : montrer le raisonnement est plus utile qu'annoncer un
+          chiffre. Un prix cible vieillit en une semaine. Une méthode se réutilise, se critique, et se
+          transmet.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--bleu">
     <div class="enveloppe">
-      <div class="pourquoi">
-        <div>
-          <h2>Pourquoi aucun prix cible</h2>
-          <p>
-            Publier une valeur de référence assortie d'un avis relève de la recommandation d'investissement au sens du
-            règlement européen sur les abus de marché. Cela impose des obligations de présentation — méthodologie,
-            identité de l'auteur, positions détenues, historique des recommandations passées — qu'un avertissement en
-            pied de page ne remplace pas.
-          </p>
-          <p>
-            Le choix fait ici n'est pas un repli : montrer le raisonnement est plus utile qu'annoncer un chiffre. Un
-            prix cible vieillit en une semaine. Une méthode se réutilise, se critique, et se transmet.
-          </p>
-        </div>
-        <ul class="engagements">
-          <li><strong>Aucune position</strong> détenue sur les sociétés étudiées, à l'achat comme à la vente.</li>
-          <li><strong>Aucune affiliation</strong> : pas de lien courtier, pas de contenu sponsorisé, pas de commission.</li>
-          <li><strong>Aucune commande</strong> : les sociétés étudiées ne sont ni prévenues, ni consultées, ni payantes.</li>
-          <li><strong>Les erreurs sont corrigées</strong> en haut de l'article, avec la date et ce qui a changé.</li>
-        </ul>
+      <p class="sur reveler" style="margin-bottom:var(--e-10)">Les engagements</p>
+      <div class="grille-4">
+        {engagements.map(([fort, suite], i) => (
+          <div class="engagement reveler" data-rang={i}>
+            <hr class="filet filet--bleu" />
+            <p><strong>{fort}</strong> {suite}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .methode-tete { padding-block: clamp(2.5rem, 5vw, 4.5rem); }
-  .methode-tete h1 { font-size: var(--h2); }
-  .accroche { margin-top: 1.2rem; font-size: 1.0625rem; line-height: 1.6; color: var(--bleu-40); }
-
   .etapes { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--graphite-20); }
   .etapes li {
     display: grid;
-    grid-template-columns: 4rem minmax(0, 1fr);
-    gap: 1.5rem;
-    padding-block: 2rem;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: var(--e-8);
+    padding-block: var(--e-10);
     border-bottom: 1px solid var(--graphite-20);
   }
-  @media (max-width: 680px) {
-    .etapes li { grid-template-columns: 1fr; gap: .75rem; }
-  }
-  .rang { font-size: 0.9375rem; color: var(--or); padding-top: .35rem; }
-  .etapes h2 { font-size: 1.375rem; margin-bottom: .7rem; }
-  .etapes p { max-width: 42rem; color: var(--graphite-80); line-height: 1.68; }
+  @media (max-width: 760px) { .etapes li { grid-template-columns: 1fr; gap: var(--e-5); } }
+  .rang { font-family: var(--serif); font-weight: 300; font-size: 1.75rem; color: var(--or); line-height: 1; padding-top: .35rem; }
+  .etapes h2 { font-size: var(--h5); margin-bottom: var(--e-6); }
+  .etapes p { max-width: 44rem; line-height: 1.7; }
 
-  .pourquoi {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-    gap: clamp(2rem, 5vw, 4rem);
-    align-items: start;
-  }
-  @media (max-width: 820px) { .pourquoi { grid-template-columns: 1fr; gap: 2.5rem; } }
-  .pourquoi h2 { font-size: var(--h2); margin-bottom: 1rem; }
-  .pourquoi p { color: var(--graphite-80); line-height: 1.68; max-width: 38rem; }
-  .pourquoi p + p { margin-top: 1.1rem; }
+  .pourquoi { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  @media (max-width: 980px) { .pourquoi { grid-template-columns: 1fr; gap: var(--e-9); } }
+  .pourquoi h2 { margin-top: var(--e-6); }
+  .pourquoi p { line-height: 1.7; max-width: 42rem; }
+  .pourquoi p + p { margin-top: var(--e-7); }
 
-  .engagements { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--bleu); }
-  .engagements li {
-    padding-block: 1rem;
-    border-bottom: 1px solid var(--graphite-20);
-    font-size: 0.9375rem;
-    color: var(--graphite-80);
-    line-height: 1.6;
-  }
-  .engagements strong { color: var(--bleu); font-weight: 600; }
+  .filet--bleu { border-top-color: #2a3f5e; margin-bottom: var(--e-7); }
+  .engagement p { color: var(--bleu-20); font-size: .9375rem; line-height: 1.65; }
+  .engagement strong { color: #fff; font-weight: 400; }
 </style>

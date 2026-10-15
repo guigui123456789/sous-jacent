@@ -1,0 +1,69 @@
+---
+/* Bandeau d'en-tête des pages intérieures :
+   photographie en fond, voile bleu nuit, titre en serif light. */
+const { sur, titre, intro, image, hauteur = 'moyenne' } = Astro.props;
+---
+
+<header class={`bandeau bandeau--${hauteur}`} data-hero>
+  <div class="bandeau-image">
+    <img src={image} alt="" fetchpriority="high" />
+  </div>
+  <div class="bandeau-voile"></div>
+  <div class="enveloppe bandeau-contenu">
+    {sur && <p class="sur">{sur}</p>}
+    <h1>{titre}</h1>
+    {intro && <p class="bandeau-intro">{intro}</p>}
+  </div>
+</header>
+
+<style>
+  .bandeau { position: relative; display: flex; align-items: flex-end; overflow: hidden; }
+  .bandeau--moyenne { min-height: 30rem; }
+  .bandeau--haute { min-height: 42rem; }
+  @media (max-width: 760px) {
+    .bandeau--moyenne { min-height: 24rem; }
+    .bandeau--haute { min-height: 30rem; }
+  }
+
+  .bandeau-image { position: absolute; inset: 0; }
+  .bandeau-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+    animation: ample 14s var(--ease-ample) forwards;
+  }
+  @keyframes ample { to { transform: scale(1); } }
+
+  .bandeau-voile {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(22, 43, 75, .78) 0%, rgba(22, 43, 75, .62) 45%, rgba(22, 43, 75, .88) 100%);
+  }
+
+  .bandeau-contenu { position: relative; width: 100%; padding-block: 9rem var(--e-13); }
+  .bandeau-contenu .sur { opacity: 0; animation: entrer .8s var(--ease) .15s forwards; }
+  .bandeau h1 {
+    color: #fff;
+    font-size: var(--h2);
+    margin-top: var(--e-6);
+    max-width: 20ch;
+    opacity: 0;
+    animation: entrer 1.1s var(--ease) .3s forwards;
+  }
+  .bandeau-intro {
+    margin-top: var(--e-7);
+    max-width: 38rem;
+    color: rgba(255, 255, 255, .84);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    opacity: 0;
+    animation: entrer 1.1s var(--ease) .48s forwards;
+  }
+  @keyframes entrer { from { opacity: 0; transform: translateY(2rem); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bandeau-image img { animation: none; transform: none; }
+    .bandeau-contenu .sur, .bandeau h1, .bandeau-intro { opacity: 1; animation: none; }
+  }
+</style>
