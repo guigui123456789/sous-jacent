@@ -62,10 +62,12 @@
     --vert-clair:#172B25;
     --cuivre:#D8A062;
     --cuivre-clair:#2A2118;
-    --profond:#081310;
-    --profond-encre:#E9EDE8;
-    --profond-douce:#8A9A93;
-    --profond-filet:#1C2E28;
+    /* en thème sombre, le bloc se détache en s'éclaircissant,
+       sinon il se confond avec le fond de la page */
+    --profond:#172A24;
+    --profond-encre:#F1F4EF;
+    --profond-douce:#9FB0A8;
+    --profond-filet:#2C4139;
     color-scheme:dark;
   }
 }
@@ -412,7 +414,6 @@ nav.principale a[aria-current="page"]{color:var(--encre);border-bottom-color:var
 footer.site{
   border-top:1px solid var(--filet);
   padding-block:3rem 3.5rem;
-  margin-top:var(--pas);
   font-size:var(--t-sm);
   color:var(--encre-douce);
 }

@@ -32,7 +32,7 @@ const etude = etudes[0];
       </div>
 
       <figure class="ouverture-figure">
-        <svg viewBox="0 0 340 230" role="img" aria-label="Au-dessus, la courbe du cours. En dessous, les postes de comptes qui la produisent : marge, besoin en fonds de roulement, investissements, dette, anticipations.">
+        <svg viewBox="0 0 340 166" role="img" aria-label="Au-dessus, la courbe du cours. En dessous, les postes de comptes qui la produisent : marge, besoin en fonds de roulement, investissements, dette, anticipations.">
           <g class="axe">
             <line x1="0" y1="84" x2="340" y2="84" />
           </g>
@@ -44,37 +44,35 @@ const etude = etudes[0];
             fill="none"
           />
 
-          <text class="legende cuivre" x="0" y="106">Les comptes, ce qui le produit</text>
+          <text class="legende cuivre" x="0" y="101">Les comptes, ce qui le produit</text>
 
           <g class="tiges">
-            <line x1="30" y1="124" x2="30" y2="88" />
-            <line x1="100" y1="124" x2="100" y2="88" />
-            <line x1="170" y1="124" x2="170" y2="88" />
-            <line x1="240" y1="124" x2="240" y2="88" />
-            <line x1="305" y1="124" x2="305" y2="88" />
+            <line x1="30" y1="136" x2="30" y2="112" />
+            <line x1="100" y1="136" x2="100" y2="112" />
+            <line x1="170" y1="136" x2="170" y2="112" />
+            <line x1="240" y1="136" x2="240" y2="112" />
+            <line x1="305" y1="136" x2="305" y2="112" />
           </g>
 
           <g class="postes">
-            <rect x="2" y="124" width="56" height="30" rx="2" />
-            <rect x="72" y="124" width="56" height="30" rx="2" />
-            <rect x="142" y="124" width="56" height="30" rx="2" />
-            <rect x="212" y="124" width="56" height="30" rx="2" />
-            <rect x="282" y="124" width="56" height="30" rx="2" />
+            <rect x="2" y="136" width="56" height="28" rx="2" />
+            <rect x="72" y="136" width="56" height="28" rx="2" />
+            <rect x="142" y="136" width="56" height="28" rx="2" />
+            <rect x="212" y="136" width="56" height="28" rx="2" />
+            <rect x="282" y="136" width="56" height="28" rx="2" />
           </g>
 
           <g class="etiquette">
-            <text x="30" y="143">marge</text>
-            <text x="100" y="143">BFR</text>
-            <text x="170" y="143">capex</text>
-            <text x="240" y="143">dette</text>
-            <text x="310" y="143">attentes</text>
-          </g>
-
-          <g class="question">
-            <text x="0" y="186">À quelle marge et à quelle croissance</text>
-            <text x="0" y="203">le cours d'aujourd'hui oblige-t-il déjà à croire&nbsp;?</text>
+            <text x="30" y="154">marge</text>
+            <text x="100" y="154">BFR</text>
+            <text x="170" y="154">capex</text>
+            <text x="240" y="154">dette</text>
+            <text x="310" y="154">attentes</text>
           </g>
         </svg>
+        <p class="question">
+          À quelle marge et à quelle croissance le cours d'aujourd'hui oblige-t-il déjà à croire&nbsp;?
+        </p>
         <figcaption>La question qui ouvre chaque étude : un DCF inversé, pas un objectif de cours.</figcaption>
       </figure>
     </div>
@@ -301,13 +299,16 @@ const etude = etudes[0];
     opacity: 0;
     animation: paraitre .5s ease 1.7s forwards;
   }
-  .ouverture-figure .question text {
+  .ouverture-figure .question {
+    margin-top: 1.4rem;
+    max-width: 26rem;
     font-family: var(--serif);
-    font-size: 12.5px;
+    font-size: var(--t-md);
     font-style: italic;
-    fill: var(--encre-douce);
+    line-height: 1.45;
+    color: var(--encre);
     opacity: 0;
-    animation: paraitre .7s ease 1.95s forwards;
+    animation: paraitre .7s ease 1.85s forwards;
   }
 
   @keyframes tracer { to { stroke-dashoffset: 0; } }
@@ -319,7 +320,7 @@ const etude = etudes[0];
     .ouverture-figure .tiges line,
     .ouverture-figure .postes rect,
     .ouverture-figure .etiquette text,
-    .ouverture-figure .question text { opacity: 1; transform: none; }
+    .ouverture-figure .question { opacity: 1; transform: none; }
   }
 
   /* ---------- l'étude ---------- */
@@ -376,7 +377,7 @@ const etude = etudes[0];
   /* ---------- fondamentaux ---------- */
   .fonda-grille {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
     gap: 1px;
     background: var(--filet);
     border: 1px solid var(--filet);
