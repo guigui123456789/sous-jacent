@@ -1,5 +1,5 @@
 ---
-import Article from '../../layouts/Article.astro';
+import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -8,7 +8,139 @@ export async function getStaticPaths() {
 }
 const { e } = Astro.props;
 const { Content } = await render(e);
+const d = new Date(e.data.date);
+const affiche = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
 ---
-<Article titre={e.data.titre} chapo={e.data.chapo} date={e.data.date} surtitre="L'étude du mois">
-  <Content />
-</Article>
+
+<Base titre={e.data.titre} description={e.data.chapo}>
+  <div class="etude-tete profond gutter">
+    <div class="wrap">
+      <a class="retour" href="/etudes">&#8249; Toutes les études</a>
+      <p class="label">Étude n° {String(e.data.numero).padStart(2, '0')} — {e.data.societe}</p>
+      <h1>{e.data.titre}</h1>
+      <p class="chapo">{e.data.chapo}</p>
+      <div class="tete-meta">
+        <time class="chiffre" datetime={d.toISOString()}>{affiche}</time>
+        <span>Guillaume Le Mérour</span>
+        <span class="chiffre">{e.data.periode}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="etude-page gutter">
+    <div class="wrap etude-grille">
+      <div class="corps"><Content /></div>
+
+      <aside class="flanc">
+        <div class="bloc">
+          <h2>Fiche technique</h2>
+          <dl class="fiche-flanc">
+            <div><dt>Société</dt><dd>{e.data.societe}</dd></div>
+            {e.data.isin && <div><dt>ISIN</dt><dd class="chiffre">{e.data.isin}</dd></div>}
+            <div><dt>Exercices</dt><dd class="chiffre">{e.data.periode}</dd></div>
+            <div><dt>Scénarios</dt><dd class="chiffre">3</dd></div>
+          </dl>
+        </div>
+
+        {(e.data.resumePdf || e.data.donneesCsv) && (
+          <div class="bloc">
+            <h2>À télécharger</h2>
+            <ul class="telechargements">
+              {e.data.resumePdf && (
+                <li><a href={e.data.resumePdf}>Le résumé de deux pages <span class="poids">PDF</span></a></li>
+              )}
+              {e.data.donneesCsv && (
+                <li><a href={e.data.donneesCsv}>Les comptes retraités <span class="poids">CSV</span></a></li>
+              )}
+            </ul>
+          </div>
+        )}
+
+        <div class="bloc">
+          <h2>Ce que cette étude ne fait pas</h2>
+          <p class="note">
+            Aucun objectif de cours, aucun avis d'achat ou de vente. Les hypothèses sont écrites et modifiables : la
+            conclusion vous appartient.
+          </p>
+          <a class="lien-note" href="/methode">La méthode</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .etude-tete { padding-block: clamp(2.5rem, 5vw, 4.5rem); }
+  .retour {
+    display: inline-block;
+    font-size: var(--t-sm);
+    font-weight: 500;
+    color: var(--profond-douce);
+    text-decoration: none;
+    margin-bottom: 1.75rem;
+  }
+  .retour:hover { color: var(--cuivre); }
+  .etude-tete h1 { font-size: var(--t-2xl); margin-top: .7rem; max-width: 24ch; }
+  .etude-tete .chapo {
+    font-family: var(--serif);
+    font-size: var(--t-lg);
+    line-height: 1.45;
+    color: var(--profond-douce);
+    margin-top: 1.1rem;
+    max-width: 38rem;
+  }
+  .tete-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--profond-filet);
+    font-size: var(--t-sm);
+    color: var(--profond-douce);
+  }
+
+  .etude-page { padding-block: clamp(2.5rem, 5vw, 4rem); }
+  .etude-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 17rem;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .etude-grille { grid-template-columns: 1fr; }
+    .flanc { order: -1; }
+  }
+  .etude-grille .corps { margin-top: 0; }
+
+  .flanc { position: sticky; top: 6rem; display: grid; gap: 1.75rem; }
+  @media (max-width: 900px) { .flanc { position: static; } }
+  .bloc { border-top: 1.5px solid var(--encre); padding-top: .9rem; }
+  .bloc h2 { font-family: var(--sans); font-size: var(--t-sm); font-weight: 600; margin-bottom: .8rem; }
+
+  .fiche-flanc { margin: 0; font-size: var(--t-sm); }
+  .fiche-flanc > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: .5rem;
+    border-bottom: 1px solid var(--filet);
+  }
+  .fiche-flanc dt { color: var(--encre-douce); }
+  .fiche-flanc dd { margin: 0; text-align: right; }
+
+  .telechargements { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; font-size: var(--t-sm); }
+  .telechargements a {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    text-decoration: none;
+    padding-block: .5rem;
+    border-bottom: 1px solid var(--filet);
+  }
+  .telechargements a:hover { color: var(--cuivre); }
+  .poids { font-family: var(--mono); font-size: var(--t-xs); color: var(--encre-douce); }
+
+  .note { font-size: var(--t-sm); color: var(--encre-douce); line-height: 1.55; }
+  .lien-note { display: inline-block; margin-top: .7rem; font-size: var(--t-sm); font-weight: 500; color: var(--vert); }
+</style>

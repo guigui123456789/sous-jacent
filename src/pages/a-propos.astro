@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+
+/* À COMPLÉTER par Guillaume : école, année de sortie, expériences, lien du CV, contact.
+   Les valeurs ci-dessous sont des espaces réservés et doivent être remplacées avant publication. */
+const cv = '/cv-guillaume-le-merour.pdf';
+const courriel = 'contact@sousjacent.com';
+const linkedin = '';
+---
+
+<Base
+  titre="À propos"
+  description="Guillaume Le Mérour, étudiant en master de finance. Pourquoi ce site existe et ce qu'on y trouve."
+>
+  <div class="apropos-tete gutter">
+    <div class="wrap grille-tete">
+      <div>
+        <h1>Guillaume Le Mérour</h1>
+        <p class="accroche">
+          Étudiant en master de finance. J'écris ici l'analyse que j'aurais voulu lire en commençant : une société, ses
+          comptes sur vingt et un exercices, et tout le chemin de calcul montré plutôt que résumé.
+        </p>
+        <div class="actions">
+          <a class="bouton" href={cv}>Télécharger le CV</a>
+          <a class="bouton creux" href={`mailto:${courriel}`}>Écrire un message</a>
+          {linkedin && <a class="bouton creux" href={linkedin}>LinkedIn</a>}
+        </div>
+      </div>
+
+      <dl class="carte-identite">
+        <div><dt>Formation</dt><dd>Master de finance</dd></div>
+        <div><dt>Intérêts</dt><dd>Equity research, structuration</dd></div>
+        <div><dt>Terrain</dt><dd>Small et mid caps françaises</dd></div>
+        <div><dt>Écrit depuis</dt><dd class="chiffre">2026</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <section class="section gutter">
+    <div class="wrap grille-texte">
+      <div>
+        <h2>Pourquoi ce site</h2>
+        <p>
+          Les small et mid caps françaises sont peu suivies. Les bureaux indépendants qui les couvrent le font pour des
+          professionnels, derrière un abonnement, et sur quatre cents valeurs à la fois : large, continu, forcément
+          rapide sur chaque dossier. Il n'existe presque rien de public qui prenne une seule de ces sociétés et passe
+          quinze heures dessus.
+        </p>
+        <p>
+          C'est l'espace que j'occupe. Je ne vends pas de la recherche, donc je peux me permettre la lenteur : reprendre
+          les comptes depuis 2005, les retraiter ligne à ligne, et publier le fichier avec l'article.
+        </p>
+      </div>
+      <div>
+        <h2>Ce que je ne fais pas</h2>
+        <p>
+          Je ne publie pas d'objectif de cours et je ne donne pas d'avis d'achat ou de vente. Je ne détiens aucune
+          position sur les sociétés étudiées et n'ai aucune affiliation, ni courtier, ni sponsor. Les sociétés ne sont ni
+          prévenues ni consultées.
+        </p>
+        <p>
+          Ce que je publie est pédagogique : une méthode, des hypothèses explicites, et de quoi refaire le calcul
+          autrement. <a href="/methode">La méthode est détaillée ici.</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section gutter">
+    <div class="wrap">
+      <div class="contact">
+        <h2>Pour les recruteurs</h2>
+        <p class="mesure">
+          Chaque étude existe aussi en résumé de deux pages, en PDF, avec les données retraitées. C'est le format que
+          j'envoie en candidature, et vous pouvez le télécharger directement depuis chaque étude.
+        </p>
+        <a class="bouton" href="/etudes">Voir les études</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .apropos-tete { padding-block: clamp(2.5rem, 5vw, 4.5rem) 0; }
+  .grille-tete {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  @media (max-width: 820px) { .grille-tete { grid-template-columns: 1fr; gap: 2rem; } }
+  .apropos-tete h1 { font-size: var(--t-2xl); }
+  .accroche { margin-top: 1.2rem; max-width: 34rem; font-size: var(--t-md); line-height: 1.62; color: var(--encre-douce); }
+  .actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+
+  .carte-identite { margin: 0; font-size: var(--t-sm); border-top: 1.5px solid var(--encre); }
+  .carte-identite > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: .7rem;
+    border-bottom: 1px solid var(--filet);
+  }
+  .carte-identite dt { color: var(--encre-douce); }
+  .carte-identite dd { margin: 0; text-align: right; }
+
+  .grille-texte {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: clamp(2rem, 5vw, 4rem);
+  }
+  .grille-texte h2 { font-size: var(--t-lg); margin-bottom: 1rem; }
+  .grille-texte p { color: var(--encre-douce); line-height: 1.68; max-width: 36rem; }
+  .grille-texte p + p { margin-top: 1.1rem; }
+  .grille-texte a { color: var(--vert); }
+
+  .contact { border-top: 1.5px solid var(--encre); padding-top: 1.75rem; }
+  .contact h2 { font-size: var(--t-lg); margin-bottom: .9rem; }
+  .contact p { color: var(--encre-douce); line-height: 1.65; margin-bottom: 1.75rem; }
+</style>

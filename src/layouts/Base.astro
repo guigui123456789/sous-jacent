@@ -1,28 +1,48 @@
 ---
 import '../styles/global.css';
-const { titre, description } = Astro.props;
+
+const { titre, description, titreComplet } = Astro.props;
 const path = Astro.url.pathname;
+const actif = (prefixe) => (path === prefixe || path.startsWith(prefixe + '/') ? 'page' : undefined);
+const annee = new Date().getFullYear();
 ---
 <!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>{titre} — sous-jacent</title>
+  <title>{titreComplet ?? `${titre} — sous-jacent`}</title>
   <meta name="description" content={description} />
+  <meta property="og:title" content={titre} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href={new URL(path, Astro.site ?? 'https://sousjacent.com')} />
   <link rel="alternate" type="application/rss+xml" title="sous-jacent" href="/rss.xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+  />
 </head>
 <body>
-  <header class="site gutter">
+  <header class="site gutter" id="entete">
     <div class="wrap bar">
-      <a class="marque" href="/">sous&#8209;jacent<span>.</span></a>
-      <nav>
-        <a href="/mecanisme" aria-current={path.startsWith('/mecanisme') ? 'page' : undefined}>Le mécanisme</a>
-        <a href="/etudes" aria-current={path.startsWith('/etudes') ? 'page' : undefined}>L'étude</a>
-        <a href="/fondamentaux" aria-current={path.startsWith('/fondamentaux') ? 'page' : undefined}>Les fondamentaux</a>
-        <a href="/methode" aria-current={path === '/methode' ? 'page' : undefined}>Méthode</a>
+      <a class="marque" href="/">
+        <span>sous&#8209;jacent</span>
+        <span class="trait" aria-hidden="true"></span>
+      </a>
+
+      <button class="menu-bouton" type="button" aria-expanded="false" aria-controls="menu-principal">Menu</button>
+
+      <nav class="principale" id="menu-principal">
+        <a href="/etudes" aria-current={actif('/etudes')}>Les études</a>
+        <a href="/mecanisme" aria-current={actif('/mecanisme')}>Le mécanisme</a>
+        <a href="/fondamentaux" aria-current={actif('/fondamentaux')}>Les fondamentaux</a>
+        <a href="/methode" aria-current={actif('/methode')}>La méthode</a>
+        <a href="/a-propos" aria-current={actif('/a-propos')}>À propos</a>
       </nav>
     </div>
   </header>
@@ -31,9 +51,69 @@ const path = Astro.url.pathname;
 
   <footer class="site gutter">
     <div class="wrap">
-      <div class="avert"><strong>Ceci n'est pas un conseil en investissement.</strong> Les contenus publiés ici ont une vocation pédagogique. Ils ne constituent ni une recommandation d'investissement, ni une incitation à acheter ou vendre un instrument financier, et ne tiennent compte d'aucune situation patrimoniale particulière.</div>
-      <p style="margin-top:1.5rem">sousjacent.com — écrit par Guillaume Le Mérour. <a href="/methode">Méthode</a> · <a href="/rss.xml">RSS</a></p>
+      <div class="avert">
+        <strong>Ceci n'est pas un conseil en investissement.</strong> Les contenus publiés ici ont une vocation
+        pédagogique. Ils ne constituent ni une recommandation d'investissement, ni une incitation à acheter ou vendre un
+        instrument financier, et ne tiennent compte d'aucune situation patrimoniale particulière. Aucun objectif de
+        cours n'est publié.
+      </div>
+
+      <div class="pied-grille" style="margin-top:2.5rem">
+        <div>
+          <h3>sous-jacent</h3>
+          <p class="mesure">
+            Les comptes d'une société cotée française sur vingt et un exercices, retraités au même gabarit et publiés
+            avec les données. Écrit par Guillaume Le Mérour.
+          </p>
+        </div>
+        <div>
+          <h3>Publications</h3>
+          <ul>
+            <li><a href="/etudes">Les études</a></li>
+            <li><a href="/mecanisme">Le mécanisme de la semaine</a></li>
+            <li><a href="/fondamentaux">Les fondamentaux</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Le site</h3>
+          <ul>
+            <li><a href="/methode">La méthode</a></li>
+            <li><a href="/a-propos">À propos</a></li>
+            <li><a href="/rss.xml">Suivre par RSS</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pied-bas">
+        <span>© {annee} sousjacent.com</span>
+        <span>Aucune position détenue sur les sociétés étudiées. Aucune affiliation.</span>
+      </div>
     </div>
   </footer>
+
+  <script is:inline>
+    (function () {
+      var entete = document.getElementById('entete');
+      var bouton = document.querySelector('.menu-bouton');
+      var menu = document.getElementById('menu-principal');
+
+      if (bouton && menu) {
+        bouton.addEventListener('click', function () {
+          var ouvert = menu.getAttribute('data-ouvert') === 'oui';
+          menu.setAttribute('data-ouvert', ouvert ? 'non' : 'oui');
+          bouton.setAttribute('aria-expanded', ouvert ? 'false' : 'true');
+          bouton.textContent = ouvert ? 'Menu' : 'Fermer';
+        });
+      }
+
+      if (entete) {
+        var marquer = function () {
+          entete.setAttribute('data-defile', window.scrollY > 8 ? 'oui' : 'non');
+        };
+        marquer();
+        window.addEventListener('scroll', marquer, { passive: true });
+      }
+    })();
+  </script>
 </body>
 </html>

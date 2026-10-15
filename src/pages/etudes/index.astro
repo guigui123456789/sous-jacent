@@ -2,14 +2,54 @@
 import Base from '../../layouts/Base.astro';
 import Liste from '../../components/Liste.astro';
 import { getCollection } from 'astro:content';
-const entrees = (await getCollection('etudes')).filter((e) => !e.data.brouillon).sort((a, b) => b.data.date - a.data.date);
+
+const entrees = (await getCollection('etudes'))
+  .filter((e) => !e.data.brouillon)
+  .sort((a, b) => b.data.date - a.data.date);
 ---
-<Base titre="Les études" description="Une société cotée par mois, vingt-cinq ans de comptes retraités au même gabarit.">
-  <section class="gutter">
+
+<Base
+  titre="Les études"
+  description="Une société cotée française peu suivie, vingt et un exercices de comptes retraités au même gabarit, publiés avec les données."
+>
+  <div class="index-tete gutter">
     <div class="wrap">
-      <div class="section-head"><h2>Les études</h2><p class="eyebrow">{entrees.length} publication{entrees.length > 1 ? 's' : ''}</p></div>
-      <p class="col" style="color:var(--encre-douce);margin-bottom:1.5rem">Une société cotée par mois, vingt-cinq ans de comptes retraités au même gabarit.</p>
-      <Liste entrees={entrees} base="/etudes" />
+      <h1>Les études</h1>
+      <p class="mesure intro">
+        Une société à la fois, traitée en profondeur. Les comptes sont repris exercice par exercice depuis 2005,
+        l'année du passage obligatoire aux IFRS, pour que la série reste homogène d'un bout à l'autre. Chaque étude
+        paraît avec son résumé de deux pages et ses données.
+      </p>
+    </div>
+  </div>
+
+  <section class="section gutter">
+    <div class="wrap">
+      {entrees.length > 0 ? (
+        <Liste entrees={entrees} base="/etudes" />
+      ) : (
+        <div class="vide">
+          <p class="vide-titre">La première étude n'est pas encore publiée.</p>
+          <p class="mesure">
+            Le gabarit d'analyse et le modèle de retraitement sont en construction. En attendant, la méthode est
+            publique et les fondamentaux expliquent chaque retraitement qui sera utilisé.
+          </p>
+          <div class="vide-actions">
+            <a class="bouton" href="/methode">Lire la méthode</a>
+            <a class="bouton creux" href="/fondamentaux">Voir les fondamentaux</a>
+          </div>
+        </div>
+      )}
     </div>
   </section>
 </Base>
+
+<style>
+  .index-tete { padding-block: clamp(2.5rem, 5vw, 4.5rem) 0; }
+  .index-tete h1 { font-size: var(--t-2xl); }
+  .intro { margin-top: 1.2rem; font-size: var(--t-md); line-height: 1.62; color: var(--encre-douce); }
+  .vide { border-top: 1.5px solid var(--encre); padding-top: 1.75rem; }
+  .vide-titre { font-family: var(--serif); font-size: var(--t-lg); line-height: 1.4; margin-bottom: .9rem; }
+  .vide p { color: var(--encre-douce); }
+  .vide-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
+</style>

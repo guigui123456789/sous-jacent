@@ -1,14 +1,22 @@
 ---
 const { entrees, base } = Astro.props;
+const jour = (d) =>
+  new Date(d).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
 ---
+
 <div class="liste">
   {entrees.map((e) => (
     <a class="item" href={`${base}/${e.id}`}>
-      <div class="date">{e.data.rubrique ?? new Date(e.data.date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
+      <div>
+        {e.data.rubrique
+          ? <span class="rubrique">{e.data.rubrique}</span>
+          : <time class="quand" datetime={new Date(e.data.date).toISOString()}>{jour(e.data.date)}</time>}
+      </div>
       <div>
         <h3>{e.data.titre}</h3>
         <p>{e.data.chapo}</p>
       </div>
+      <span class="fleche" aria-hidden="true">&#8250;</span>
     </a>
   ))}
 </div>

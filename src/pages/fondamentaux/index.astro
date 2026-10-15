@@ -1,15 +1,65 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Liste from '../../components/Liste.astro';
 import { getCollection } from 'astro:content';
-const entrees = (await getCollection('fondamentaux')).filter((e) => !e.data.brouillon).sort((a, b) => b.data.date - a.data.date);
+
+const entrees = (await getCollection('fondamentaux'))
+  .filter((e) => !e.data.brouillon)
+  .sort((a, b) => b.data.date - a.data.date);
+
+const rubriques = [...new Set(entrees.map((e) => e.data.rubrique))];
 ---
-<Base titre="Les fondamentaux" description="Les briques de méthode, écrites une fois et citées en note dans les études.">
-  <section class="gutter">
+
+<Base
+  titre="Les fondamentaux"
+  description="Chaque retraitement expliqué une fois, puis cité en note dans les études."
+>
+  <div class="index-tete gutter">
     <div class="wrap">
-      <div class="section-head"><h2>Les fondamentaux</h2><p class="eyebrow">{entrees.length} publication{entrees.length > 1 ? 's' : ''}</p></div>
-      <p class="col" style="color:var(--encre-douce);margin-bottom:1.5rem">Les briques de méthode, écrites une fois et citées en note dans les études.</p>
-      <Liste entrees={entrees} base="/fondamentaux" />
+      <h1>Les fondamentaux</h1>
+      <p class="mesure intro">
+        Les briques de méthode : lire un compte de résultat, distinguer l'EBITDA du free cash flow, remettre les loyers
+        au bilan, comprendre ce que mesure le ROIC. Chacune est écrite une fois ici, puis citée en note dans les
+        études plutôt que réexpliquée à chaque fois.
+      </p>
     </div>
-  </section>
+  </div>
+
+  {rubriques.map((r) => (
+    <section class="section gutter">
+      <div class="wrap">
+        <div class="section-tete"><h2>{r}</h2></div>
+        <div class="grille">
+          {entrees.filter((e) => e.data.rubrique === r).map((e) => (
+            <a class="carte" href={`/fondamentaux/${e.id}`}>
+              <h3>{e.data.titre}</h3>
+              <p>{e.data.chapo}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
 </Base>
+
+<style>
+  .index-tete { padding-block: clamp(2.5rem, 5vw, 4.5rem) 0; }
+  .index-tete h1 { font-size: var(--t-2xl); }
+  .intro { margin-top: 1.2rem; font-size: var(--t-md); line-height: 1.62; color: var(--encre-douce); }
+
+  .grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: 1px;
+    background: var(--filet);
+    border: 1px solid var(--filet);
+  }
+  .carte {
+    background: var(--papier);
+    padding: 1.5rem 1.4rem 1.6rem;
+    text-decoration: none;
+    transition: background .18s ease;
+  }
+  .carte:hover { background: var(--sable); }
+  .carte h3 { font-size: var(--t-md); }
+  .carte p { margin-top: .5rem; font-size: var(--t-sm); color: var(--encre-douce); line-height: 1.55; }
+</style>

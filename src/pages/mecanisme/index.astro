@@ -2,14 +2,34 @@
 import Base from '../../layouts/Base.astro';
 import Liste from '../../components/Liste.astro';
 import { getCollection } from 'astro:content';
-const entrees = (await getCollection('mecanisme')).filter((e) => !e.data.brouillon).sort((a, b) => b.data.date - a.data.date);
+
+const entrees = (await getCollection('mecanisme'))
+  .filter((e) => !e.data.brouillon)
+  .sort((a, b) => b.data.date - a.data.date);
 ---
-<Base titre="Le mécanisme de la semaine" description="Un seul fait de marché par semaine, et la mécanique qui l'a produit.">
-  <section class="gutter">
+
+<Base
+  titre="Le mécanisme de la semaine"
+  description="Un seul fait de marché par semaine, et la mécanique qui l'a produit. Huit cents mots, chaque lundi."
+>
+  <div class="index-tete gutter">
     <div class="wrap">
-      <div class="section-head"><h2>Le mécanisme de la semaine</h2><p class="eyebrow">{entrees.length} publication{entrees.length > 1 ? 's' : ''}</p></div>
-      <p class="col" style="color:var(--encre-douce);margin-bottom:1.5rem">Un seul fait de marché par semaine, et la mécanique qui l'a produit.</p>
-      <Liste entrees={entrees} base="/mecanisme" />
+      <h1>Le mécanisme de la semaine</h1>
+      <p class="mesure intro">
+        Pas un résumé de l'actualité : un seul fait, et ce qui l'a produit. Non pas « la banque centrale a baissé ses
+        taux », mais pourquoi la courbe s'était déjà pentifiée avant l'annonce, et ce que cela dit des anticipations.
+        Huit cents mots, chaque lundi.
+      </p>
     </div>
+  </div>
+
+  <section class="section gutter">
+    <div class="wrap"><Liste entrees={entrees} base="/mecanisme" /></div>
   </section>
 </Base>
+
+<style>
+  .index-tete { padding-block: clamp(2.5rem, 5vw, 4.5rem) 0; }
+  .index-tete h1 { font-size: var(--t-2xl); }
+  .intro { margin-top: 1.2rem; font-size: var(--t-md); line-height: 1.62; color: var(--encre-douce); }
+</style>

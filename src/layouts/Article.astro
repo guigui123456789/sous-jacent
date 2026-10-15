@@ -1,16 +1,80 @@
 ---
 import Base from './Base.astro';
-const { titre, chapo, date, surtitre } = Astro.props;
-const d = new Date(date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+
+const { titre, chapo, date, rubrique, fait, retour, retourLibelle } = Astro.props;
+const d = new Date(date);
+const affiche = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
 ---
+
 <Base titre={titre} description={chapo}>
   <article class="article gutter">
     <div class="wrap">
-      <p class="eyebrow">{surtitre}</p>
-      <h1>{titre}</h1>
-      <p class="chapo">{chapo}</p>
-      <p class="meta">{d}</p>
+      <div class="article-tete">
+        {retour && <a class="retour" href={retour}>&#8249; {retourLibelle}</a>}
+        {rubrique && <p class="rubrique-article">{rubrique}</p>}
+        <h1>{titre}</h1>
+        <p class="chapo">{chapo}</p>
+        <div class="article-meta">
+          <time class="chiffre" datetime={d.toISOString()}>{affiche}</time>
+          <span>Guillaume Le Mérour</span>
+        </div>
+      </div>
+
+      {fait && (
+        <aside class="fait">
+          <p class="fait-label">Le fait</p>
+          <p class="fait-texte">{fait}</p>
+        </aside>
+      )}
+
       <div class="corps"><slot /></div>
+
+      <div class="article-pied">
+        <p>
+          Cet article décrit une méthode et des mécanismes. Il ne contient ni recommandation, ni objectif de cours.
+          <a href="/methode">Lire la méthode</a>.
+        </p>
+      </div>
     </div>
   </article>
 </Base>
+
+<style>
+  .retour {
+    display: inline-block;
+    font-size: var(--t-sm);
+    font-weight: 500;
+    color: var(--encre-douce);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+  .retour:hover { color: var(--cuivre); }
+
+  .rubrique-article {
+    font-size: var(--t-sm);
+    font-weight: 600;
+    color: var(--cuivre);
+    margin-bottom: .6rem;
+  }
+
+  .fait {
+    max-width: 36rem;
+    margin-top: 2.75rem;
+    padding: 1.2rem 1.3rem;
+    background: var(--sable);
+    border-left: 2px solid var(--cuivre);
+    border-radius: var(--rayon);
+  }
+  .fait-label { font-size: var(--t-xs); font-weight: 600; color: var(--cuivre); margin-bottom: .4rem; }
+  .fait-texte { font-family: var(--serif); font-size: var(--t-md); line-height: 1.5; }
+
+  .article-pied {
+    max-width: 36rem;
+    margin-top: 3.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--filet);
+    font-size: var(--t-sm);
+    color: var(--encre-douce);
+  }
+  .article-pied a { color: var(--vert); }
+</style>

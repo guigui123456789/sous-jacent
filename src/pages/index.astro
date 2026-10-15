@@ -3,132 +3,417 @@ import Base from '../layouts/Base.astro';
 import Liste from '../components/Liste.astro';
 import { getCollection } from 'astro:content';
 
-const pub = (c) => c.filter((e) => !e.data.brouillon).sort((a, b) => b.data.date - a.data.date);
-const meca = pub(await getCollection('mecanisme')).slice(0, 3);
-const fonda = pub(await getCollection('fondamentaux')).slice(0, 4);
-const etudes = pub(await getCollection('etudes'));
+const publie = (c) => c.filter((e) => !e.data.brouillon).sort((a, b) => b.data.date - a.data.date);
+const meca = publie(await getCollection('mecanisme')).slice(0, 4);
+const fonda = publie(await getCollection('fondamentaux')).slice(0, 6);
+const etudes = publie(await getCollection('etudes'));
 const etude = etudes[0];
 ---
-<Base titre="Les mécanismes derrière les prix" description="Un fait de marché par semaine expliqué par sa mécanique, une étude d'entreprise par mois sur vingt-cinq ans de comptes.">
-  <div class="hero gutter">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">Marchés · mécanismes · comptes</p>
-        <h1>Le prix est au-dessus.<br />Le <em>mécanisme</em> est dessous.</h1>
-        <p class="col intro">Un fait de marché par semaine, expliqué par ce qui le produit. Une étude d'entreprise par mois, bâtie sur vingt-cinq ans de comptes. Et la méthode, écrite une fois, pour que vous puissiez refaire le calcul vous-même.</p>
+
+<Base
+  titreComplet="sous-jacent — les comptes d'une société, vingt et un exercices, en public"
+  titre="sous-jacent"
+  description="Une société cotée française peu suivie, vingt et un exercices de comptes retraités au même gabarit, publiés avec les données et le modèle. La méthode, pas le verdict."
+>
+  <!-- ========== OUVERTURE ========== -->
+  <div class="ouverture gutter">
+    <div class="wrap ouverture-grille">
+      <div class="ouverture-texte">
+        <h1>Le cours est en surface.<br />Les comptes sont dessous.</h1>
+        <p class="accroche">
+          Une société cotée française peu suivie. Vingt et un exercices de bilans, retraités au même gabarit. Le modèle
+          et les données se téléchargent avec l'étude, pour que vous puissiez refaire chaque calcul et changer les
+          hypothèses.
+        </p>
+        <div class="ouverture-actions">
+          <a class="bouton" href="/etudes">Voir les études</a>
+          <a class="bouton creux" href="/methode">Comment c'est calculé</a>
+        </div>
       </div>
-      <figure>
-        <svg viewBox="0 0 320 170" role="img" aria-label="Une courbe de prix en surface, et en dessous les flux qui la déterminent">
-          <text x="0" y="12" font-family="IBM Plex Mono, monospace" font-size="8" fill="var(--encre-douce)">SURFACE — le cours</text>
-          <polyline points="0,42 40,34 80,46 120,28 160,37 200,22 240,33 280,18 320,26" fill="none" stroke="var(--encre)" stroke-width="1.6" />
-          <line x1="0" y1="62" x2="320" y2="62" stroke="var(--filet)" stroke-width="1" stroke-dasharray="3 3" />
-          <text x="0" y="78" font-family="IBM Plex Mono, monospace" font-size="8" fill="var(--accent)">SOUS-JACENT — ce qui le produit</text>
-          <g fill="var(--accent-faible)" stroke="var(--accent)" stroke-width="1">
-            <rect x="0" y="92" width="44" height="26" /><rect x="58" y="92" width="44" height="26" />
-            <rect x="116" y="92" width="44" height="26" /><rect x="174" y="92" width="44" height="26" />
-            <rect x="232" y="92" width="88" height="26" />
+
+      <figure class="ouverture-figure">
+        <svg viewBox="0 0 340 230" role="img" aria-label="Au-dessus, la courbe du cours. En dessous, les postes de comptes qui la produisent : marge, besoin en fonds de roulement, investissements, dette, anticipations.">
+          <g class="axe">
+            <line x1="0" y1="84" x2="340" y2="84" />
           </g>
-          <g font-family="IBM Plex Mono, monospace" font-size="6.5" fill="var(--encre)" text-anchor="middle">
-            <text x="22" y="108">marge</text><text x="80" y="108">BFR</text><text x="138" y="108">capex</text>
-            <text x="196" y="108">dette</text><text x="276" y="108">anticipations</text>
+
+          <text class="legende" x="0" y="13">Le cours, ce qui se voit</text>
+          <polyline
+            class="courbe"
+            points="0,52 38,42 76,58 114,33 152,46 190,26 228,40 266,20 304,31 340,18"
+            fill="none"
+          />
+
+          <text class="legende cuivre" x="0" y="106">Les comptes, ce qui le produit</text>
+
+          <g class="tiges">
+            <line x1="30" y1="124" x2="30" y2="88" />
+            <line x1="100" y1="124" x2="100" y2="88" />
+            <line x1="170" y1="124" x2="170" y2="88" />
+            <line x1="240" y1="124" x2="240" y2="88" />
+            <line x1="305" y1="124" x2="305" y2="88" />
           </g>
-          <g stroke="var(--accent)" stroke-width="1" opacity=".55">
-            <line x1="22" y1="92" x2="22" y2="66" /><line x1="80" y1="92" x2="80" y2="66" />
-            <line x1="138" y1="92" x2="138" y2="66" /><line x1="196" y1="92" x2="196" y2="66" /><line x1="276" y1="92" x2="276" y2="66" />
+
+          <g class="postes">
+            <rect x="2" y="124" width="56" height="30" rx="2" />
+            <rect x="72" y="124" width="56" height="30" rx="2" />
+            <rect x="142" y="124" width="56" height="30" rx="2" />
+            <rect x="212" y="124" width="56" height="30" rx="2" />
+            <rect x="282" y="124" width="56" height="30" rx="2" />
           </g>
-          <text x="0" y="145" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="var(--encre-douce)">DCF inversé : quelle marge le marché doit-il supposer</text>
-          <text x="0" y="157" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="var(--encre-douce)">pour que le cours d'aujourd'hui tienne ?</text>
+
+          <g class="etiquette">
+            <text x="30" y="143">marge</text>
+            <text x="100" y="143">BFR</text>
+            <text x="170" y="143">capex</text>
+            <text x="240" y="143">dette</text>
+            <text x="310" y="143">attentes</text>
+          </g>
+
+          <g class="question">
+            <text x="0" y="186">À quelle marge et à quelle croissance</text>
+            <text x="0" y="203">le cours d'aujourd'hui oblige-t-il déjà à croire&nbsp;?</text>
+          </g>
         </svg>
-        <figcaption>La question de départ de chaque étude.</figcaption>
+        <figcaption>La question qui ouvre chaque étude : un DCF inversé, pas un objectif de cours.</figcaption>
       </figure>
     </div>
   </div>
 
-  <section class="gutter">
+  <!-- ========== L'ÉTUDE ========== -->
+  <section class="profond etude-bloc gutter">
     <div class="wrap">
-      <div class="section-head"><h2>Trois formats, un seul fil</h2></div>
-      <div class="formats">
-        <article class="format">
-          <span class="cadence">Chaque lundi · ~800 mots</span>
-          <h3>Le mécanisme de la semaine</h3>
-          <p>Pas le résumé de l'actualité : un seul fait, et la mécanique qui l'a produit. Non pas « la BCE a baissé ses taux », mais pourquoi la courbe s'est pentifiée avant l'annonce.</p>
-        </article>
-        <article class="format">
-          <span class="cadence">Mensuel · mémoire + 2 pages</span>
-          <h3>L'étude</h3>
-          <p>Une société cotée, vingt-cinq ans de bilans retraités au même gabarit. Small et mid caps françaises peu suivies, là où les comptes racontent encore quelque chose d'inédit.</p>
-        </article>
-        <article class="format">
-          <span class="cadence">Au fil de l'eau</span>
-          <h3>Les fondamentaux</h3>
-          <p>Lire un compte de résultat, EBITDA contre free cash flow, ce que mesure vraiment le ROIC. La méthode écrite une fois, puis citée en note dans les études.</p>
-        </article>
+      <div class="etude-entete">
+        <h2>L'étude</h2>
+        <p class="mesure">
+          Les bureaux indépendants couvrent quatre cents valeurs, en surface, derrière un abonnement. Ici c'est
+          l'inverse : une seule société, traitée en profondeur, tout montré, en accès libre.
+        </p>
       </div>
+
+      {etude ? (
+        <article class="etude-vedette">
+          <div class="etude-corps">
+            <p class="label">
+              Étude n° {String(etude.data.numero).padStart(2, '0')} — {etude.data.societe}
+            </p>
+            <h3><a href={`/etudes/${etude.id}`}>{etude.data.titre}</a></h3>
+            <p class="etude-chapo">{etude.data.chapo}</p>
+            <a class="bouton" href={`/etudes/${etude.id}`}>Lire l'étude</a>
+          </div>
+          <dl class="fiche">
+            <div><dt>Période couverte</dt><dd class="chiffre">{etude.data.periode}</dd></div>
+            <div><dt>Société</dt><dd>{etude.data.societe}</dd></div>
+            {etude.data.isin && <div><dt>ISIN</dt><dd class="chiffre">{etude.data.isin}</dd></div>}
+            <div><dt>Scénarios</dt><dd class="chiffre">3</dd></div>
+            <div><dt>Résumé</dt><dd>2 pages, PDF</dd></div>
+            <div><dt>Données</dt><dd>CSV téléchargeable</dd></div>
+          </dl>
+        </article>
+      ) : (
+        <div class="etude-attente">
+          <p class="etude-attente-titre">
+            La première étude est en préparation. Voici ce qu'elle contiendra.
+          </p>
+          <ul class="livrables">
+            <li>
+              <h3>Le mémoire</h3>
+              <p>L'analyse complète, en six parties, du fait de départ jusqu'à ce que les comptes ne disent pas.</p>
+            </li>
+            <li>
+              <h3>Le résumé de deux pages</h3>
+              <p>La même étude ramenée à l'essentiel, en PDF, mise en page pour être imprimée et transmise.</p>
+            </li>
+            <li>
+              <h3>Les comptes retraités</h3>
+              <p>Vingt et un exercices en CSV, avec chaque retraitement documenté et chaque source datée.</p>
+            </li>
+            <li>
+              <h3>Le DCF inversé</h3>
+              <p>Trois curseurs — marge, croissance, coût du capital — et la valeur implicite qui bouge avec eux.</p>
+            </li>
+          </ul>
+          <a class="bouton" href="/methode">Lire la méthode en attendant</a>
+        </div>
+      )}
     </div>
   </section>
 
-  <section class="gutter">
-    <div class="wrap">
-      <div class="section-head"><h2>Le mécanisme de la semaine</h2><a class="eyebrow" href="/mecanisme">Tous les numéros →</a></div>
-      <Liste entrees={meca} base="/mecanisme" />
-    </div>
-  </section>
-
-  {etude && (
-    <section class="gutter">
+  <!-- ========== MÉCANISME ========== -->
+  {meca.length > 0 && (
+    <section class="section gutter">
       <div class="wrap">
-        <div class="section-head"><h2>L'étude du mois</h2><a class="eyebrow" href="/etudes">Toutes les études →</a></div>
-        <div class="etude">
+        <div class="section-tete">
           <div>
-            <p class="eyebrow">n° {String(etude.data.numero).padStart(2, '0')} · {etude.data.societe}</p>
-            <h3><a href={`/etudes/${etude.id}`} style="text-decoration:none">{etude.data.titre}</a></h3>
-            <p>{etude.data.chapo}</p>
+            <h2>Le mécanisme de la semaine</h2>
+            <p class="mesure" style="color:var(--encre-douce);margin-top:.6rem">
+              Un seul fait de marché, et la mécanique qui l'a produit. Huit cents mots, chaque lundi.
+            </p>
           </div>
-          <div class="fiche">
-            <div><span>Période couverte</span><span>{etude.data.periode}</span></div>
-            <div><span>Société</span><span>{etude.data.societe}</span></div>
-            {etude.data.isin && <div><span>ISIN</span><span>{etude.data.isin}</span></div>}
-            <div><span>Scénarios</span><span>3</span></div>
-            <div><span>Résumé</span><span>2 pages</span></div>
+          <a class="lien" href="/mecanisme">Tous les numéros</a>
+        </div>
+        <Liste entrees={meca} base="/mecanisme" />
+      </div>
+    </section>
+  )}
+
+  <!-- ========== FONDAMENTAUX ========== -->
+  {fonda.length > 0 && (
+    <section class="section gutter">
+      <div class="wrap">
+        <div class="section-tete">
+          <div>
+            <h2>Les fondamentaux</h2>
+            <p class="mesure" style="color:var(--encre-douce);margin-top:.6rem">
+              Chaque retraitement est expliqué une fois ici, puis cité en note dans les études.
+            </p>
           </div>
+          <a class="lien" href="/fondamentaux">Tout voir</a>
+        </div>
+        <div class="fonda-grille">
+          {fonda.map((f) => (
+            <a class="fonda-carte" href={`/fondamentaux/${f.id}`}>
+              <span class="fonda-rubrique">{f.data.rubrique}</span>
+              <h3>{f.data.titre}</h3>
+              <p>{f.data.chapo}</p>
+            </a>
+          ))}
         </div>
       </div>
     </section>
   )}
 
-  <section class="gutter">
+  <!-- ========== MÉTHODE ========== -->
+  <section class="section gutter">
     <div class="wrap">
-      <div class="section-head"><h2>Les fondamentaux</h2><a class="eyebrow" href="/fondamentaux">Tout voir →</a></div>
-      <Liste entrees={fonda} base="/fondamentaux" />
+      <div class="regles-grille">
+        <div>
+          <h2>Pourquoi aucun objectif de cours</h2>
+          <p class="mesure" style="color:var(--encre-douce);margin-top:1rem">
+            Publier un prix cible assorti d'un avis relève de la recommandation d'investissement au sens du règlement
+            européen sur les abus de marché, avec les obligations qui vont avec. Le choix fait ici est différent :
+            montrer la méthode et laisser le lecteur faire le calcul.
+          </p>
+          <a class="bouton creux" href="/methode" style="margin-top:1.5rem">La méthode en détail</a>
+        </div>
+        <ul class="regles">
+          <li><strong>Des hypothèses écrites</strong> plutôt qu'un chiffre unique, et trois scénarios plutôt qu'un.</li>
+          <li><strong>Le DCF inversé</strong> comme question d'ouverture : ce que le cours oblige déjà à croire.</li>
+          <li><strong>Un seul gabarit de retraitement</strong>, pour que deux sociétés restent comparables.</li>
+          <li><strong>Aucune affiliation</strong>, aucun contenu sponsorisé, aucune position sur les valeurs étudiées.</li>
+        </ul>
+      </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .hero { padding-block: 3.5rem 2.5rem; border-bottom: 1px solid var(--filet); }
-  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1.08; }
-  .hero h1 :global(em) { font-style: italic; color: var(--accent); }
-  .intro { margin-top: 1.1rem; font-size: 1.08rem; color: var(--encre-douce); }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 2.5rem; align-items: end; }
-  @media (max-width: 720px) { .hero-grid { grid-template-columns: 1fr; gap: 1.75rem; } }
-  figure { margin: 0; }
-  figcaption { font-family: var(--mono); font-size: .7rem; color: var(--encre-douce); margin-top: .5rem; }
-  svg { max-width: 100%; height: auto; display: block; }
-  .formats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--filet); }
-  @media (max-width: 760px) { .formats { grid-template-columns: 1fr; } }
-  .format { min-width: 0; padding: 1.5rem 1.4rem 1.6rem; border-bottom: 1px solid var(--filet); }
-  .format + .format { border-left: 1px solid var(--filet); }
-  @media (max-width: 760px) { .format + .format { border-left: 0; } }
-  .format h3 { font-size: 1.18rem; margin-bottom: .45rem; }
-  .format p { font-size: .93rem; color: var(--encre-douce); }
-  .cadence { font-family: var(--mono); font-size: .72rem; color: var(--accent); letter-spacing: .06em; margin-bottom: .9rem; display: block; }
-  .etude { background: var(--surface); border: 1px solid var(--filet); border-radius: 2px; padding: 1.75rem 1.5rem; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 2rem; }
-  @media (max-width: 760px) { .etude { grid-template-columns: 1fr; gap: 1.5rem; } }
-  .etude h3 { font-size: 1.45rem; margin: .4rem 0 .7rem; }
-  .etude p { color: var(--encre-douce); font-size: .95rem; }
-  .fiche { font-family: var(--mono); font-size: .78rem; border-top: 1px solid var(--filet); }
-  .fiche div { display: flex; justify-content: space-between; gap: 1rem; padding: .5rem 0; border-bottom: 1px solid var(--filet); font-variant-numeric: tabular-nums; }
-  .fiche span:first-child { color: var(--encre-douce); }
-  .section-head a { text-decoration: none; }
-  .section-head a:hover { color: var(--accent); }
+  /* ---------- ouverture ---------- */
+  .ouverture {
+    padding-block: clamp(3rem, 7vw, 6rem) clamp(3rem, 6vw, 5rem);
+  }
+  .ouverture-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+  }
+  @media (max-width: 860px) {
+    .ouverture-grille { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+  .ouverture h1 {
+    font-size: var(--t-3xl);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+  }
+  .accroche {
+    margin-top: 1.5rem;
+    max-width: 34rem;
+    font-size: var(--t-md);
+    line-height: 1.62;
+    color: var(--encre-douce);
+  }
+  .ouverture-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-top: 2rem;
+  }
+
+  .ouverture-figure { margin: 0; }
+  .ouverture-figure svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .ouverture-figure figcaption {
+    margin-top: 1rem;
+    padding-top: .9rem;
+    border-top: 1px solid var(--filet);
+    font-size: var(--t-xs);
+    color: var(--encre-douce);
+    max-width: 26rem;
+  }
+
+  .ouverture-figure .legende {
+    font-family: var(--sans);
+    font-size: 9px;
+    font-weight: 600;
+    fill: var(--encre-douce);
+  }
+  .ouverture-figure .legende.cuivre { fill: var(--cuivre); }
+  .ouverture-figure .axe line { stroke: var(--filet-fort); stroke-width: 1; stroke-dasharray: 2 4; }
+  .ouverture-figure .courbe {
+    stroke: var(--encre);
+    stroke-width: 1.8;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-dasharray: 420;
+    stroke-dashoffset: 420;
+    animation: tracer 1.5s cubic-bezier(.33, 1, .68, 1) .25s forwards;
+  }
+  .ouverture-figure .tiges line {
+    stroke: var(--cuivre);
+    stroke-width: 1;
+    opacity: 0;
+    animation: paraitre .5s ease forwards;
+  }
+  .ouverture-figure .tiges line:nth-child(1) { animation-delay: 1.15s; }
+  .ouverture-figure .tiges line:nth-child(2) { animation-delay: 1.25s; }
+  .ouverture-figure .tiges line:nth-child(3) { animation-delay: 1.35s; }
+  .ouverture-figure .tiges line:nth-child(4) { animation-delay: 1.45s; }
+  .ouverture-figure .tiges line:nth-child(5) { animation-delay: 1.55s; }
+  .ouverture-figure .postes rect {
+    fill: var(--cuivre-clair);
+    stroke: var(--cuivre);
+    stroke-width: 1;
+    opacity: 0;
+    animation: monter .5s cubic-bezier(.33, 1, .68, 1) forwards;
+    transform-origin: center bottom;
+  }
+  .ouverture-figure .postes rect:nth-child(1) { animation-delay: 1.15s; }
+  .ouverture-figure .postes rect:nth-child(2) { animation-delay: 1.25s; }
+  .ouverture-figure .postes rect:nth-child(3) { animation-delay: 1.35s; }
+  .ouverture-figure .postes rect:nth-child(4) { animation-delay: 1.45s; }
+  .ouverture-figure .postes rect:nth-child(5) { animation-delay: 1.55s; }
+  .ouverture-figure .etiquette text {
+    font-family: var(--sans);
+    font-size: 8.5px;
+    font-weight: 500;
+    fill: var(--encre);
+    text-anchor: middle;
+    opacity: 0;
+    animation: paraitre .5s ease 1.7s forwards;
+  }
+  .ouverture-figure .question text {
+    font-family: var(--serif);
+    font-size: 12.5px;
+    font-style: italic;
+    fill: var(--encre-douce);
+    opacity: 0;
+    animation: paraitre .7s ease 1.95s forwards;
+  }
+
+  @keyframes tracer { to { stroke-dashoffset: 0; } }
+  @keyframes paraitre { to { opacity: 1; } }
+  @keyframes monter { from { opacity: 0; transform: scaleY(.4); } to { opacity: 1; transform: scaleY(1); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ouverture-figure .courbe { stroke-dashoffset: 0; }
+    .ouverture-figure .tiges line,
+    .ouverture-figure .postes rect,
+    .ouverture-figure .etiquette text,
+    .ouverture-figure .question text { opacity: 1; transform: none; }
+  }
+
+  /* ---------- l'étude ---------- */
+  .etude-bloc { padding-block: clamp(3.5rem, 7vw, 6rem); }
+  .etude-entete { max-width: 44rem; margin-bottom: 3rem; }
+  .etude-entete h2 { font-size: var(--t-2xl); }
+  .etude-entete p { margin-top: 1rem; color: var(--profond-douce); font-size: var(--t-md); line-height: 1.6; }
+
+  .etude-vedette {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--profond-filet);
+  }
+  @media (max-width: 820px) { .etude-vedette { grid-template-columns: 1fr; gap: 2rem; } }
+  .etude-vedette h3 { font-size: var(--t-2xl); margin: .8rem 0 1rem; }
+  .etude-vedette h3 a { text-decoration: none; }
+  .etude-vedette h3 a:hover { color: var(--cuivre); }
+  .etude-chapo { color: var(--profond-douce); font-size: var(--t-md); line-height: 1.6; max-width: 32rem; margin-bottom: 1.75rem; }
+
+  .fiche { margin: 0; font-size: var(--t-sm); }
+  .fiche > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: .7rem;
+    border-bottom: 1px solid var(--profond-filet);
+  }
+  .fiche > div:first-child { border-top: 1px solid var(--profond-filet); }
+  .fiche dt { color: var(--profond-douce); }
+  .fiche dd { margin: 0; text-align: right; }
+
+  /* état d'attente */
+  .etude-attente { padding-top: 2.5rem; border-top: 1px solid var(--profond-filet); }
+  .etude-attente-titre {
+    font-family: var(--serif);
+    font-size: var(--t-lg);
+    line-height: 1.4;
+    max-width: 30rem;
+    margin-bottom: 2.5rem;
+  }
+  .livrables {
+    list-style: none;
+    margin: 0 0 2.5rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 2rem 2.5rem;
+  }
+  .livrables h3 { font-size: var(--t-md); margin-bottom: .5rem; }
+  .livrables p { color: var(--profond-douce); font-size: var(--t-sm); line-height: 1.6; }
+
+  /* ---------- fondamentaux ---------- */
+  .fonda-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 1px;
+    background: var(--filet);
+    border: 1px solid var(--filet);
+  }
+  .fonda-carte {
+    background: var(--papier);
+    padding: 1.5rem 1.4rem 1.6rem;
+    text-decoration: none;
+    transition: background .18s ease;
+  }
+  .fonda-carte:hover { background: var(--sable); }
+  .fonda-rubrique {
+    display: block;
+    font-size: var(--t-xs);
+    font-weight: 600;
+    color: var(--cuivre);
+    margin-bottom: .6rem;
+  }
+  .fonda-carte h3 { font-size: var(--t-md); }
+  .fonda-carte p { margin-top: .5rem; font-size: var(--t-sm); color: var(--encre-douce); line-height: 1.55; }
+
+  /* ---------- règles ---------- */
+  .regles-grille {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  @media (max-width: 820px) { .regles-grille { grid-template-columns: 1fr; gap: 2.5rem; } }
+  .regles-grille h2 { font-size: var(--t-xl); }
+  .regles { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--filet); }
+  .regles li {
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--filet);
+    font-size: var(--t-sm);
+    color: var(--encre-douce);
+    line-height: 1.6;
+  }
+  .regles strong { color: var(--encre); font-weight: 600; }
 </style>
