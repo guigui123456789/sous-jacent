@@ -1,0 +1,14 @@
+---
+const { entrees, base } = Astro.props;
+---
+<div class="liste">
+  {entrees.map((e) => (
+    <a class="item" href={`${base}/${e.id}`}>
+      <div class="date">{e.data.rubrique ?? new Date(e.data.date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
+      <div>
+        <h3>{e.data.titre}</h3>
+        <p>{e.data.chapo}</p>
+      </div>
+    </a>
+  ))}
+</div>

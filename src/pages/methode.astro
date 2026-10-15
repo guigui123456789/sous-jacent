@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base titre="La méthode, pas le verdict" description="Ce que publie sous-jacent.com, et ce qu'il ne publie pas.">
+  <section class="gutter">
+    <div class="wrap">
+      <div class="section-head"><h2>La méthode, pas le verdict</h2></div>
+      <div class="methode">
+        <div class="regle"><h3>Des hypothèses, pas une prophétie</h3><p>Une fourchette de valorisation avec les hypothèses écrites noir sur blanc, et trois scénarios plutôt qu'un chiffre unique.</p></div>
+        <div class="regle"><h3>Le DCF inversé comme question centrale</h3><p>Plutôt que d'annoncer un prix, on demande ce que le cours actuel oblige déjà à croire.</p></div>
+        <div class="regle"><h3>Un modèle de retraitement unique</h3><p>Construit une fois, appliqué à chaque étude, pour que deux sociétés restent comparables.</p></div>
+        <div class="regle"><h3>Aucune affiliation</h3><p>Pas de lien courtier, pas de contenu sponsorisé, pas de position prise sur les valeurs étudiées.</p></div>
+      </div>
+      <div class="col" style="margin-top:2.5rem">
+        <h3 style="font-size:1.2rem;margin-bottom:.6rem">Pourquoi aucun objectif de cours</h3>
+        <p style="color:var(--encre-douce)">Publier un prix cible assorti d'un avis relève de la recommandation d'investissement au sens du règlement européen sur les abus de marché, avec les obligations de présentation qui vont avec. Le choix fait ici est différent : montrer la méthode et laisser le lecteur faire le calcul. C'est plus honnête, et plus utile.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .methode { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 2.5rem; }
+  @media (max-width: 720px) { .methode { grid-template-columns: 1fr; } }
+  .regle { min-width: 0; border-left: 2px solid var(--accent); padding-left: 1rem; }
+  .regle h3 { font-size: 1.02rem; font-family: var(--sans); font-weight: 600; margin-bottom: .3rem; }
+  .regle p { font-size: .92rem; color: var(--encre-douce); }
+</style>

@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import Liste from '../../components/Liste.astro';
+import { getCollection } from 'astro:content';
+const entrees = (await getCollection('fondamentaux')).filter((e) => !e.data.brouillon).sort((a, b) => b.data.date - a.data.date);
+---
+<Base titre="Les fondamentaux" description="Les briques de méthode, écrites une fois et citées en note dans les études.">
+  <section class="gutter">
+    <div class="wrap">
+      <div class="section-head"><h2>Les fondamentaux</h2><p class="eyebrow">{entrees.length} publication{entrees.length > 1 ? 's' : ''}</p></div>
+      <p class="col" style="color:var(--encre-douce);margin-bottom:1.5rem">Les briques de méthode, écrites une fois et citées en note dans les études.</p>
+      <Liste entrees={entrees} base="/fondamentaux" />
+    </div>
+  </section>
+</Base>

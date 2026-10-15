@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import Liste from '../../components/Liste.astro';
+import { getCollection } from 'astro:content';
+const entrees = (await getCollection('etudes')).filter((e) => !e.data.brouillon).sort((a, b) => b.data.date - a.data.date);
+---
+<Base titre="Les études" description="Une société cotée par mois, vingt-cinq ans de comptes retraités au même gabarit.">
+  <section class="gutter">
+    <div class="wrap">
+      <div class="section-head"><h2>Les études</h2><p class="eyebrow">{entrees.length} publication{entrees.length > 1 ? 's' : ''}</p></div>
+      <p class="col" style="color:var(--encre-douce);margin-bottom:1.5rem">Une société cotée par mois, vingt-cinq ans de comptes retraités au même gabarit.</p>
+      <Liste entrees={entrees} base="/etudes" />
+    </div>
+  </section>
+</Base>

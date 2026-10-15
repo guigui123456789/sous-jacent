@@ -1,0 +1,57 @@
+backend:
+  name: github
+  repo: guigui123456789/sous-jacent
+  branch: main
+
+media_folder: public/images
+public_folder: /images
+locale: fr
+publish_mode: editorial_workflow
+
+collections:
+  - name: mecanisme
+    label: Le mécanisme de la semaine
+    label_singular: un mécanisme
+    folder: src/content/mecanisme
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    sortable_fields: [date, titre]
+    fields:
+      - { name: titre, label: Titre, widget: string }
+      - { name: chapo, label: Chapô (2 lignes, s'affiche sous le titre et dans les listes), widget: text }
+      - { name: fait, label: "Le fait de départ (une phrase)", widget: string, required: false }
+      - { name: date, label: Date de publication, widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { name: brouillon, label: Garder en brouillon, widget: boolean, default: true }
+      - { name: body, label: Article, widget: markdown }
+
+  - name: etudes
+    label: Les études
+    label_singular: une étude
+    folder: src/content/etudes
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: numero, label: Numéro de l'étude, widget: number, value_type: int }
+      - { name: societe, label: Société, widget: string }
+      - { name: isin, label: Code ISIN, widget: string, required: false }
+      - { name: periode, label: Période couverte, widget: string, default: "2001 – 2025" }
+      - { name: titre, label: Titre, widget: string }
+      - { name: chapo, label: Chapô, widget: text }
+      - { name: date, label: Date de publication, widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { name: resumePdf, label: "Résumé 2 pages (PDF)", widget: file, required: false }
+      - { name: brouillon, label: Garder en brouillon, widget: boolean, default: true }
+      - { name: body, label: Mémoire, widget: markdown }
+
+  - name: fondamentaux
+    label: Les fondamentaux
+    label_singular: une fiche
+    folder: src/content/fondamentaux
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: titre, label: Titre, widget: string }
+      - { name: rubrique, label: Rubrique, widget: select, options: [Comptes, Flux, Rentabilité, Retraitement, Valorisation, Marchés] }
+      - { name: chapo, label: Chapô, widget: text }
+      - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { name: brouillon, label: Garder en brouillon, widget: boolean, default: true }
+      - { name: body, label: Fiche, widget: markdown }

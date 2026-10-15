@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import Liste from '../../components/Liste.astro';
+import { getCollection } from 'astro:content';
+const entrees = (await getCollection('mecanisme')).filter((e) => !e.data.brouillon).sort((a, b) => b.data.date - a.data.date);
+---
+<Base titre="Le mécanisme de la semaine" description="Un seul fait de marché par semaine, et la mécanique qui l'a produit.">
+  <section class="gutter">
+    <div class="wrap">
+      <div class="section-head"><h2>Le mécanisme de la semaine</h2><p class="eyebrow">{entrees.length} publication{entrees.length > 1 ? 's' : ''}</p></div>
+      <p class="col" style="color:var(--encre-douce);margin-bottom:1.5rem">Un seul fait de marché par semaine, et la mécanique qui l'a produit.</p>
+      <Liste entrees={entrees} base="/mecanisme" />
+    </div>
+  </section>
+</Base>

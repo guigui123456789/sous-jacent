@@ -1,0 +1,16 @@
+---
+import Base from './Base.astro';
+const { titre, chapo, date, surtitre } = Astro.props;
+const d = new Date(date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+---
+<Base titre={titre} description={chapo}>
+  <article class="article gutter">
+    <div class="wrap">
+      <p class="eyebrow">{surtitre}</p>
+      <h1>{titre}</h1>
+      <p class="chapo">{chapo}</p>
+      <p class="meta">{d}</p>
+      <div class="corps"><slot /></div>
+    </div>
+  </article>
+</Base>
