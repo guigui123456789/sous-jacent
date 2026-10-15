@@ -1,7 +1,7 @@
 ---
 numero: 1
 societe: "À choisir"
-periode: "2001 – 2025"
+periode: "2005 – 2025"
 titre: "Gabarit d'étude — à dupliquer"
 chapo: "Le plan type du mémoire mensuel. Reste en brouillon, sert de modèle pour la première vraie étude."
 date: 2026-10-15

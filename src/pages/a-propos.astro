@@ -1,0 +1,119 @@
+---
+import Base from '../layouts/Base.astro';
+import EnTetePage from '../components/EnTetePage.astro';
+
+/* À COMPLÉTER par Guillaume avant publication :
+   école, année de sortie, expériences, fichier du CV, adresse de contact, LinkedIn. */
+const cv = '/cv-guillaume-le-merour.pdf';
+const courriel = 'contact@sousjacent.com';
+const linkedin = '';
+---
+
+<Base
+  titre="À propos"
+  description="Guillaume Le Mérour, étudiant en master de finance. Pourquoi ce site existe et ce qu'on y trouve."
+  enteteTransparente={true}
+>
+  <EnTetePage
+    sur="À propos"
+    titre="Guillaume Le Mérour"
+    intro="Étudiant en master de finance. J'écris ici l'analyse que j'aurais voulu lire en commençant : une société, ses comptes sur vingt et un exercices, et tout le chemin de calcul montré plutôt que résumé."
+    image="/images/pantheon-dome.jpg"
+  />
+
+  <section class="section">
+    <div class="enveloppe apropos">
+      <div class="reveler">
+        <p class="sur">Pourquoi ce site</p>
+        <h2>Occuper la place que personne ne prend</h2>
+        <p class="texte">
+          Les small et mid caps françaises sont peu suivies. Les bureaux indépendants qui les couvrent
+          le font pour des professionnels, derrière un abonnement, et sur quatre cents valeurs à la
+          fois : large, continu, forcément rapide sur chaque dossier. Il n'existe presque rien de
+          public qui prenne une seule de ces sociétés et passe quinze heures dessus.
+        </p>
+        <p class="texte">
+          C'est l'espace que j'occupe. Je ne vends pas de la recherche, donc je peux me permettre la
+          lenteur : reprendre les comptes depuis 2005, les retraiter ligne à ligne, et publier le
+          fichier avec l'article.
+        </p>
+      </div>
+
+      <aside class="carte-identite reveler" data-rang="1">
+        <h3>En bref</h3>
+        <dl>
+          <div><dt>Formation</dt><dd>Master de finance</dd></div>
+          <div><dt>Intérêts</dt><dd>Equity research, structuration</dd></div>
+          <div><dt>Terrain</dt><dd>Small et mid caps françaises</dd></div>
+          <div><dt>Écrit depuis</dt><dd>2026</dd></div>
+        </dl>
+        <div class="actions">
+          <a class="bouton" href={cv}>Télécharger le CV</a>
+          <a class="bouton bouton--ligne" href={`mailto:${courriel}`}>Écrire un message</a>
+          {linkedin && <a class="bouton bouton--ligne" href={linkedin}>LinkedIn</a>}
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--pierre">
+    <div class="enveloppe pourquoi">
+      <div class="reveler">
+        <p class="sur">Les limites que je me donne</p>
+        <h2>Ce que je ne fais pas</h2>
+      </div>
+      <div class="reveler" data-rang="1">
+        <p>
+          Je ne publie pas d'objectif de cours et je ne donne pas d'avis d'achat ou de vente. Je ne
+          détiens aucune position sur les sociétés étudiées et n'ai aucune affiliation, ni courtier, ni
+          sponsor. Les sociétés ne sont ni prévenues ni consultées.
+        </p>
+        <p>
+          Ce que je publie est pédagogique : une méthode, des hypothèses explicites, et de quoi refaire
+          le calcul autrement. <a href="/methode">La méthode est détaillée ici.</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--bleu">
+    <div class="enveloppe recruteurs reveler">
+      <div>
+        <p class="sur">Pour les recruteurs</p>
+        <h2>Chaque étude existe aussi en deux pages</h2>
+        <p class="recruteurs-texte">
+          En PDF, avec les comptes retraités en pièce jointe. C'est le format que j'envoie en
+          candidature, et vous pouvez le télécharger directement depuis chaque étude.
+        </p>
+      </div>
+      <a class="bouton bouton--clair" href="/etudes">Voir les études</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .apropos { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+  @media (max-width: 980px) { .apropos { grid-template-columns: 1fr; gap: var(--e-10); } }
+  .apropos h2 { margin-top: var(--e-6); }
+  .texte { margin-top: var(--e-7); line-height: 1.7; max-width: 40rem; }
+
+  .carte-identite { background: var(--pierre-20); padding: var(--e-9); }
+  .carte-identite h3 { font-family: var(--sans); font-size: .875rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: var(--graphite-80); margin-bottom: var(--e-7); }
+  .carte-identite dl { margin: 0; }
+  .carte-identite dl > div { display: flex; justify-content: space-between; gap: var(--e-7); padding-block: var(--e-4); border-bottom: 1px solid var(--graphite-20); }
+  .carte-identite dl > div:first-child { border-top: 1px solid var(--graphite-20); }
+  .carte-identite dt { color: var(--graphite-80); font-size: .9375rem; }
+  .carte-identite dd { margin: 0; color: var(--bleu); font-size: .9375rem; text-align: right; }
+  .actions { display: flex; flex-direction: column; gap: var(--e-3); margin-top: var(--e-9); }
+
+  .pourquoi { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  @media (max-width: 980px) { .pourquoi { grid-template-columns: 1fr; gap: var(--e-9); } }
+  .pourquoi h2 { margin-top: var(--e-6); }
+  .pourquoi p { line-height: 1.7; max-width: 42rem; }
+  .pourquoi p + p { margin-top: var(--e-7); }
+  .pourquoi a { color: var(--bleu); border-bottom: 1px solid var(--bleu-40); text-decoration: none; }
+
+  .recruteurs { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--e-10); flex-wrap: wrap; }
+  .recruteurs h2 { margin-top: var(--e-6); }
+  .recruteurs-texte { margin-top: var(--e-7); color: var(--bleu-20); line-height: 1.65; max-width: 36rem; }
+</style>

@@ -1,134 +1,344 @@
 ---
 import Base from '../layouts/Base.astro';
-import Liste from '../components/Liste.astro';
 import { getCollection } from 'astro:content';
 
-const pub = (c) => c.filter((e) => !e.data.brouillon).sort((a, b) => b.data.date - a.data.date);
-const meca = pub(await getCollection('mecanisme')).slice(0, 3);
-const fonda = pub(await getCollection('fondamentaux')).slice(0, 4);
-const etudes = pub(await getCollection('etudes'));
+const publie = (c) => c.filter((e) => !e.data.brouillon).sort((a, b) => b.data.date - a.data.date);
+const meca = publie(await getCollection('mecanisme'));
+const fonda = publie(await getCollection('fondamentaux'));
+const etudes = publie(await getCollection('etudes'));
 const etude = etudes[0];
+
+const recents = [...meca, ...fonda]
+  .sort((a, b) => b.data.date - a.data.date)
+  .slice(0, 4)
+  .map((e) => ({
+    titre: e.data.titre,
+    chapo: e.data.chapo,
+    lien: (e.data.rubrique ? '/fondamentaux/' : '/mecanisme/') + e.id,
+    categorie: e.data.rubrique ? `Fondamentaux — ${e.data.rubrique}` : 'Le mécanisme',
+  }));
+
+const formats = [
+  {
+    image: '/images/parc-haussmann.png',
+    titre: "L'étude",
+    texte:
+      "Vingt et un exercices de comptes repris et retraités au même gabarit, un DCF inversé, trois scénarios, et le fichier de données en téléchargement.",
+    lien: '/etudes',
+    libelle: 'Voir les études',
+  },
+  {
+    image: '/images/pantheon-dome.jpg',
+    titre: 'Le mécanisme',
+    texte:
+      "Un seul fait de marché par semaine, et la mécanique qui l'a produit. Pas le résumé de l'actualité : ce qui se passe dessous.",
+    lien: '/mecanisme',
+    libelle: 'Lire les mécanismes',
+  },
+  {
+    image: '/images/salle-conseil.webp',
+    titre: 'Les fondamentaux',
+    texte:
+      "Chaque retraitement expliqué une fois — loyers, éléments non récurrents, capital employé — puis cité en note dans les études.",
+    lien: '/fondamentaux',
+    libelle: 'Voir les fondamentaux',
+  },
+];
+
+const chiffres = [
+  { valeur: 2005, suffixe: '', texte: "Première année de la série : celle du passage obligatoire aux IFRS, pour que les comptes restent comparables d'un bout à l'autre." },
+  { valeur: 21, suffixe: '', texte: "Exercices repris un à un, à partir des documents d'enregistrement universels et des rapports annuels." },
+  { valeur: 3, suffixe: '', texte: "Jeux d'hypothèses publiés côte à côte, avec ce que chacun suppose écrit noir sur blanc." },
+  { valeur: 0, suffixe: '', texte: "Objectif de cours. La méthode est montrée, la conclusion revient au lecteur." },
+];
 ---
-<Base titre="Les mécanismes derrière les prix" description="Un fait de marché par semaine expliqué par sa mécanique, une étude d'entreprise par mois sur vingt-cinq ans de comptes.">
-  <div class="hero gutter">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">Marchés · mécanismes · comptes</p>
-        <h1>Le prix est au-dessus.<br />Le <em>mécanisme</em> est dessous.</h1>
-        <p class="col intro">Un fait de marché par semaine, expliqué par ce qui le produit. Une étude d'entreprise par mois, bâtie sur vingt-cinq ans de comptes. Et la méthode, écrite une fois, pour que vous puissiez refaire le calcul vous-même.</p>
-      </div>
-      <figure>
-        <svg viewBox="0 0 320 170" role="img" aria-label="Une courbe de prix en surface, et en dessous les flux qui la déterminent">
-          <text x="0" y="12" font-family="IBM Plex Mono, monospace" font-size="8" fill="var(--encre-douce)">SURFACE — le cours</text>
-          <polyline points="0,42 40,34 80,46 120,28 160,37 200,22 240,33 280,18 320,26" fill="none" stroke="var(--encre)" stroke-width="1.6" />
-          <line x1="0" y1="62" x2="320" y2="62" stroke="var(--filet)" stroke-width="1" stroke-dasharray="3 3" />
-          <text x="0" y="78" font-family="IBM Plex Mono, monospace" font-size="8" fill="var(--accent)">SOUS-JACENT — ce qui le produit</text>
-          <g fill="var(--accent-faible)" stroke="var(--accent)" stroke-width="1">
-            <rect x="0" y="92" width="44" height="26" /><rect x="58" y="92" width="44" height="26" />
-            <rect x="116" y="92" width="44" height="26" /><rect x="174" y="92" width="44" height="26" />
-            <rect x="232" y="92" width="88" height="26" />
-          </g>
-          <g font-family="IBM Plex Mono, monospace" font-size="6.5" fill="var(--encre)" text-anchor="middle">
-            <text x="22" y="108">marge</text><text x="80" y="108">BFR</text><text x="138" y="108">capex</text>
-            <text x="196" y="108">dette</text><text x="276" y="108">anticipations</text>
-          </g>
-          <g stroke="var(--accent)" stroke-width="1" opacity=".55">
-            <line x1="22" y1="92" x2="22" y2="66" /><line x1="80" y1="92" x2="80" y2="66" />
-            <line x1="138" y1="92" x2="138" y2="66" /><line x1="196" y1="92" x2="196" y2="66" /><line x1="276" y1="92" x2="276" y2="66" />
-          </g>
-          <text x="0" y="145" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="var(--encre-douce)">DCF inversé : quelle marge le marché doit-il supposer</text>
-          <text x="0" y="157" font-family="IBM Plex Mono, monospace" font-size="7.5" fill="var(--encre-douce)">pour que le cours d'aujourd'hui tienne ?</text>
-        </svg>
-        <figcaption>La question de départ de chaque étude.</figcaption>
-      </figure>
-    </div>
-  </div>
 
-  <section class="gutter">
-    <div class="wrap">
-      <div class="section-head"><h2>Trois formats, un seul fil</h2></div>
-      <div class="formats">
-        <article class="format">
-          <span class="cadence">Chaque lundi · ~800 mots</span>
-          <h3>Le mécanisme de la semaine</h3>
-          <p>Pas le résumé de l'actualité : un seul fait, et la mécanique qui l'a produit. Non pas « la BCE a baissé ses taux », mais pourquoi la courbe s'est pentifiée avant l'annonce.</p>
-        </article>
-        <article class="format">
-          <span class="cadence">Mensuel · mémoire + 2 pages</span>
-          <h3>L'étude</h3>
-          <p>Une société cotée, vingt-cinq ans de bilans retraités au même gabarit. Small et mid caps françaises peu suivies, là où les comptes racontent encore quelque chose d'inédit.</p>
-        </article>
-        <article class="format">
-          <span class="cadence">Au fil de l'eau</span>
-          <h3>Les fondamentaux</h3>
-          <p>Lire un compte de résultat, EBITDA contre free cash flow, ce que mesure vraiment le ROIC. La méthode écrite une fois, puis citée en note dans les études.</p>
-        </article>
+<Base
+  titreComplet="sous-jacent — l'analyse d'une société cotée, vingt et un exercices, en public"
+  titre="sous-jacent"
+  description="Une société cotée française peu suivie, vingt et un exercices de comptes retraités au même gabarit, publiés avec les données et le modèle. La méthode, pas le verdict."
+  enteteTransparente={true}
+>
+  <!-- ============== OUVERTURE ============== -->
+  <section class="hero" data-hero>
+    <div class="hero-image">
+      <img src="/images/facade-verre.png" alt="" width="1600" height="900" fetchpriority="high" />
+    </div>
+    <div class="hero-voile"></div>
+    <div class="enveloppe hero-contenu">
+      <p class="sur hero-sur">Analyse financière indépendante</p>
+      <h1>Ce que le cours<br />ne dit pas encore</h1>
+      <p class="hero-texte">
+        Une société cotée française peu suivie, reprise exercice par exercice depuis 2005. Les comptes
+        retraités, le modèle et les hypothèses sont publiés avec l'analyse.
+      </p>
+      <div class="hero-actions">
+        <a class="bouton bouton--clair" href="/etudes">Voir les études</a>
+        <a class="bouton bouton--clair" href="/methode">La méthode</a>
       </div>
     </div>
   </section>
 
-  <section class="gutter">
-    <div class="wrap">
-      <div class="section-head"><h2>Le mécanisme de la semaine</h2><a class="eyebrow" href="/mecanisme">Tous les numéros →</a></div>
-      <Liste entrees={meca} base="/mecanisme" />
+  <!-- ============== CE QUE JE PUBLIE ============== -->
+  <section class="section">
+    <div class="enveloppe">
+      <div class="tete reveler">
+        <p class="sur">Ce que je publie</p>
+        <h2>Une seule société, traitée en profondeur</h2>
+        <p class="tete-texte">
+          Les bureaux indépendants couvrent quatre cents valeurs, en surface, derrière un abonnement.
+          Ici c'est l'inverse : une société à la fois, tout montré, en accès libre.
+        </p>
+      </div>
+
+      <div class="trio">
+        {formats.map((f, i) => (
+          <article class="carte reveler" data-rang={i}>
+            <a href={f.lien}>
+              <div class="cadre-image carte-image" data-rang={i}>
+                <img src={f.image} alt="" loading="lazy" />
+              </div>
+              <h3>{f.titre}</h3>
+              <p>{f.texte}</p>
+              <span class="lien carte-lien">{f.libelle}</span>
+            </a>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
-  {etude && (
-    <section class="gutter">
-      <div class="wrap">
-        <div class="section-head"><h2>L'étude du mois</h2><a class="eyebrow" href="/etudes">Toutes les études →</a></div>
-        <div class="etude">
-          <div>
-            <p class="eyebrow">n° {String(etude.data.numero).padStart(2, '0')} · {etude.data.societe}</p>
-            <h3><a href={`/etudes/${etude.id}`} style="text-decoration:none">{etude.data.titre}</a></h3>
-            <p>{etude.data.chapo}</p>
+  <!-- ============== CHIFFRES ============== -->
+  <section class="section section--pierre">
+    <div class="enveloppe">
+      <p class="sur sur--graphite reveler" style="margin-bottom:var(--e-10)">La série</p>
+      <div class="grille-4">
+        {chiffres.map((c, i) => (
+          <div class="chiffre reveler" data-rang={i}>
+            <span class="chiffre-valeur" data-compte={c.valeur}>0</span>
+            <hr class="filet" />
+            <p>{c.texte}</p>
           </div>
-          <div class="fiche">
-            <div><span>Période couverte</span><span>{etude.data.periode}</span></div>
-            <div><span>Société</span><span>{etude.data.societe}</span></div>
-            {etude.data.isin && <div><span>ISIN</span><span>{etude.data.isin}</span></div>}
-            <div><span>Scénarios</span><span>3</span></div>
-            <div><span>Résumé</span><span>2 pages</span></div>
-          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== L'ÉTUDE ============== -->
+  <section class="etude">
+    <div class="etude-grille">
+      <div class="cadre-image etude-image">
+        <img src="/images/grande-arche.jpg" alt="" width="1376" height="768" loading="lazy" />
+      </div>
+      <div class="etude-texte reveler">
+        <p class="sur">L'étude</p>
+        <h2>{etude ? etude.data.titre : 'La première étude est en préparation'}</h2>
+        <p class="etude-chapo">
+          {etude
+            ? etude.data.chapo
+            : "Le gabarit d'analyse et le modèle de retraitement sont en construction. Voici ce que chaque étude contiendra."}
+        </p>
+
+        {etude ? (
+          <dl class="fiche">
+            <div><dt>Société</dt><dd>{etude.data.societe}</dd></div>
+            <div><dt>Exercices</dt><dd>{etude.data.periode}</dd></div>
+            <div><dt>Résumé</dt><dd>2 pages, PDF</dd></div>
+            <div><dt>Données</dt><dd>CSV téléchargeable</dd></div>
+          </dl>
+        ) : (
+          <ul class="livrables">
+            <li><strong>Le mémoire</strong> — l'analyse complète en six parties, du fait de départ jusqu'à ce que les comptes ne disent pas.</li>
+            <li><strong>Le résumé de deux pages</strong> — en PDF, mis en page pour être imprimé et transmis.</li>
+            <li><strong>Les comptes retraités</strong> — vingt et un exercices en CSV, chaque source datée.</li>
+            <li><strong>Le DCF inversé</strong> — trois curseurs, et la valeur implicite qui bouge avec eux.</li>
+          </ul>
+        )}
+
+        <a class="bouton" href={etude ? `/etudes/${etude.id}` : '/methode'}>
+          {etude ? "Lire l'étude" : 'Lire la méthode'}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== DERNIÈRES PUBLICATIONS ============== -->
+  {recents.length > 0 && (
+    <section class="section">
+      <div class="enveloppe">
+        <div class="tete-ligne reveler">
+          <h2>Dernières publications</h2>
+          <a class="lien" href="/mecanisme">Tout voir</a>
+        </div>
+        <div class="liste">
+          {recents.map((r, i) => (
+            <a class="entree reveler" href={r.lien} data-rang={i}>
+              <span class="categorie">{r.categorie}</span>
+              <div>
+                <h3>{r.titre}</h3>
+                <p>{r.chapo}</p>
+              </div>
+              <span class="rond" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+            </a>
+          ))}
         </div>
       </div>
     </section>
   )}
 
-  <section class="gutter">
-    <div class="wrap">
-      <div class="section-head"><h2>Les fondamentaux</h2><a class="eyebrow" href="/fondamentaux">Tout voir →</a></div>
-      <Liste entrees={fonda} base="/fondamentaux" />
+  <!-- ============== LA MÉTHODE ============== -->
+  <section class="section section--bleu methode">
+    <div class="enveloppe methode-grille">
+      <div class="reveler">
+        <p class="sur">La méthode, pas le verdict</p>
+        <h2>Un prix cible vieillit en une semaine.<br />Une méthode se laisse contredire.</h2>
+      </div>
+      <div class="reveler" data-rang="1">
+        <p class="methode-texte">
+          Aucun objectif de cours n'est publié ici. Les hypothèses sont écrites et modifiables, les
+          données se téléchargent, et chaque graphique renvoie au document et à la page dont il est
+          tiré. Vous pouvez refaire le calcul et aboutir à autre chose que moi — c'est le but.
+        </p>
+        <a class="bouton bouton--clair" href="/methode">Comment c'est calculé</a>
+      </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .hero { padding-block: 3.5rem 2.5rem; border-bottom: 1px solid var(--filet); }
-  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1.08; }
-  .hero h1 :global(em) { font-style: italic; color: var(--accent); }
-  .intro { margin-top: 1.1rem; font-size: 1.08rem; color: var(--encre-douce); }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 2.5rem; align-items: end; }
-  @media (max-width: 720px) { .hero-grid { grid-template-columns: 1fr; gap: 1.75rem; } }
-  figure { margin: 0; }
-  figcaption { font-family: var(--mono); font-size: .7rem; color: var(--encre-douce); margin-top: .5rem; }
-  svg { max-width: 100%; height: auto; display: block; }
-  .formats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--filet); }
-  @media (max-width: 760px) { .formats { grid-template-columns: 1fr; } }
-  .format { min-width: 0; padding: 1.5rem 1.4rem 1.6rem; border-bottom: 1px solid var(--filet); }
-  .format + .format { border-left: 1px solid var(--filet); }
-  @media (max-width: 760px) { .format + .format { border-left: 0; } }
-  .format h3 { font-size: 1.18rem; margin-bottom: .45rem; }
-  .format p { font-size: .93rem; color: var(--encre-douce); }
-  .cadence { font-family: var(--mono); font-size: .72rem; color: var(--accent); letter-spacing: .06em; margin-bottom: .9rem; display: block; }
-  .etude { background: var(--surface); border: 1px solid var(--filet); border-radius: 2px; padding: 1.75rem 1.5rem; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 2rem; }
-  @media (max-width: 760px) { .etude { grid-template-columns: 1fr; gap: 1.5rem; } }
-  .etude h3 { font-size: 1.45rem; margin: .4rem 0 .7rem; }
-  .etude p { color: var(--encre-douce); font-size: .95rem; }
-  .fiche { font-family: var(--mono); font-size: .78rem; border-top: 1px solid var(--filet); }
-  .fiche div { display: flex; justify-content: space-between; gap: 1rem; padding: .5rem 0; border-bottom: 1px solid var(--filet); font-variant-numeric: tabular-nums; }
-  .fiche span:first-child { color: var(--encre-douce); }
-  .section-head a { text-decoration: none; }
-  .section-head a:hover { color: var(--accent); }
+  /* ---------- ouverture ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-image { position: absolute; inset: 0; }
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.08);
+    animation: ample 14s var(--ease-ample) forwards;
+  }
+  @keyframes ample { to { transform: scale(1); } }
+
+  .hero-voile {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(100deg, rgba(22, 43, 75, .92) 0%, rgba(22, 43, 75, .78) 34%, rgba(22, 43, 75, .34) 58%, rgba(22, 43, 75, .12) 100%);
+  }
+  @media (max-width: 860px) {
+    .hero-voile { background: linear-gradient(to bottom, rgba(22,43,75,.86) 0%, rgba(22,43,75,.7) 60%, rgba(22,43,75,.78) 100%); }
+  }
+
+  .hero-contenu { position: relative; width: 100%; padding-block: 9rem 5rem; }
+  .hero-sur { opacity: 0; animation: entrer .8s var(--ease) .15s forwards; }
+  .hero h1 {
+    color: #fff;
+    margin-top: var(--e-7);
+    max-width: 16ch;
+    opacity: 0;
+    animation: entrer 1.2s var(--ease) .3s forwards;
+  }
+  @media (max-width: 640px) { .hero h1 { font-size: min(var(--h1), 3rem); } }
+  .hero-texte {
+    margin-top: var(--e-8);
+    max-width: 34rem;
+    color: rgba(255, 255, 255, .86);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    opacity: 0;
+    animation: entrer 1.2s var(--ease) .5s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--e-5);
+    margin-top: var(--e-10);
+    opacity: 0;
+    animation: entrer 1.2s var(--ease) .68s forwards;
+  }
+  @keyframes entrer { from { opacity: 0; transform: translateY(2rem); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-image img { animation: none; transform: none; }
+    .hero-sur, .hero h1, .hero-texte, .hero-actions { opacity: 1; animation: none; }
+  }
+
+  /* ---------- têtes ---------- */
+  .tete { max-width: 44rem; margin-bottom: var(--e-13); }
+  .tete h2 { margin-top: var(--e-6); }
+  .tete-texte { margin-top: var(--e-7); font-size: 1.0625rem; line-height: 1.6; }
+  .tete-ligne {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--e-8);
+    flex-wrap: wrap;
+    margin-bottom: var(--e-10);
+  }
+
+  /* ---------- trois cartes ---------- */
+  .trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--e-10); }
+  @media (max-width: 980px) { .trio { grid-template-columns: 1fr; gap: var(--e-13); } }
+  .carte a { text-decoration: none; display: block; transition: transform .2s ease-out; }
+  .carte a:hover { transform: translateY(-4px); }
+  .carte-image { aspect-ratio: 4 / 5; margin-bottom: var(--e-8); background: var(--pierre-40); }
+  .carte h3 { font-size: var(--h5); }
+  .carte p { margin-top: var(--e-5); color: var(--graphite); line-height: 1.6; }
+  .carte-lien { display: inline-block; margin-top: var(--e-7); }
+
+  /* ---------- chiffres ---------- */
+  .chiffre-valeur {
+    display: block;
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(3rem, 2rem + 3vw, 4.25rem);
+    line-height: 1;
+    color: var(--bleu);
+    margin-bottom: var(--e-6);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .chiffre .filet { margin-bottom: var(--e-6); }
+  .chiffre p { font-size: .9375rem; line-height: 1.6; color: var(--graphite); }
+
+  /* ---------- l'étude ---------- */
+  .etude { padding-block: 0; }
+  .etude-grille { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; }
+  @media (max-width: 980px) { .etude-grille { grid-template-columns: 1fr; } }
+  .etude-image { min-height: 32rem; }
+  @media (max-width: 980px) { .etude-image { min-height: 20rem; } }
+  .etude-texte {
+    padding: var(--rythme) clamp(1.25rem, 4vw, 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 44rem;
+  }
+  .etude-texte h2 { margin-top: var(--e-6); }
+  .etude-chapo { margin-top: var(--e-7); font-size: 1.0625rem; line-height: 1.6; }
+
+  .fiche { margin: var(--e-9) 0; }
+  .fiche > div { display: flex; justify-content: space-between; gap: var(--e-7); padding-block: var(--e-4); border-bottom: 1px solid var(--graphite-20); }
+  .fiche > div:first-child { border-top: 1px solid var(--graphite-20); }
+  .fiche dt { color: var(--graphite-80); font-size: .9375rem; }
+  .fiche dd { margin: 0; color: var(--bleu); font-size: .9375rem; }
+
+  .livrables { list-style: none; margin: var(--e-9) 0; padding: 0; }
+  .livrables li { padding-block: var(--e-5); border-bottom: 1px solid var(--graphite-20); font-size: .9375rem; line-height: 1.6; }
+  .livrables li:first-child { border-top: 1px solid var(--graphite-20); }
+  .livrables strong { color: var(--bleu); font-weight: 600; }
+
+  .etude-texte .bouton { align-self: flex-start; }
+
+  /* ---------- méthode ---------- */
+  .methode-grille { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  @media (max-width: 980px) { .methode-grille { grid-template-columns: 1fr; gap: var(--e-9); } }
+  .methode h2 { margin-top: var(--e-6); line-height: 1.2; }
+  .methode-texte { color: var(--bleu-20); font-size: 1.0625rem; line-height: 1.65; margin-bottom: var(--e-10); }
 </style>

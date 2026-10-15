@@ -9,6 +9,15 @@ export async function getStaticPaths() {
 const { e } = Astro.props;
 const { Content } = await render(e);
 ---
-<Article titre={e.data.titre} chapo={e.data.chapo} date={e.data.date} surtitre="Le mécanisme de la semaine">
+
+<Article
+  titre={e.data.titre}
+  chapo={e.data.chapo}
+  date={e.data.date}
+  fait={e.data.fait}
+  rubrique="Le mécanisme de la semaine"
+  retour="/mecanisme"
+  retourLibelle="Tous les mécanismes"
+>
   <Content />
 </Article>

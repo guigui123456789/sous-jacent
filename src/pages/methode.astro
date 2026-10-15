@@ -1,27 +1,124 @@
 ---
 import Base from '../layouts/Base.astro';
+import EnTetePage from '../components/EnTetePage.astro';
+
+const etapes = [
+  {
+    titre: 'Reprendre les comptes depuis 2005',
+    texte:
+      "2005 est l'année du passage obligatoire aux IFRS pour les sociétés cotées européennes. Avant, les comptes sont en normes françaises et ne se comparent pas sans retraitements lourds. La série commence donc là où elle est homogène : vingt et un exercices, saisis depuis les documents d'enregistrement universels et les rapports annuels.",
+  },
+  {
+    titre: 'Retraiter au même gabarit',
+    texte:
+      "Capitalisation des loyers avant IFRS 16, neutralisation des éléments non récurrents, capital employé avec et sans goodwill, NOPAT, free cash flow, dette nette ajustée. Le même modèle sert à toutes les études, pour que deux sociétés restent comparables. Chaque retraitement renvoie au fondamental qui l'explique.",
+  },
+  {
+    titre: 'Poser la question à l’envers',
+    texte:
+      "Plutôt que d'annoncer une valeur, on part du cours et on remonte : à quelle marge, à quelle croissance et à quel coût du capital le marché doit-il croire pour que ce cours tienne ? C'est un DCF inversé. La réponse est une hypothèse implicite, qu'on peut ensuite comparer aux vingt et un exercices observés.",
+  },
+  {
+    titre: 'Publier les hypothèses et les données',
+    texte:
+      "Trois scénarios, leurs hypothèses écrites, et le fichier des comptes retraités en téléchargement. Chaque graphique renvoie au document et à la page dont il est tiré. Vous pouvez refaire le calcul, changer une hypothèse et obtenir un autre résultat que le mien — c'est le but.",
+  },
+];
+
+const engagements = [
+  ['Aucune position', 'détenue sur les sociétés étudiées, à l’achat comme à la vente.'],
+  ['Aucune affiliation', 'pas de lien courtier, pas de contenu sponsorisé, pas de commission.'],
+  ['Aucune commande', 'les sociétés étudiées ne sont ni prévenues, ni consultées, ni payantes.'],
+  ['Les erreurs sont corrigées', 'en haut de l’article, avec la date et ce qui a changé.'],
+];
 ---
-<Base titre="La méthode, pas le verdict" description="Ce que publie sousjacent.com, et ce qu'il ne publie pas.">
-  <section class="gutter">
-    <div class="wrap">
-      <div class="section-head"><h2>La méthode, pas le verdict</h2></div>
-      <div class="methode">
-        <div class="regle"><h3>Des hypothèses, pas une prophétie</h3><p>Une fourchette de valorisation avec les hypothèses écrites noir sur blanc, et trois scénarios plutôt qu'un chiffre unique.</p></div>
-        <div class="regle"><h3>Le DCF inversé comme question centrale</h3><p>Plutôt que d'annoncer un prix, on demande ce que le cours actuel oblige déjà à croire.</p></div>
-        <div class="regle"><h3>Un modèle de retraitement unique</h3><p>Construit une fois, appliqué à chaque étude, pour que deux sociétés restent comparables.</p></div>
-        <div class="regle"><h3>Aucune affiliation</h3><p>Pas de lien courtier, pas de contenu sponsorisé, pas de position prise sur les valeurs étudiées.</p></div>
+
+<Base
+  titre="La méthode"
+  description="Comment une étude est construite : vingt et un exercices retraités au même gabarit, un DCF inversé, trois scénarios, et les données publiées."
+  enteteTransparente={true}
+>
+  <EnTetePage
+    sur="La méthode, pas le verdict"
+    titre="Montrer le calcul plutôt que le résultat"
+    intro="Ce site ne publie pas d'objectif de cours. Il publie la manière dont on arriverait à un chiffre, et vous laisse le produire vous-même."
+    image="/images/parc-haussmann.png"
+  />
+
+  <section class="section">
+    <div class="enveloppe">
+      <ol class="etapes">
+        {etapes.map((e, i) => (
+          <li class="reveler" data-rang={i}>
+            <span class="rang">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h2>{e.titre}</h2>
+              <p>{e.texte}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--pierre">
+    <div class="enveloppe pourquoi">
+      <div class="reveler">
+        <p class="sur">Le point réglementaire</p>
+        <h2>Pourquoi aucun prix cible</h2>
       </div>
-      <div class="col" style="margin-top:2.5rem">
-        <h3 style="font-size:1.2rem;margin-bottom:.6rem">Pourquoi aucun objectif de cours</h3>
-        <p style="color:var(--encre-douce)">Publier un prix cible assorti d'un avis relève de la recommandation d'investissement au sens du règlement européen sur les abus de marché, avec les obligations de présentation qui vont avec. Le choix fait ici est différent : montrer la méthode et laisser le lecteur faire le calcul. C'est plus honnête, et plus utile.</p>
+      <div class="reveler" data-rang="1">
+        <p>
+          Publier une valeur de référence assortie d'un avis relève de la recommandation
+          d'investissement au sens du règlement européen sur les abus de marché. Cela impose des
+          obligations de présentation — méthodologie, identité de l'auteur, positions détenues,
+          historique des recommandations passées — qu'un avertissement en pied de page ne remplace pas.
+        </p>
+        <p>
+          Le choix fait ici n'est pas un repli : montrer le raisonnement est plus utile qu'annoncer un
+          chiffre. Un prix cible vieillit en une semaine. Une méthode se réutilise, se critique, et se
+          transmet.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--bleu">
+    <div class="enveloppe">
+      <p class="sur reveler" style="margin-bottom:var(--e-10)">Les engagements</p>
+      <div class="grille-4">
+        {engagements.map(([fort, suite], i) => (
+          <div class="engagement reveler" data-rang={i}>
+            <hr class="filet filet--bleu" />
+            <p><strong>{fort}</strong> {suite}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 </Base>
+
 <style>
-  .methode { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 2.5rem; }
-  @media (max-width: 720px) { .methode { grid-template-columns: 1fr; } }
-  .regle { min-width: 0; border-left: 2px solid var(--accent); padding-left: 1rem; }
-  .regle h3 { font-size: 1.02rem; font-family: var(--sans); font-weight: 600; margin-bottom: .3rem; }
-  .regle p { font-size: .92rem; color: var(--encre-douce); }
+  .etapes { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--graphite-20); }
+  .etapes li {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: var(--e-8);
+    padding-block: var(--e-10);
+    border-bottom: 1px solid var(--graphite-20);
+  }
+  @media (max-width: 760px) { .etapes li { grid-template-columns: 1fr; gap: var(--e-5); } }
+  .rang { font-family: var(--serif); font-weight: 300; font-size: 1.75rem; color: var(--or); line-height: 1; padding-top: .35rem; }
+  .etapes h2 { font-size: var(--h5); margin-bottom: var(--e-6); }
+  .etapes p { max-width: 44rem; line-height: 1.7; }
+
+  .pourquoi { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+  @media (max-width: 980px) { .pourquoi { grid-template-columns: 1fr; gap: var(--e-9); } }
+  .pourquoi h2 { margin-top: var(--e-6); }
+  .pourquoi p { line-height: 1.7; max-width: 42rem; }
+  .pourquoi p + p { margin-top: var(--e-7); }
+
+  .filet--bleu { border-top-color: #2a3f5e; margin-bottom: var(--e-7); }
+  .engagement p { color: var(--bleu-20); font-size: .9375rem; line-height: 1.65; }
+  .engagement strong { color: #fff; font-weight: 400; }
 </style>

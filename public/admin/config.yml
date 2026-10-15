@@ -36,11 +36,12 @@ collections:
       - { name: numero, label: Numéro de l'étude, widget: number, value_type: int }
       - { name: societe, label: Société, widget: string }
       - { name: isin, label: Code ISIN, widget: string, required: false }
-      - { name: periode, label: Période couverte, widget: string, default: "2001 – 2025" }
+      - { name: periode, label: Période couverte, widget: string, default: "2005 – 2025" }
       - { name: titre, label: Titre, widget: string }
       - { name: chapo, label: Chapô, widget: text }
       - { name: date, label: Date de publication, widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
       - { name: resumePdf, label: "Résumé 2 pages (PDF)", widget: file, required: false }
+      - { name: donneesCsv, label: "Comptes retraités (CSV)", widget: file, required: false }
       - { name: brouillon, label: Garder en brouillon, widget: boolean, default: true }
       - { name: body, label: Mémoire, widget: markdown }
 

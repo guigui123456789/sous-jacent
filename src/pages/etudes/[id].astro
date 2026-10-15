@@ -1,5 +1,5 @@
 ---
-import Article from '../../layouts/Article.astro';
+import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -8,7 +8,103 @@ export async function getStaticPaths() {
 }
 const { e } = Astro.props;
 const { Content } = await render(e);
+const d = new Date(e.data.date);
+const affiche = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
 ---
-<Article titre={e.data.titre} chapo={e.data.chapo} date={e.data.date} surtitre="L'étude du mois">
-  <Content />
-</Article>
+
+<Base titre={e.data.titre} description={e.data.chapo} enteteTransparente={true}>
+  <header class="tete" data-hero>
+    <div class="tete-image">
+      <img src="/images/toits-defense.png" alt="" fetchpriority="high" />
+    </div>
+    <div class="tete-voile"></div>
+    <div class="enveloppe tete-contenu">
+      <a class="retour" href="/etudes">Toutes les études</a>
+      <p class="sur">Étude n° {String(e.data.numero).padStart(2, '0')} — {e.data.societe}</p>
+      <h1>{e.data.titre}</h1>
+      <p class="tete-chapo">{e.data.chapo}</p>
+      <div class="tete-meta">
+        <time datetime={d.toISOString()}>{affiche}</time>
+        <span>Guillaume Le Mérour</span>
+        <span>{e.data.periode}</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="enveloppe grille-etude">
+      <div class="corps"><Content /></div>
+
+      <aside class="flanc">
+        <div class="bloc">
+          <h2>Fiche technique</h2>
+          <dl>
+            <div><dt>Société</dt><dd>{e.data.societe}</dd></div>
+            {e.data.isin && <div><dt>ISIN</dt><dd>{e.data.isin}</dd></div>}
+            <div><dt>Exercices</dt><dd>{e.data.periode}</dd></div>
+            <div><dt>Scénarios</dt><dd>3</dd></div>
+          </dl>
+        </div>
+
+        {(e.data.resumePdf || e.data.donneesCsv) && (
+          <div class="bloc">
+            <h2>À télécharger</h2>
+            <ul class="fichiers">
+              {e.data.resumePdf && (
+                <li><a href={e.data.resumePdf}>Le résumé de deux pages <span>PDF</span></a></li>
+              )}
+              {e.data.donneesCsv && (
+                <li><a href={e.data.donneesCsv}>Les comptes retraités <span>CSV</span></a></li>
+              )}
+            </ul>
+          </div>
+        )}
+
+        <div class="bloc bloc--note">
+          <h2>Ce que cette étude ne fait pas</h2>
+          <p>
+            Aucun objectif de cours, aucun avis d'achat ou de vente. Les hypothèses sont écrites et
+            modifiables : la conclusion vous appartient.
+          </p>
+          <a class="lien" href="/methode">La méthode</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tete { position: relative; display: flex; align-items: flex-end; overflow: hidden; min-height: 34rem; }
+  @media (max-width: 760px) { .tete { min-height: 26rem; } }
+  .tete-image { position: absolute; inset: 0; }
+  .tete-image img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.08); animation: ample 14s var(--ease-ample) forwards; }
+  @keyframes ample { to { transform: scale(1); } }
+  .tete-voile { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(22,43,75,.8) 0%, rgba(22,43,75,.66) 40%, rgba(22,43,75,.9) 100%); }
+  .tete-contenu { position: relative; width: 100%; padding-block: 8.5rem var(--e-12); }
+
+  .retour { display: inline-block; margin-bottom: var(--e-9); font-size: .875rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.72); text-decoration: none; }
+  .retour:hover { color: #fff; }
+  .tete h1 { color: #fff; font-size: var(--h2); margin-top: var(--e-6); max-width: 22ch; }
+  .tete-chapo { margin-top: var(--e-7); max-width: 38rem; color: rgba(255,255,255,.84); font-family: var(--serif); font-weight: 300; font-size: 1.375rem; line-height: 1.45; }
+  .tete-meta { display: flex; gap: var(--e-8); flex-wrap: wrap; margin-top: var(--e-9); padding-top: var(--e-6); border-top: 1px solid rgba(255,255,255,.22); font-size: .875rem; color: rgba(255,255,255,.7); }
+
+  .grille-etude { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
+  @media (max-width: 1024px) { .grille-etude { grid-template-columns: 1fr; } .flanc { order: -1; } }
+  .grille-etude .corps { margin-top: 0; }
+
+  .flanc { position: sticky; top: 7rem; display: grid; gap: var(--e-9); }
+  @media (max-width: 1024px) { .flanc { position: static; } }
+  .bloc { border-top: 1px solid var(--bleu); padding-top: var(--e-5); }
+  .bloc h2 { font-family: var(--sans); font-size: .875rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: var(--graphite-80); margin-bottom: var(--e-6); }
+  .bloc dl { margin: 0; }
+  .bloc dl > div { display: flex; justify-content: space-between; gap: var(--e-5); padding-block: var(--e-3); border-bottom: 1px solid var(--graphite-20); font-size: .9375rem; }
+  .bloc dt { color: var(--graphite-80); }
+  .bloc dd { margin: 0; color: var(--bleu); text-align: right; }
+
+  .fichiers { list-style: none; margin: 0; padding: 0; font-size: .9375rem; }
+  .fichiers a { display: flex; justify-content: space-between; gap: var(--e-5); padding-block: var(--e-3); border-bottom: 1px solid var(--graphite-20); text-decoration: none; color: var(--bleu); }
+  .fichiers a:hover { color: var(--or); }
+  .fichiers span { color: var(--graphite-80); }
+
+  .bloc--note p { font-size: .9375rem; line-height: 1.6; color: var(--graphite); margin-bottom: var(--e-6); }
+</style>
