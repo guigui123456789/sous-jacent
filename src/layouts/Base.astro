@@ -16,6 +16,11 @@ const AUTEUR = {
   name: 'Guillaume Le Merour',
   url: origine + '/a-propos/',
   email: 'contact@sousjacent.com',
+  sameAs: ['https://www.linkedin.com/in/guillaumelemerour/'],
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Université Paris-Panthéon-Assas' },
+    { '@type': 'CollegeOrUniversity', name: 'University of Maine at Augusta' },
+  ],
   jobTitle: 'Étudiant en master de finance',
   knowsAbout: ['analyse financière', 'valorisation d\'entreprise', 'small caps', 'comptabilité IFRS'],
 };
@@ -147,7 +152,7 @@ const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@
           <a href="/mentions-legales">Données personnelles</a>
         </div>
         <div class="pied-social">
-          <a href="https://www.linkedin.com/" aria-label="LinkedIn" rel="me noopener" target="_blank">
+          <a href="https://www.linkedin.com/in/guillaumelemerour/" aria-label="LinkedIn" rel="me noopener" target="_blank">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21h-4z"/></svg>
           </a>
           <a href="https://www.instagram.com/" aria-label="Instagram" rel="me noopener" target="_blank">
