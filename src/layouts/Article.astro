@@ -1,12 +1,22 @@
 ---
 import Base from './Base.astro';
 
-const { titre, chapo, date, categorie, fait, retour, retourLibelle } = Astro.props;
+const { titre, chapo, date, categorie, fait, retour, retourLibelle, schema: schemaSup } = Astro.props;
 const d = new Date(date);
 const affiche = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+
+const schemaArticle = {
+  '@type': 'Article',
+  headline: titre,
+  description: chapo,
+  datePublished: d.toISOString(),
+  dateModified: d.toISOString(),
+  ...(categorie ? { articleSection: categorie } : {}),
+};
+const schema = schemaSup ? [schemaArticle, ...(Array.isArray(schemaSup) ? schemaSup : [schemaSup])] : schemaArticle;
 ---
 
-<Base titre={titre} description={chapo}>
+<Base titre={titre} description={chapo} schema={schema}>
   <article class="article">
     <div class="enveloppe">
       <div class="article-tete">

@@ -10,9 +10,42 @@ const { e } = Astro.props;
 const { Content } = await render(e);
 const d = new Date(e.data.date);
 const affiche = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+
+const schema = [
+  {
+    '@type': 'Article',
+    headline: e.data.titre,
+    description: e.data.chapo,
+    datePublished: d.toISOString(),
+    dateModified: d.toISOString(),
+    articleSection: 'Les études',
+    about: {
+      '@type': 'Corporation',
+      name: e.data.societe,
+      ...(e.data.isin ? { identifier: { '@type': 'PropertyValue', propertyID: 'ISIN', value: e.data.isin } } : {}),
+    },
+    temporalCoverage: e.data.periode.replace(/\s*–\s*/, '/'),
+  },
+  ...(e.data.donneesCsv
+    ? [
+        {
+          '@type': 'Dataset',
+          name: `${e.data.societe} — comptes retraités ${e.data.periode}`,
+          description: `Comptes annuels de ${e.data.societe} repris et retraités au même gabarit sur la période ${e.data.periode}.`,
+          creator: { '@id': (Astro.site ?? new URL('https://www.sousjacent.com')).origin + '/a-propos/#personne' },
+          temporalCoverage: e.data.periode.replace(/\s*–\s*/, '/'),
+          distribution: {
+            '@type': 'DataDownload',
+            encodingFormat: 'text/csv',
+            contentUrl: new URL(e.data.donneesCsv, Astro.site ?? 'https://www.sousjacent.com').href,
+          },
+        },
+      ]
+    : []),
+];
 ---
 
-<Base titre={e.data.titre} description={e.data.chapo} enteteTransparente={true}>
+<Base titre={e.data.titre} description={e.data.chapo} enteteTransparente={true} schema={schema}>
   <header class="tete" data-hero>
     <div class="tete-image">
       <img src="/images/toits-defense.png" alt="" fetchpriority="high" />

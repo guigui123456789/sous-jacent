@@ -13,6 +13,7 @@ const linkedin = '';
   titre="À propos"
   description="Guillaume Le Merour, étudiant en master de finance. Pourquoi ce site existe et ce qu'on y trouve."
   enteteTransparente={true}
+  schema={{ '@type': 'ProfilePage', mainEntity: { '@id': (Astro.site ?? new URL('https://www.sousjacent.com')).origin + '/a-propos/#personne' } }}
 >
   <EnTetePage
     sur="À propos"

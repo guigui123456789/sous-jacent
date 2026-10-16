@@ -2,10 +2,41 @@
 import '../styles/global.css';
 import Embleme from '../components/Embleme.astro';
 
-const { titre, description, titreComplet, enteteTransparente = false } = Astro.props;
+const { titre, description, titreComplet, enteteTransparente = false, schema } = Astro.props;
 const path = Astro.url.pathname;
 const actif = (p) => (path === p || path.startsWith(p + '/') ? 'page' : undefined);
 const annee = new Date().getFullYear();
+
+const origine = (Astro.site ?? new URL('https://www.sousjacent.com')).origin;
+const url = origine + path;
+
+const AUTEUR = {
+  '@type': 'Person',
+  '@id': origine + '/a-propos/#personne',
+  name: 'Guillaume Le Merour',
+  url: origine + '/a-propos/',
+  email: 'contact@sousjacent.com',
+  jobTitle: 'Étudiant en master de finance',
+  knowsAbout: ['analyse financière', 'valorisation d\'entreprise', 'small caps', 'comptabilité IFRS'],
+};
+
+const SITE = {
+  '@type': 'WebSite',
+  '@id': origine + '/#site',
+  url: origine + '/',
+  name: 'sous-jacent',
+  inLanguage: 'fr-FR',
+  description:
+    "L'analyse de sociétés cotées françaises peu suivies : vingt et un exercices de comptes retraités, publiés avec les données et le modèle.",
+  publisher: { '@id': AUTEUR['@id'] },
+};
+
+const graphe = [SITE, AUTEUR, ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])].map((n) =>
+  n['@type'] === 'Article' || n['@type'] === 'TechArticle'
+    ? { mainEntityOfPage: url, url, author: { '@id': AUTEUR['@id'] }, publisher: { '@id': AUTEUR['@id'] }, isPartOf: { '@id': SITE['@id'] }, inLanguage: 'fr-FR', ...n }
+    : n
+);
+const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@graph': graphe });
 ---
 <!doctype html>
 <html lang="fr">
@@ -21,6 +52,7 @@ const annee = new Date().getFullYear();
   <meta property="og:locale" content="fr_FR" />
   <meta property="og:url" content={new URL(path, Astro.site ?? "https://www.sousjacent.com")} />
   <link rel="canonical" href={new URL(path, Astro.site ?? 'https://www.sousjacent.com')} />
+  <script type="application/ld+json" is:inline set:html={donneesStructurees} />
   <link rel="alternate" type="application/rss+xml" title="sous-jacent" href="/rss.xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
