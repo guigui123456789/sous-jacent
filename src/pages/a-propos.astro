@@ -88,6 +88,15 @@ const travaux = [
       </div>
 
       <aside class="carte-identite reveler" data-rang="1">
+        <figure class="portrait">
+          <img
+            src="/images/portrait-guillaume.webp"
+            alt="Portrait de Guillaume Le Merour"
+            width="900"
+            height="1100"
+            loading="lazy"
+          />
+        </figure>
         <h3>En bref</h3>
         <dl>
           <div><dt>Formation</dt><dd>Master de finance, Paris-Panthéon-Assas</dd></div>
@@ -95,7 +104,7 @@ const travaux = [
           <div><dt>Expérience</dt><dd>Deux étés en agence, CIC</dd></div>
           <div><dt>Terrain</dt><dd>Small et mid caps françaises</dd></div>
           <div><dt>Langues</dt><dd>Français, anglais</dd></div>
-          <div><dt>Recherche</dt><dd>Stage de six mois</dd></div>
+          <div><dt>Césure</dt><dd>Deux stages de six mois, à partir de juin 2027</dd></div>
         </dl>
         <div class="actions">
           {cv && <a class="bouton" href={cv}>Télécharger le CV</a>}
@@ -182,6 +191,9 @@ const travaux = [
   .texte { margin-top: var(--e-7); line-height: 1.7; max-width: 40rem; }
 
   .carte-identite { background: var(--pierre-20); padding: var(--e-9); }
+  .portrait { margin: calc(var(--e-9) * -1) calc(var(--e-9) * -1) var(--e-8); }
+  .portrait img { display: block; width: 100%; height: auto; aspect-ratio: 9 / 11; object-fit: cover; }
+
   .carte-identite h3 { font-family: var(--sans); font-size: .875rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: var(--graphite-80); margin-bottom: var(--e-7); }
   .carte-identite dl { margin: 0; }
   .carte-identite dl > div { display: flex; justify-content: space-between; gap: var(--e-7); padding-block: var(--e-4); border-bottom: 1px solid var(--graphite-20); }
