@@ -2,11 +2,58 @@
 import Base from '../layouts/Base.astro';
 import EnTetePage from '../components/EnTetePage.astro';
 
-/* À COMPLÉTER par Guillaume avant publication :
-   école, année de sortie, expériences, fichier du CV, adresse de contact, LinkedIn. */
-const cv = '/cv-guillaume-le-merour.pdf';
+/* Le CV reste vide tant que le PDF n'est pas déposé dans public/ :
+   le bouton ne s'affiche pas et aucun lien ne tombe en 404. */
+const cv = '';
 const courriel = 'contact@sousjacent.com';
 const linkedin = 'https://www.linkedin.com/in/guillaumelemerour';
+
+const parcours = [
+  {
+    periode: '2026 — 2029',
+    titre: 'Master de finance',
+    lieu: 'Université Paris-Panthéon-Assas',
+    detail:
+      "Gestion de portefeuille obligataire et actions, produits dérivés, évaluation d'actifs, analyse financière et finance d'entreprise. Séries temporelles, économétrie, optimisation dynamique. Python et VBA.",
+  },
+  {
+    periode: '2025 — 2026',
+    titre: 'Licence 3, finance internationale',
+    lieu: 'University of Maine at Augusta, États-Unis',
+    detail: "Année d'échange. Scolarité et travaux rendus en anglais.",
+  },
+  {
+    periode: 'Été 2025',
+    titre: 'Chargé de clientèle',
+    lieu: 'CIC, Fouesnant',
+    detail:
+      "Quatre mois en agence : relation client, procédures financières et contraintes réglementaires vues du guichet plutôt que du manuel.",
+  },
+  {
+    periode: 'Été 2024',
+    titre: 'Auxiliaire de vacances',
+    lieu: 'CIC, Fouesnant',
+    detail: 'Trois mois en agence, premier contact avec le fonctionnement courant d\'une banque de détail.',
+  },
+];
+
+const travaux = [
+  {
+    titre: 'Next Challenge 2026-2027',
+    detail:
+      "Compétition boursière étudiante organisée par Nextwise. Gestion d'un portefeuille en conditions réelles d'octobre à avril, évaluée par un jury de professionnels sur la diversification et la justification des choix autant que sur la performance.",
+  },
+  {
+    titre: 'CME Group University Trading Challenge 2026',
+    detail:
+      "Chef d'équipe pour Paris-Panthéon-Assas. Quatre semaines de négociation de contrats à terme sur plateforme professionnelle simulée, face à plusieurs centaines d'équipes universitaires.",
+  },
+  {
+    titre: 'Certifications Bloomberg',
+    detail:
+      'Bloomberg Market Concepts et Environmental Social Governance, obtenues en 2026.',
+  },
+];
 ---
 
 <Base
@@ -43,17 +90,53 @@ const linkedin = 'https://www.linkedin.com/in/guillaumelemerour';
       <aside class="carte-identite reveler" data-rang="1">
         <h3>En bref</h3>
         <dl>
-          <div><dt>Formation</dt><dd>Master de finance</dd></div>
-          <div><dt>Intérêts</dt><dd>Equity research, structuration</dd></div>
+          <div><dt>Formation</dt><dd>Master de finance, Paris-Panthéon-Assas</dd></div>
+          <div><dt>Échange</dt><dd>University of Maine at Augusta</dd></div>
+          <div><dt>Expérience</dt><dd>Deux étés en agence, CIC</dd></div>
           <div><dt>Terrain</dt><dd>Small et mid caps françaises</dd></div>
-          <div><dt>Écrit depuis</dt><dd>2026</dd></div>
+          <div><dt>Langues</dt><dd>Français, anglais</dd></div>
+          <div><dt>Recherche</dt><dd>Stage de six mois</dd></div>
         </dl>
         <div class="actions">
-          <a class="bouton" href={cv}>Télécharger le CV</a>
+          {cv && <a class="bouton" href={cv}>Télécharger le CV</a>}
           <a class="bouton bouton--ligne" href={`mailto:${courriel}`}>Écrire un message</a>
           {linkedin && <a class="bouton bouton--ligne" href={linkedin}>LinkedIn</a>}
         </div>
       </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="enveloppe">
+      <div class="reveler">
+        <p class="sur">Parcours</p>
+        <h2 class="parcours-titre">Où j'ai appris ce que j'écris</h2>
+      </div>
+
+      <ol class="parcours reveler" data-rang="1">
+        {parcours.map((e) => (
+          <li>
+            <p class="parcours-periode">{e.periode}</p>
+            <div>
+              <h3>{e.titre}</h3>
+              <p class="parcours-lieu">{e.lieu}</p>
+              <p class="parcours-detail">{e.detail}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <div class="travaux reveler" data-rang="2">
+        <h3 class="travaux-titre">En cours</h3>
+        <div class="travaux-grille">
+          {travaux.map((t) => (
+            <div class="travail">
+              <h4>{t.titre}</h4>
+              <p>{t.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 
@@ -116,5 +199,21 @@ const linkedin = 'https://www.linkedin.com/in/guillaumelemerour';
 
   .recruteurs { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--e-10); flex-wrap: wrap; }
   .recruteurs h2 { margin-top: var(--e-6); }
+  .parcours-titre { margin-top: var(--e-6); }
+  .parcours { list-style: none; margin: var(--e-10) 0 0; padding: 0; border-top: 1px solid var(--graphite-20); }
+  .parcours li { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); padding-block: var(--e-8); border-bottom: 1px solid var(--graphite-20); }
+  @media (max-width: 760px) { .parcours li { grid-template-columns: 1fr; gap: var(--e-3); } }
+  .parcours-periode { font-family: var(--sans); font-size: .875rem; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite-80); }
+  .parcours h3 { font-family: var(--serif); font-weight: 300; font-size: 1.375rem; color: var(--bleu); }
+  .parcours-lieu { margin-top: var(--e-2); font-size: .9375rem; color: var(--graphite-80); }
+  .parcours-detail { margin-top: var(--e-5); line-height: 1.7; max-width: 42rem; }
+
+  .travaux { margin-top: var(--e-11); }
+  .travaux-titre { font-family: var(--sans); font-size: .875rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; color: var(--graphite-80); }
+  .travaux-grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: clamp(1.5rem, 4vw, 3rem); margin-top: var(--e-8); }
+  .travail { padding-top: var(--e-6); border-top: 1px solid var(--or); }
+  .travail h4 { font-family: var(--serif); font-weight: 300; font-size: 1.1875rem; color: var(--bleu); }
+  .travail p { margin-top: var(--e-4); font-size: .9375rem; line-height: 1.65; }
+
   .recruteurs-texte { margin-top: var(--e-7); color: var(--bleu-20); line-height: 1.65; max-width: 36rem; }
 </style>
