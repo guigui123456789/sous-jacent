@@ -25,6 +25,46 @@ const etapes = [
   },
 ];
 
+/* Les questions fréquentes.
+   Un seul tableau sert à la fois au texte affiché et au balisage FAQPage
+   ci-dessous : les deux ne peuvent donc pas diverger, ce que Google exige. */
+const questions = [
+  {
+    q: "Qu'est-ce qu'un DCF inversé ?",
+    r: "Un modèle d'actualisation des flux classique part d'hypothèses de croissance, de marge et de coût du capital, et en déduit une valeur. Le DCF inversé fait le chemin contraire : il part du cours observé et remonte aux hypothèses qu'il faut retenir pour que ce cours soit justifié. Le résultat n'est pas un prix, c'est une phrase de la forme « à ce cours, le marché suppose une croissance de X % et une marge de Y % ». Cette phrase se compare ensuite à ce que la société a réellement fait sur vingt et un exercices. L'intérêt est double : la conclusion revient au lecteur, et l'écart entre l'hypothèse implicite et l'historique est mesurable au lieu d'être affirmé.",
+  },
+  {
+    q: "Qu'est-ce qu'un élément non récurrent, et pourquoi le neutraliser ?",
+    r: "Un élément non récurrent est un produit ou une charge qui figure au compte de résultat d'un exercice mais qui ne se reproduira pas : règlement de litige, dépréciation d'écart d'acquisition, indemnités de restructuration, cession d'actif. Il est réel et il a bien affecté le résultat, mais le conserver dans une série longue fausse la lecture de la rentabilité courante. Le neutraliser consiste à le retirer du résultat opérationnel pour obtenir ce que l'activité produit en régime normal. Chaque élément retiré est listé dans l'étude, avec son libellé exact au compte de résultat, son montant et l'exercice concerné, afin que le lecteur puisse remettre dans le résultat ce qu'il juge récurrent.",
+  },
+  {
+    q: "Comment le capital employé et le ROIC sont-ils calculés ici ?",
+    r: "Le capital employé est défini comme les capitaux propres augmentés des dettes financières et diminués de la trésorerie, pris en moyenne entre l'ouverture et la clôture de l'exercice. Le ROIC rapporte à ce capital le résultat opérationnel courant après un impôt normatif de 21 %. Deux précisions comptent plus que la formule : le résultat utilisé est le résultat retraité des éléments non récurrents, et la moyenne d'ouverture et de clôture évite qu'une acquisition de fin d'exercice ne gonfle artificiellement le dénominateur. Une série de ROIC n'est comparable d'une étude à l'autre que si cette définition est la même partout, c'est pourquoi elle est écrite plutôt que sous-entendue.",
+  },
+  {
+    q: "D'où viennent les chiffres des études ?",
+    r: "Des documents déposés par les sociétés elles-mêmes auprès des autorités de marché : rapports annuels, documents d'enregistrement universels, et pour les sociétés américaines les formulaires 10-K déposés auprès de la SEC, ainsi que leurs données XBRL. Aucun chiffre ne provient d'un agrégateur financier. Lorsqu'une donnée ne figure pas dans un document réglementaire — un cours de clôture historique, par exemple — la source est signalée comme telle dans la note de méthode. Chaque graphique renvoie au document et à la page dont il est tiré, et les comptes retraités sont publiés en CSV sous chaque étude.",
+  },
+  {
+    q: "Pourquoi analyser une seule société en profondeur plutôt que d'en suivre beaucoup ?",
+    r: "Les bureaux d'analyse indépendants couvrent plusieurs centaines de valeurs, en continu, derrière un abonnement : leur contrainte est l'étendue. Une société reçoit donc quelques heures par an. Le choix fait ici est l'inverse : une société à la fois, vingt et un exercices repris un à un, quinze à vingt heures de travail, et tout est publié en accès libre — le texte, les données, le modèle. Ce n'est possible que parce qu'il ne s'agit pas de vendre de la recherche. Sur une valeur peu suivie, vingt ans de comptes retraités au même gabarit n'existent nulle part ailleurs.",
+  },
+  {
+    q: "Ces analyses sont-elles un conseil en investissement ?",
+    r: "Non. Les publications de ce site ont une vocation pédagogique et méthodologique. Elles ne constituent ni une recommandation d'investissement au sens du règlement européen sur les abus de marché, ni une incitation à acheter ou à vendre un instrument financier, et elles ne tiennent compte d'aucune situation patrimoniale particulière. Aucune position n'est détenue sur les sociétés étudiées, à l'achat comme à la vente, et le site n'a aucune affiliation, aucun lien courtier et aucun contenu sponsorisé.",
+  },
+];
+
+const schemaFaq = {
+  '@type': 'FAQPage',
+  '@id': 'https://www.sousjacent.com/methode/#faq',
+  mainEntity: questions.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.r },
+  })),
+};
+
 const engagements = [
   ['Aucune position', 'détenue sur les sociétés étudiées, à l’achat comme à la vente.'],
   ['Aucune affiliation', 'pas de lien courtier, pas de contenu sponsorisé, pas de commission.'],
@@ -37,6 +77,7 @@ const engagements = [
   titre="La méthode"
   description="Comment une étude est construite : vingt et un exercices retraités au même gabarit, un DCF inversé, une fourchette de valeur avec sa grille de sensibilité, et les données publiées."
   enteteTransparente={true}
+  schema={schemaFaq}
 >
   <EnTetePage
     sur="La méthode, pas le verdict"
@@ -83,6 +124,21 @@ const engagements = [
     </div>
   </section>
 
+  <section class="section">
+    <div class="enveloppe">
+      <p class="sur reveler">Questions fréquentes</p>
+      <h2 class="reveler faq-titre">Ce qu'on me demande le plus souvent</h2>
+      <dl class="faq">
+        {questions.map((item, i) => (
+          <div class="faq-item reveler" data-rang={i}>
+            <dt>{item.q}</dt>
+            <dd>{item.r}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
   <section class="section section--bleu">
     <div class="enveloppe">
       <p class="sur reveler" style="margin-bottom:var(--e-10)">Les engagements</p>
@@ -117,6 +173,19 @@ const engagements = [
   .pourquoi h2 { margin-top: var(--e-6); }
   .pourquoi p { line-height: 1.7; max-width: 42rem; }
   .pourquoi p + p { margin-top: var(--e-7); }
+
+  .faq-titre { margin: var(--e-6) 0 var(--e-10); }
+  .faq { margin: 0; border-top: 1px solid var(--graphite-20); }
+  .faq-item { padding-block: var(--e-9); border-bottom: 1px solid var(--graphite-20); }
+  .faq dt {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: var(--h5);
+    line-height: 1.3;
+    margin-bottom: var(--e-6);
+    max-width: 44rem;
+  }
+  .faq dd { margin: 0; line-height: 1.7; max-width: 44rem; }
 
   .filet--bleu { border-top-color: #2a3f5e; margin-bottom: var(--e-7); }
   .engagement p { color: var(--bleu-20); font-size: .9375rem; line-height: 1.65; }
