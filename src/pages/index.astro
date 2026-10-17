@@ -46,10 +46,10 @@ const formats = [
 ];
 
 const chiffres = [
-  { valeur: 2005, suffixe: '', texte: "Première année de la série : celle du passage obligatoire aux IFRS, pour que les comptes restent comparables d'un bout à l'autre." },
-  { valeur: 21, suffixe: '', texte: "Exercices repris un à un, à partir des documents d'enregistrement universels et des rapports annuels." },
+  { valeur: 2005, suffixe: '', texte: "Première année de la série, choisie pour que les comptes restent comparables d'un bout à l'autre de la période." },
+  { valeur: 21, suffixe: '', texte: "Exercices repris un à un, à partir des rapports annuels et des documents déposés auprès des autorités de marché." },
   { valeur: 20, suffixe: '', texte: "Combinaisons d'hypothèses publiées côte à côte dans la grille de sensibilité, chacune refaisable." },
-  { valeur: 0, suffixe: '', texte: "Objectif de cours. La méthode est montrée, la conclusion revient au lecteur." },
+  { valeur: 0, suffixe: '', texte: "Avis d'achat ou de vente. La fourchette de valeur est publiée avec ses hypothèses ; la conclusion revient au lecteur." },
 ];
 ---
 
@@ -75,51 +75,6 @@ const chiffres = [
       <div class="hero-actions">
         <a class="bouton bouton--clair" href="/etudes">Voir les études</a>
         <a class="bouton bouton--clair" href="/methode">La méthode</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== CE QUE JE PUBLIE ============== -->
-  <section class="section">
-    <div class="enveloppe">
-      <div class="tete reveler">
-        <p class="sur">Ce que je publie</p>
-        <h2>Une seule société, traitée en profondeur</h2>
-        <p class="tete-texte">
-          Les bureaux indépendants couvrent quatre cents valeurs, en surface, derrière un abonnement.
-          Ici c'est l'inverse : une société à la fois, tout montré, en accès libre.
-        </p>
-      </div>
-
-      <div class="trio">
-        {formats.map((f, i) => (
-          <article class="carte reveler" data-rang={i}>
-            <a href={f.lien}>
-              <div class="cadre-image carte-image" data-rang={i}>
-                <img src={f.image} alt="" loading="lazy" />
-              </div>
-              <h3>{f.titre}</h3>
-              <p>{f.texte}</p>
-              <span class="lien carte-lien">{f.libelle}</span>
-            </a>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== CHIFFRES ============== -->
-  <section class="section section--pierre">
-    <div class="enveloppe">
-      <p class="sur sur--graphite reveler" style="margin-bottom:var(--e-10)">La série</p>
-      <div class="grille-4">
-        {chiffres.map((c, i) => (
-          <div class="chiffre reveler" data-rang={i}>
-            <span class="chiffre-valeur" data-compte={c.valeur}>0</span>
-            <hr class="filet" />
-            <p>{c.texte}</p>
-          </div>
-        ))}
       </div>
     </div>
   </section>
@@ -162,13 +117,61 @@ const chiffres = [
     </div>
   </section>
 
+  <!-- ============== CE QUE JE PUBLIE ============== -->
+  <section class="section">
+    <div class="enveloppe">
+      <div class="tete reveler">
+        <p class="sur">Ce que je publie</p>
+        <h2>Une seule société, traitée en profondeur</h2>
+        <p class="tete-texte">
+          Les bureaux indépendants couvrent quatre cents valeurs, en surface, derrière un abonnement.
+          Ici c'est l'inverse : une société à la fois, tout montré, en accès libre.
+        </p>
+      </div>
+
+      <div class="trio">
+        {formats.map((f, i) => (
+          <article class="carte reveler" data-rang={i}>
+            <a href={f.lien}>
+              <div class="cadre-image carte-image" data-rang={i}>
+                <img src={f.image} alt="" loading="lazy" />
+              </div>
+              <h3>{f.titre}</h3>
+              <p>{f.texte}</p>
+              <span class="lien carte-lien">{f.libelle}</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CHIFFRES ============== -->
+  <section class="section section--pierre">
+    <div class="enveloppe">
+      <p class="sur sur--graphite reveler" style="margin-bottom:var(--e-10)">La série</p>
+      <div class="grille-4">
+        {chiffres.map((c, i) => (
+          <div class="chiffre reveler" data-rang={i}>
+            <span class="chiffre-valeur" data-compte={c.valeur}>{c.valeur}</span>
+            <hr class="filet" />
+            <p>{c.texte}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- ============== DERNIÈRES PUBLICATIONS ============== -->
   {recents.length > 0 && (
     <section class="section">
       <div class="enveloppe">
         <div class="tete-ligne reveler">
           <h2>Dernières publications</h2>
-          <a class="lien" href="/mecanisme">Tout voir</a>
+          <p class="tete-liens">
+            <a class="lien" href="/mecanisme">Les mécanismes</a>
+            <a class="lien" href="/fondamentaux">Les fondamentaux</a>
+          </p>
         </div>
         <div class="liste">
           {recents.map((r, i) => (
@@ -197,9 +200,10 @@ const chiffres = [
       </div>
       <div class="reveler" data-rang="1">
         <p class="methode-texte">
-          Aucun objectif de cours n'est publié ici. Les hypothèses sont écrites et modifiables, les
-          données se téléchargent, et chaque graphique renvoie au document et à la page dont il est
-          tiré. Vous pouvez refaire le calcul et aboutir à autre chose que moi — c'est le but.
+          Les études aboutissent à une fourchette de valeur, jamais à un avis d'achat ou de vente. Les
+          hypothèses sont écrites et modifiables, les données se téléchargent, et chaque graphique
+          renvoie au document et à la page dont il est tiré. Vous pouvez refaire le calcul et aboutir
+          à autre chose que moi — c'est le but.
         </p>
         <a class="bouton bouton--clair" href="/methode">Comment c'est calculé</a>
       </div>
@@ -274,6 +278,7 @@ const chiffres = [
   .tete { max-width: 44rem; margin-bottom: var(--e-13); }
   .tete h2 { margin-top: var(--e-6); }
   .tete-texte { margin-top: var(--e-7); font-size: 1.0625rem; line-height: 1.6; }
+  .tete-liens { display: flex; gap: var(--e-7); flex-wrap: wrap; }
   .tete-ligne {
     display: flex;
     align-items: baseline;

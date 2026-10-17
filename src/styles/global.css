@@ -362,6 +362,20 @@ footer.site a:hover{color:var(--blanc)}
   color:var(--bleu);text-align:center;margin-block:var(--e-6);
 }
 
+/* Renvoi vers le fondamental qui explique un retraitement :
+   la méthode est écrite une fois, puis citée en note dans les études. */
+.corps .renvoi{
+  margin-block:var(--e-8);padding-left:var(--e-6);
+  border-left:2px solid var(--or);
+  font-size:.9375rem;line-height:1.6;color:var(--graphite);
+}
+.corps .renvoi b{
+  display:block;font-family:var(--sans);font-size:.75rem;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--or);font-weight:400;margin-bottom:.3rem;
+}
+.corps .renvoi a{color:var(--bleu);border-bottom:1px solid var(--bleu-40);text-decoration:none}
+.corps .renvoi a:hover{color:var(--or);border-bottom-color:var(--or)}
+
 .reperes{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));
   gap:var(--e-8) var(--e-7);margin-block:var(--e-10);
@@ -387,3 +401,108 @@ footer.site a:hover{color:var(--blanc)}
 @media (max-width:640px){.sommaire-etude ol{columns:1}}
 .sommaire-etude a{border-bottom:none}
 .sommaire-etude a:hover{border-bottom:1px solid var(--bleu)}
+
+/* ---------- calculateur de valorisation (page d'étude) ---------- */
+.corps .calculateur{
+  max-width:none;width:100%;
+  margin-block:var(--e-12);padding:var(--e-9) 0 var(--e-8);
+  border-top:1px solid var(--bleu);border-bottom:1px solid var(--graphite-20);
+}
+.calculateur-sur{
+  font-family:var(--sans);font-size:.8125rem;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--or);
+}
+.corps .calculateur h3{margin-top:var(--e-5);font-size:1.5rem}
+.calculateur-intro{
+  margin-top:var(--e-6);max-width:38rem;font-size:.9375rem;line-height:1.62;
+  color:var(--graphite);
+}
+.calculateur-grille{
+  display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);
+  gap:clamp(2rem,5vw,4rem);margin-top:var(--e-10);align-items:start;
+}
+@media (max-width:860px){.calculateur-grille{grid-template-columns:1fr;gap:var(--e-10)}}
+
+.curseur + .curseur{margin-top:var(--e-9)}
+.curseur label{
+  display:flex;justify-content:space-between;align-items:baseline;gap:var(--e-5);
+  font-size:.9375rem;color:var(--graphite);margin-bottom:var(--e-4);
+}
+.curseur output{
+  font-family:var(--serif);font-size:1.125rem;color:var(--bleu);
+  font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;
+}
+.curseur input[type="range"]{
+  -webkit-appearance:none;appearance:none;width:100%;height:2px;
+  background:var(--graphite-20);border-radius:0;cursor:pointer;
+}
+.curseur input[type="range"]:focus-visible{outline:2px solid var(--or);outline-offset:6px}
+.curseur input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;
+  background:var(--bleu);border:3px solid var(--pierre-20);
+  box-shadow:0 0 0 1px var(--bleu);cursor:grab;
+}
+.curseur input[type="range"]::-moz-range-thumb{
+  width:14px;height:14px;border-radius:50%;background:var(--bleu);
+  border:3px solid var(--pierre-20);box-shadow:0 0 0 1px var(--bleu);cursor:grab;
+}
+
+/* Les repères historiques : chaque trait est un exercice observé. */
+.jalons{position:relative;height:1.9rem;margin-top:.55rem}
+.jalons span{
+  position:absolute;top:0;width:1px;height:7px;background:var(--or);
+  opacity:.55;transform:translateX(-.5px);
+}
+/* Le trait épais : la valeur de référence (moyenne observée, hypothèse retenue). */
+.jalons i{
+  position:absolute;top:-2px;width:2px;height:12px;background:var(--or);
+  transform:translateX(-1px);
+}
+.jalons{height:.9rem}
+.jalons-note{margin-top:.35rem;font-size:.75rem;line-height:1.55;color:var(--graphite-80)}
+.jalons-note b{color:var(--bleu);font-weight:400}
+
+.calculateur-reset{
+  margin-top:var(--e-9);padding:0;background:none;border:none;cursor:pointer;
+  font-family:var(--sans);font-size:.875rem;color:var(--bleu);
+  border-bottom:1px solid var(--bleu-40);
+}
+.calculateur-reset:hover{color:var(--or);border-bottom-color:var(--or)}
+
+.calculateur-sorties{background:var(--pierre-20);padding:var(--e-8)}
+.sortie-titre{
+  font-family:var(--sans);font-size:.75rem;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--graphite-80);
+}
+.sortie-valeur{
+  font-family:var(--serif);font-weight:300;line-height:1;color:var(--bleu);
+  font-size:clamp(3rem,2rem+3vw,4rem);margin-top:var(--e-4);
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.sortie-valeur .devise{font-size:.45em;vertical-align:.5em;color:var(--graphite-80)}
+.sortie-barre{
+  position:relative;height:3px;background:var(--graphite-20);margin-top:var(--e-7);
+}
+.barre-modele{height:3px;background:var(--bleu);transition:width .18s ease-out}
+.barre-cours{
+  position:absolute;right:0;top:8px;font-family:var(--sans);font-size:.6875rem;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--graphite-80);
+}
+.sortie-ecart{
+  margin-top:var(--e-9);font-family:var(--serif);font-size:1.0625rem;
+  color:var(--bleu);
+}
+.sortie-detail{margin:var(--e-8) 0 0}
+.sortie-detail > div{
+  display:flex;justify-content:space-between;gap:var(--e-5);
+  padding-block:var(--e-3);border-bottom:1px solid var(--graphite-20);font-size:.875rem;
+}
+.sortie-detail > div:first-child{border-top:1px solid var(--graphite-20)}
+.sortie-detail dt{color:var(--graphite-80)}
+.sortie-detail dd{
+  margin:0;color:var(--bleu);text-align:right;
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.sortie-note{margin-top:var(--e-7);font-size:.75rem;line-height:1.55;color:var(--graphite-80)}
+
+@media (prefers-reduced-motion:reduce){.barre-modele{transition:none}}

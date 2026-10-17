@@ -319,7 +319,7 @@ P('cream', head("Chapitre douze","Le point de départ : l'exercice 2026")+f"""
 r=d.dcf()
 hyp=[("Chiffre d'affaires 2026","639,8 M$","reconstitué, chapitre douze"),
 ("Croissance 2027 à 2035","30, 22, 16, 12, 10, 8, 6, 5, 4 %","décroissance régulière"),
-("Chiffre d'affaires 2035",f"{nb(r['ca_terminal'],0)} M$","soit 4,5 fois celui de 2025"),
+("Chiffre d'affaires 2035",f"{nb(r['ca_terminal'],0)} M$",f"soit {nb(r['ca_terminal']/(d.CA[2025]/1000),1)} fois celui de 2025"),
 ("Marge opérationnelle de départ","26 %","niveau implicite de l'exercice 2026"),
 ("Marge opérationnelle normative","33 %","atteinte en 2035, puis maintenue"),
 ("Taux d'imposition normatif","21 %","taux fédéral des États-Unis"),
@@ -336,7 +336,7 @@ P('cream', head("Chapitre treize","Le modèle et ses hypothèses")+f"""
 {boxed("Définition · réinvestissement et actualisation",
  "<p>Une entreprise qui croît doit financer cette croissance : stocks, créances, machines. Le modèle en tient compte par la rotation du capital, qui indique combien de chiffre d'affaires supplémentaire un dollar de capital permet de produire. Avec une rotation de 2,6 fois, cent dollars de chiffre d'affaires nouveau exigent trente-huit dollars de capital nouveau, retranchés du flux de l'année.</p><p>Actualiser consiste ensuite à ramener chaque flux futur à sa valeur d'aujourd'hui : un dollar attendu dans cinq ans, au coût du capital de 10 %, vaut soixante-deux centimes aujourd'hui.</p>",
  "Flux de l'année = Résultat opérationnel × (1 − impôt) − Croissance du chiffre d'affaires ÷ Rotation")}
-<p>Trois de ces hypothèses sont nettement favorables à la société et méritent d'être signalées. La marge normative de 33 % est <b>neuf fois la moyenne historique</b> de 3,5 % et double le meilleur exercice jamais réalisé. La rotation du capital de 2,6 fois dépasse l'historique, au motif que les revenus de licence ne consomment pas de capital. La trajectoire de croissance multiplie le chiffre d'affaires par 4,5 en dix ans, contre 2,3 fois sur les vingt années précédentes.</p>
+<p>Trois de ces hypothèses sont nettement favorables à la société et méritent d'être signalées. La marge normative de 33 % est <b>neuf fois la moyenne historique</b> de 3,5 % et double le meilleur exercice jamais réalisé. La rotation du capital de 2,6 fois dépasse l'historique, au motif que les revenus de licence ne consomment pas de capital. La trajectoire de croissance multiplie le chiffre d'affaires par 4,4 en dix ans, contre 2,3 fois sur les vingt années précédentes.</p>
 <p class="small">La valeur terminale représente <b>{nb(r['part_vt'],0)} %</b> de la valeur d'entreprise obtenue. C'est élevé, et c'est inhérent à l'exercice : l'essentiel de ce que l'on valorise ici se situe au-delà de 2035, c'est-à-dire au-delà de ce que l'on peut raisonnablement prévoir.</p>
 """)
 

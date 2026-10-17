@@ -19,6 +19,9 @@ const schema = [
     datePublished: d.toISOString(),
     dateModified: d.toISOString(),
     articleSection: 'Les études',
+    ...(e.data.partage
+      ? { image: new URL(e.data.partage, Astro.site ?? 'https://www.sousjacent.com').href }
+      : {}),
     about: {
       '@type': 'Corporation',
       name: e.data.societe,
@@ -54,7 +57,7 @@ const schema = [
 ];
 ---
 
-<Base titre={e.data.titre} description={e.data.chapo} enteteTransparente={true} schema={schema}>
+<Base titre={e.data.titre} description={e.data.chapo} image={e.data.partage} enteteTransparente={true} schema={schema}>
   <header class="tete" data-hero>
     <div class="tete-image">
       <img src="/images/tours-contreplongee.webp" alt="" fetchpriority="high" />
@@ -108,8 +111,9 @@ const schema = [
         <div class="bloc bloc--note">
           <h2>Ce que cette étude ne fait pas</h2>
           <p>
-            Aucun objectif de cours, aucun avis d'achat ou de vente. Les hypothèses sont écrites et
-            modifiables : la conclusion vous appartient.
+            La fourchette publiée est le résultat d'hypothèses déclarées, pas un objectif de cours :
+            ni horizon, ni avis d'achat ou de vente. Chaque hypothèse se déplace dans le calculateur,
+            et la conclusion vous appartient.
           </p>
           <a class="lien" href="/methode">La méthode</a>
         </div>
@@ -117,6 +121,109 @@ const schema = [
     </div>
   </section>
 </Base>
+
+<script>
+  /* Calculateur de valorisation.
+     Portage exact du moteur de outils/data.py : aux valeurs par défaut il
+     redonne les 102 $ publiés et reproduit les vingt cases de la grille de
+     sensibilité. Toute modification doit être reportée des deux côtés. */
+  (function () {
+    const racine = document.getElementById('calculateur');
+    if (!racine) return;
+
+    const CA2026 = 639.8;                                             // M$
+    const CA2025 = 407.701;                                           // M$
+    const BASE = [0.30, 0.22, 0.16, 0.12, 0.10, 0.08, 0.06, 0.05, 0.04];
+    const MARGE_DEP = 0.26;
+    const IMPOT = 0.21;
+    const ACTIONS = 46.0;                                             // millions
+    const TRESO_NETTE = 395.384;                                      // M$
+    const COURS = 202.40;
+    const DEFAUTS = { marge: 33, croissance: 1, wacc: 10, rotation: 2.6, g: 3 };
+
+    function dcf(h) {
+      const margeNorm = h.marge / 100;
+      const wacc = h.wacc / 100;
+      const g = h.g / 100;
+      const croissance = BASE.map((c) => c * h.croissance);
+      const n = croissance.length;
+      let ca = CA2026;
+      let caPrec = CA2026;
+      let va = 0;
+
+      for (let i = 0; i < n; i++) {
+        ca = caPrec * (1 + croissance[i]);
+        const m = MARGE_DEP + (margeNorm - MARGE_DEP) * (i + 1) / n;
+        const nopat = ca * m * (1 - IMPOT);
+        const reinv = (ca - caPrec) / h.rotation;
+        va += (nopat - reinv) / Math.pow(1 + wacc, i + 1);
+        caPrec = ca;
+      }
+
+      const nopatT = ca * margeNorm * (1 - IMPOT);
+      const reinvT = ca * g / h.rotation;
+      const vt = (nopatT - reinvT) * (1 + g) / (wacc - g);
+      const vaVt = vt / Math.pow(1 + wacc, n);
+      const ve = va + vaVt;
+
+      return {
+        ve,
+        parAction: (ve + TRESO_NETTE) / ACTIONS,
+        partVt: vaVt / ve * 100,
+        caTerminal: ca,
+      };
+    }
+
+    const nf = (v, d) => v.toLocaleString('fr-FR', {
+      minimumFractionDigits: d, maximumFractionDigits: d,
+    });
+
+    const curseurs = Array.from(racine.querySelectorAll('input[type="range"]'));
+    const sorties = {};
+    ['marge', 'croissance', 'wacc', 'rotation', 'g', 'valeur', 'ecart', 'ca',
+      'mult', 'vt', 've', 'barre'].forEach((cle) => {
+      sorties[cle] = document.getElementById('o-' + cle);
+    });
+
+    function rendre() {
+      const h = {};
+      curseurs.forEach((c) => { h[c.dataset.cle] = parseFloat(c.value); });
+      const r = dcf(h);
+
+      sorties.marge.textContent = nf(h.marge, 1) + ' %';
+      sorties.croissance.textContent = '×' + nf(r.caTerminal / CA2025, 1) + ' en dix ans';
+      sorties.wacc.textContent = nf(h.wacc, 2).replace(/,?0+$/, '') + ' %';
+      sorties.rotation.textContent = nf(h.rotation, 2) + ' fois';
+      sorties.g.textContent = nf(h.g, 2).replace(/,?0+$/, '') + ' %';
+
+      sorties.valeur.textContent = nf(r.parAction, 0);
+      sorties.ca.textContent = nf(r.caTerminal, 0) + ' M$';
+      sorties.mult.textContent = '×' + nf(r.caTerminal / CA2025, 1);
+      sorties.vt.textContent = nf(r.partVt, 0) + ' %';
+      sorties.ve.textContent = nf(r.ve, 0) + ' M$';
+
+      const ecart = (r.parAction - COURS) / COURS * 100;
+      sorties.ecart.textContent = Math.abs(ecart) < 0.5
+        ? 'au niveau du cours observé'
+        : nf(Math.abs(ecart), 0) + (ecart < 0 ? ' % sous le cours observé' : ' % au-dessus du cours observé');
+      sorties.barre.style.width =
+        Math.max(2, Math.min(100, r.parAction / COURS * 100)) + '%';
+      racine.dataset.position = ecart < 0 ? 'sous' : 'au-dessus';
+    }
+
+    curseurs.forEach((c) => c.addEventListener('input', rendre));
+
+    const reset = document.getElementById('c-reset');
+    if (reset) {
+      reset.addEventListener('click', function () {
+        curseurs.forEach((c) => { c.value = String(DEFAUTS[c.dataset.cle]); });
+        rendre();
+      });
+    }
+
+    rendre();
+  })();
+</script>
 
 <style>
   .tete { position: relative; display: flex; align-items: flex-end; overflow: hidden; min-height: 34rem; }

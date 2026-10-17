@@ -25,6 +25,7 @@ const etudes = defineCollection({
     resumePdf: z.string().optional(),
     memoirePdf: z.string().optional(),
     cours: z.string().optional(),
+    partage: z.string().optional(),
   }),
 });
 

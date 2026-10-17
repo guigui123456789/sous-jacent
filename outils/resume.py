@@ -51,7 +51,7 @@ P2=f"""<section class="page cream" style="padding:22mm 22mm 11mm">{FIL}
 <div class="eyebrow">Ce que le cours oblige à croire</div><div class="rule-v"></div>
 <h2 style="font-size:17.5pt;margin-bottom:4mm">90 à 116 dollars, contre un cours de 202,40</h2>
 <p>Vingt et un exercices retraités donnent <b>4,2 %</b> de croissance annuelle moyenne, <b>3,5 %</b> de marge opérationnelle courante, une rentabilité du capital durablement inférieure à son coût, et neuf exercices déficitaires sur vingt et un, huit après retraitement.</p>
-<p>Le modèle part du chiffre d'affaires 2026 reconstitué — <b>639,8 M$</b>, dont les deux tiers sont publiés ou guidés — puis retient une croissance qui multiplie les ventes par 4,5 en dix ans, une marge normative de <b>33 %</b> (neuf fois la moyenne historique) et un coût du capital de 10 %. Il produit <b>{nb(cen,0)} dollars par action</b>.</p>
+<p>Le modèle part du chiffre d'affaires 2026 reconstitué — <b>639,8 M$</b>, dont les deux tiers sont publiés ou guidés — puis retient une croissance qui multiplie les ventes par 4,4 en dix ans, une marge normative de <b>33 %</b> (neuf fois la moyenne historique) et un coût du capital de 10 %. Il produit <b>{nb(cen,0)} dollars par action</b>.</p>
 <table class="plain" style="font-size:7.4pt;margin-top:3mm"><caption>Valeur par action selon la marge normative et le coût du capital</caption>
 <thead><tr><th>Marge normative</th><th>Capital 9 %</th><th>Capital 10 %</th><th>Capital 11 %</th><th>Capital 12 %</th></tr></thead>
 <tbody>{grid}</tbody></table>
