@@ -564,3 +564,4 @@ footer.site a:hover{color:var(--blanc)}
 .lettre-rgpd a { color: inherit; text-decoration: underline; }
 @media (max-width: 760px) { .lettre-etat, .lettre-rgpd { grid-column: 1; } }
 .lettre-merci { font-family: var(--serif); font-size: 1.0625rem; }
+.bloc-version { margin-top: .7rem; font-size: .8rem; color: var(--graphite-80); }

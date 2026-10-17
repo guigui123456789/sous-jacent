@@ -51,7 +51,7 @@ P2=f"""<section class="page cream" style="padding:22mm 22mm 11mm">{FIL}
 <div class="eyebrow">Ce que le cours oblige à croire</div><div class="rule-v"></div>
 <h2 style="font-size:17.5pt;margin-bottom:4mm">90 à 116 dollars, contre un cours de 202,40</h2>
 <p>Vingt et un exercices retraités donnent <b>4,2 %</b> de croissance annuelle moyenne, <b>3,5 %</b> de marge opérationnelle courante, une rentabilité du capital durablement inférieure à son coût, et neuf exercices déficitaires sur vingt et un, huit après retraitement.</p>
-<p>Le modèle part du chiffre d'affaires 2026 reconstitué — <b>639,8 M$</b>, dont les deux tiers sont publiés ou guidés — puis retient une croissance qui multiplie les ventes par 4,4 en dix ans, une marge normative de <b>33 %</b> (neuf fois la moyenne historique) et un coût du capital de 10 %. Il produit <b>{nb(cen,0)} dollars par action</b>.</p>
+<p>Le modèle part du chiffre d'affaires 2026 reconstitué — <b>639,8 M$</b>, dont 256,4 M$ publiés et le reste estimé au-dessus des indications de la société — puis retient une croissance qui multiplie les ventes par 4,4 en dix ans, une marge normative de <b>33 %</b> (neuf fois la moyenne historique) et un coût du capital de 10 %. Il produit <b>{nb(cen,0)} dollars par action</b>.</p>
 <table class="plain" style="font-size:7.4pt;margin-top:3mm"><caption>Valeur par action selon la marge normative et le coût du capital</caption>
 <thead><tr><th>Marge normative</th><th>Capital 9 %</th><th>Capital 10 %</th><th>Capital 11 %</th><th>Capital 12 %</th></tr></thead>
 <tbody>{grid}</tbody></table>
@@ -62,7 +62,7 @@ P2=f"""<section class="page cream" style="padding:22mm 22mm 11mm">{FIL}
 <div><h3 style="margin-top:0;font-size:9.4pt">La bascule réelle</h3>
 <p class="small">Les licences passent de 3,9 % du chiffre d'affaires en 2023 à 14,1 % en 2025, tandis que le chiffre d'affaires hors licences reste <b>10 % sous son niveau de 2023</b>. Vicor a équipé les V100 et A100 de Nvidia avant d'être remplacée sur la H100 : le virage vers les brevets suit la perte du socle produit.</p></div>
 <div><h3 style="margin-top:0;font-size:9.4pt">Ce que l'étude ne dit pas</h3>
-<p class="small">L'échéance et la portée des accords de licence ne sont pas publiées : c'est l'inconnue qui décide de la marge normative. Ni recommandation d'achat ou de vente, ni objectif de cours — les onze hypothèses sont données dans l'étude complète.</p></div></div>
+<p class="small">Les forfaits de licence sont conclus pour <b>deux ans</b> et renégociés : celui du deuxième trimestre 2026 porte sur 60 M$, échéance vers fin 2027. Le prix de leur reconduction reste inconnu, et c'est lui qui décide de la marge normative. Ni recommandation d'achat ou de vente, ni objectif de cours — les onze hypothèses sont données dans l'étude complète.</p></div></div>
 <div class="copyright" style="margin-top:3mm;padding-top:2.5mm"><div class="t">L'étude complète</div>
 <p style="font-size:7.8pt">Trente pages, dix-sept chapitres et l'annexe des vingt et un exercices : <b>sousjacent.com/etudes/vicor-2005-2025</b> — © 2026 <b>Sous-jacent</b>, reproduction soumise à autorisation écrite.</p></div>
 {foot(2)}</section>"""

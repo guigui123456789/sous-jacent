@@ -92,6 +92,24 @@ const engagements = [
 
   <section class="section">
     <div class="enveloppe">
+      <div class="doc-methode">
+        <div>
+          <p class="doc-sur">Document de référence</p>
+          <h2>Méthode d'analyse — version 1.0</h2>
+          <p class="doc-texte">
+            Les règles résumées sur cette page sont consignées en entier dans un document daté et
+            versionné : choix des sociétés, période retenue, retraitements, définition officielle du
+            capital employé, modèle de valorisation, construction de la fourchette, quatre repères,
+            dispositif de suivi et statut réglementaire. Il est antérieur aux conclusions qu'il permet
+            d'obtenir, et chaque étude indique la version sous laquelle elle a été construite.
+          </p>
+        </div>
+        <div class="doc-action">
+          <a class="bouton" href="/documents/sous-jacent-methode-v1.0.pdf">Le document complet</a>
+          <p class="doc-date">PDF, 11 pages — version 1.0 du 17 octobre 2026</p>
+        </div>
+      </div>
+
       <ol class="etapes">
         {etapes.map((e, i) => (
           <li class="reveler" data-rang={i}>
@@ -203,4 +221,12 @@ const engagements = [
   .filet--bleu { border-top-color: #2a3f5e; margin-bottom: var(--e-7); }
   .engagement p { color: var(--bleu-20); font-size: .9375rem; line-height: 1.65; }
   .engagement strong { color: #fff; font-weight: 400; }
+
+  .doc-methode { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; padding: var(--e-8); margin-bottom: var(--e-10); background: var(--pierre-20); border-left: 2px solid var(--or); }
+  @media (max-width: 860px) { .doc-methode { grid-template-columns: 1fr; } }
+  .doc-sur { font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; color: var(--or); }
+  .doc-methode h2 { margin-top: .4rem; font-family: var(--serif); font-weight: 300; font-size: 1.375rem; }
+  .doc-texte { margin-top: .7rem; font-size: .9375rem; line-height: 1.6; color: var(--graphite-80); }
+  .doc-action { display: flex; flex-direction: column; align-items: flex-start; gap: .7rem; }
+  .doc-date { font-size: .8rem; color: var(--graphite-80); }
 </style>
