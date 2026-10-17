@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import json, data as d, charts as c
 from style import CSS
-IMG=json.load(open('/home/claude/vicor/assets/images.json'))
+import os
+ICI = os.path.dirname(os.path.abspath(__file__))
+SORTIE = os.environ.get('SORTIE_VICOR', ICI)
+IMG=json.load(open(os.path.join(ICI,'assets','images.json')))
 
 PIED="Sous-jacent · Étude n° 1 · Octobre 2026"
 pages=[]
@@ -132,7 +135,7 @@ P('cream', f'''<div class="panel" style="background-image:url({IMG['panneau']})"
 <p class="lead">Le marché paie Vicor pour une entreprise qu'elle n'a jamais été. Cette étude ne dit pas qu'il a tort. Elle dit exactement de combien l'histoire devrait changer.</p>
 <div class="hr-thin"></div>
 <p>Vicor fabrique des modules d'alimentation électrique depuis 1981. La société est cotée depuis 1990, dirigée depuis l'origine par son fondateur, et suivie par cinq analystes seulement, dont les objectifs de cours publics s'étalent de deux cents à quatre cent cinquante dollars. Cet écart, de plus du simple au double sur une société de douze milliards de dollars de capitalisation, est à lui seul le motif de cette étude.</p>
-<p>Vingt et un exercices retraités donnent le portrait suivant : une croissance annuelle moyenne de <b>4,2 %</b>, une marge opérationnelle courante moyenne de <b>3,5 %</b>, une rentabilité du capital employé inférieure en moyenne au coût de ce capital, et six exercices déficitaires sur la période. Ce n'est pas le profil d'une entreprise de rupture. C'est celui d'un équipementier industriel honorable, soumis au cycle, qui n'a jamais transformé durablement son avance technique en rentabilité.</p>
+<p>Vingt et un exercices retraités donnent le portrait suivant : une croissance annuelle moyenne de <b>4,2 %</b>, une marge opérationnelle courante moyenne de <b>3,5 %</b>, une rentabilité du capital employé inférieure en moyenne au coût de ce capital, et neuf exercices déficitaires sur la période, huit après retraitement. Ce n'est pas le profil d'une entreprise de rupture. C'est celui d'un équipementier industriel honorable, soumis au cycle, qui n'a jamais transformé durablement son avance technique en rentabilité.</p>
 <p>L'exercice 2025 semble rompre avec cela : marge brute de 57,3 %, résultat opérationnel de 81,8 M$, bénéfice net multiplié par dix-neuf. La première partie de cette étude montre que <b>cinquante-cinq pour cent de ce résultat opérationnel provient d'un règlement judiciaire de quarante-cinq millions de dollars</b>, et que ce règlement est balisé par la société à l'intérieur même de son chiffre d'affaires, dans les données que lisent les agrégateurs et les modèles automatiques. Retraité, l'exercice 2025 affiche <b>9,0 %</b> de marge opérationnelle, non 20,1 %.</p>
 <p>La deuxième partie reconstruit les comptes sur la longue période et cherche la bascule réelle du modèle. Elle la trouve, mais ailleurs : les revenus de licence passent de 3,9 % du chiffre d'affaires en 2023 à 14,1 % en 2025, tandis que le chiffre d'affaires hors licences reste, en 2025, <b>dix pour cent en dessous de son niveau de 2023</b>. Le socle produit recule, le péage sur les brevets avance. La troisième partie met un prix sur ce basculement, hypothèse par hypothèse.</p>
 <div class="hr-thin"></div>
@@ -179,7 +182,7 @@ P('cream', head("Chapitre trois","Vicor en vingt et un ans")+f"""
 <p>Vicor Corporation a été fondée en 1981 à Andover, dans le Massachusetts, par Patrizio Vinciarelli, qui la dirige toujours. La société conçoit et fabrique des modules de conversion de puissance : les composants qui, dans un serveur, un équipement médical ou un satellite, transforment une tension d'entrée en tensions utilisables par les circuits. Son activité se répartit entre deux lignes, les <em>Brick Products</em>, héritage historique de modules standardisés, et les <em>Advanced Products</em>, qui portent les architectures récentes ainsi que les revenus de licence.</p>
 {fig(c.ca_barres(), "Le chiffre d'affaires publié passe de 179 M$ en 2005 à 408 M$ en 2025, soit 4,2 % de croissance annuelle moyenne sur vingt ans. La part dorée isole les revenus de licence, dont la société ne publie le détail que depuis l'exercice 2023.","Formulaires 10-K, exercices 2005 à 2025. Les revenus de licence de 2025 excluent le règlement de litige de 45 M$.")}
 <p>La série raconte une entreprise cyclique plus qu'une entreprise de croissance. Trois phases se distinguent : une stagnation de 2005 à 2009 autour de deux cents millions de dollars ; un cycle 2010-2017 qui culmine à 253 M$ en 2011 avant de retomber à 200 M$ en 2016 ; puis une phase d'accélération à partir de 2018, portée par l'alimentation des centres de données, qui mène le chiffre d'affaires à 405 M$ en 2023 avant un recul de 11 % en 2024.</p>
-<p>Six exercices sur vingt et un se soldent par une perte opérationnelle publiée. Quatre affichent un chiffre d'affaires en recul. Une entreprise dont le produit serait structurellement indispensable à une technologie en expansion ne présenterait pas ce profil : elle présenterait une pente. Vicor présente un cycle.</p>
+<p>Neuf exercices sur vingt et un se soldent par une perte opérationnelle publiée, et huit restent déficitaires une fois les éléments non récurrents neutralisés. Sept affichent un chiffre d'affaires en recul. Une entreprise dont le produit serait structurellement indispensable à une technologie en expansion ne présenterait pas ce profil : elle présenterait une pente. Vicor présente un cycle.</p>
 """)
 
 # ======================================================== 10 · CH4 (page vedette)
@@ -448,7 +451,8 @@ P('egg', head("Annexe","Les vingt et un exercices retraités")+f"""
 <table class="plain" style="font-size:7.6pt"><tbody>
 <tr><td>Meilleur exercice</td><td class="num">2021</td></tr>
 <tr><td>Marge opérationnelle courante 2021</td><td class="num">15,5 %</td></tr>
-<tr><td>Exercices déficitaires, résultat publié</td><td class="num">6 sur 21</td></tr>
+<tr><td>Exercices déficitaires, résultat publié</td><td class="num">9 sur 21</td></tr>
+<tr><td>Exercices déficitaires, résultat courant retraité</td><td class="num">8 sur 21</td></tr>
 <tr><td>Trésorerie nette au 31 décembre 2025</td><td class="num">395,4 M$</td></tr>
 <tr><td>Dette financière</td><td class="num">néant</td></tr>
 </tbody></table></div></div>
@@ -495,5 +499,5 @@ html=f"""<!doctype html><html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Vicor Corporation — Étude</title>
 <style>{CSS}</style></head><body>{''.join(pages)}</body></html>"""
-open('/home/claude/vicor/etude-vicor.html','w',encoding='utf-8').write(html)
+open(os.path.join(SORTIE,'etude-vicor.html'),'w',encoding='utf-8').write(html)
 print("pages:", len(pages), "octets:", len(html))

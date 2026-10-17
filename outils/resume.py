@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import json, data as d, charts as c
 from style import CSS
-IMG=json.load(open('/home/claude/vicor/assets/images.json'))
+import os
+ICI = os.path.dirname(os.path.abspath(__file__))
+SORTIE = os.environ.get('SORTIE_VICOR', ICI)
+IMG=json.load(open(os.path.join(ICI,'assets','images.json')))
 
 def nb(x,dec=0): return f"{x:,.{dec}f}".replace(","," ").replace(".",",")
 cen=d.dcf()['par_action']; bas=d.dcf(0.31,0.105)['par_action']; haut=d.dcf(0.35,0.095)['par_action']
@@ -47,7 +50,7 @@ P1=f"""<section class="page egg" style="padding:24mm 22mm 14mm">{FIL}
 P2=f"""<section class="page cream" style="padding:22mm 22mm 11mm">{FIL}
 <div class="eyebrow">Ce que le cours oblige à croire</div><div class="rule-v"></div>
 <h2 style="font-size:17.5pt;margin-bottom:4mm">90 à 116 dollars, contre un cours de 202,40</h2>
-<p>Vingt et un exercices retraités donnent <b>4,2 %</b> de croissance annuelle moyenne, <b>3,5 %</b> de marge opérationnelle courante, une rentabilité du capital durablement inférieure à son coût, et six exercices déficitaires.</p>
+<p>Vingt et un exercices retraités donnent <b>4,2 %</b> de croissance annuelle moyenne, <b>3,5 %</b> de marge opérationnelle courante, une rentabilité du capital durablement inférieure à son coût, et neuf exercices déficitaires sur vingt et un, huit après retraitement.</p>
 <p>Le modèle part du chiffre d'affaires 2026 reconstitué — <b>639,8 M$</b>, dont les deux tiers sont publiés ou guidés — puis retient une croissance qui multiplie les ventes par 4,5 en dix ans, une marge normative de <b>33 %</b> (neuf fois la moyenne historique) et un coût du capital de 10 %. Il produit <b>{nb(cen,0)} dollars par action</b>.</p>
 <table class="plain" style="font-size:7.4pt;margin-top:3mm"><caption>Valeur par action selon la marge normative et le coût du capital</caption>
 <thead><tr><th>Marge normative</th><th>Capital 9 %</th><th>Capital 10 %</th><th>Capital 11 %</th><th>Capital 12 %</th></tr></thead>
@@ -70,5 +73,5 @@ html=f"""<!doctype html><html lang="fr"><head><meta charset="utf-8">
 .copyright{{margin-top:2mm!important;padding-top:2mm!important}}
 .copyright p{{margin-bottom:0}}</style></head>
 <body>{P1}{P2}</body></html>"""
-open('/home/claude/vicor/resume-vicor.html','w',encoding='utf-8').write(html)
+open(os.path.join(SORTIE,'resume-vicor.html'),'w',encoding='utf-8').write(html)
 print("ok", len(html))
