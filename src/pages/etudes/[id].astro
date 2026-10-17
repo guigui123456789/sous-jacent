@@ -108,6 +108,32 @@ const schema = [
           </div>
         )}
 
+        <div class="bloc bloc--suivi">
+          <h2>Le suivi de cette étude</h2>
+          <p>
+            Cette étude est revue après chaque publication trimestrielle de la société. Toute
+            révision de la fourchette est inscrite ci-dessous, datée et motivée. Rien n'est
+            corrigé en silence.
+          </p>
+          {e.data.prochaineRevue && (
+            <p class="suivi-prochaine">Prochaine revue : <b>{e.data.prochaineRevue}</b></p>
+          )}
+          <ol class="suivi-journal">
+            <li>
+              <span class="suivi-date">17 octobre 2026</span>
+              <span class="suivi-valeur">90 – 116 $, valeur centrale 102 $</span>
+              <span class="suivi-motif">Publication initiale.</span>
+            </li>
+            {e.data.revisions.map((r) => (
+              <li>
+                <span class="suivi-date">{r.date}</span>
+                <span class="suivi-valeur">{r.valeur}</span>
+                <span class="suivi-motif">{r.motif}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
         <div class="bloc bloc--note">
           <h2>Ce que cette étude ne fait pas</h2>
           <p>

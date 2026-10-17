@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import EnTetePage from '../components/EnTetePage.astro';
+import { getCollection } from 'astro:content';
+
+const dateFr = (d: Date) =>
+  d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const entrees = (await getCollection('etudes'))
+  .filter((e) => !e.data.brouillon)
+  .sort((a, b) => b.data.date - a.data.date)
+  .map((e) => {
+    const rev = e.data.revisions ?? [];
+    return {
+      id: e.id,
+      societe: e.data.societe,
+      periode: e.data.periode,
+      publiee: dateFr(e.data.date),
+      valeur: rev.length ? rev[rev.length - 1].valeur : '90 – 116 $, valeur centrale 102 $',
+      majLe: rev.length ? rev[rev.length - 1].date : dateFr(e.data.date),
+      prochaine: e.data.prochaineRevue ?? 'à la prochaine publication trimestrielle',
+    };
+  });
+---
+
+<Base
+  titre="Les sociétés suivies"
+  description="Les sociétés couvertes par sous-jacent : pour chacune, la fourchette de valeur en vigueur, la date de sa dernière révision et celle de la prochaine revue."
+  enteteTransparente={true}
+>
+  <EnTetePage
+    sur="La couverture"
+    titre="Les sociétés suivies"
+    intro="Une étude publiée n'est pas une étude close. Chaque société couverte est revue après chacune de ses publications trimestrielles, et toute révision de la fourchette est inscrite, datée et motivée sur la page de l'étude."
+    image="/images/tours-defense.webp"
+  />
+
+  <section class="section">
+    <div class="enveloppe">
+      <div class="corps">
+        <p class="preambule">
+          Ce tableau dit, à tout moment, ce que le site soutient et depuis quand. Les fourchettes qui
+          y figurent sont des valeurs intrinsèques issues d'hypothèses déclarées : ni horizon, ni avis
+          d'achat ou de vente, ni recommandation. <a href="/methode">La méthode</a> explique la
+          distinction.
+        </p>
+      </div>
+
+      <ul class="couverture">
+        {entrees.map((e) => (
+          <li>
+            <div class="couv-societe">
+              <h2><a href={`/etudes/${e.id}`}>{e.societe}</a></h2>
+              <p class="couv-periode">{e.periode}</p>
+            </div>
+            <dl class="couv-detail">
+              <div><dt>Fourchette en vigueur</dt><dd class="couv-valeur">{e.valeur}</dd></div>
+              <div><dt>Étude publiée le</dt><dd>{e.publiee}</dd></div>
+              <div><dt>Dernière mise à jour</dt><dd>{e.majLe}</dd></div>
+              <div><dt>Prochaine revue</dt><dd>{e.prochaine}</dd></div>
+            </dl>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .preambule { font-size: 1.0625rem; line-height: 1.65; color: var(--graphite-80); }
+  .couverture { list-style: none; margin: var(--e-9) 0 0; padding: 0; border-top: 1px solid var(--graphite-20); }
+  .couverture > li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: clamp(1.5rem, 4vw, 4rem); padding-block: var(--e-8); border-bottom: 1px solid var(--graphite-20); }
+  @media (max-width: 860px) { .couverture > li { grid-template-columns: 1fr; gap: var(--e-6); } }
+  .couv-societe h2 { font-family: var(--serif); font-weight: 300; font-size: 1.375rem; }
+  .couv-societe h2 a { color: var(--bleu); text-decoration: none; }
+  .couv-societe h2 a:hover { color: var(--or); }
+  .couv-periode { margin-top: .3rem; font-size: .875rem; color: var(--graphite-80); }
+  .couv-detail { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--e-6) var(--e-7); margin: 0; }
+  @media (max-width: 560px) { .couv-detail { grid-template-columns: 1fr; } }
+  .couv-detail dt { font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; color: var(--or); }
+  .couv-detail dd { margin: .25rem 0 0; font-size: .9375rem; line-height: 1.5; color: var(--graphite); }
+  .couv-valeur { font-family: var(--serif); font-size: 1.0625rem !important; color: var(--bleu) !important; }
+</style>

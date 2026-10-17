@@ -148,7 +148,7 @@ def fcf_ch():
 def trimestres():
     W,H=560,236; x0,x1,y0,y1=52,548,54,192
     T=[("T1 2026",92.6,20.4,"publié"),("T2 2026",112.9,30.4,"publié"),
-       ("T3 2026",121.0,65.4,"prévision société"),("T4 2026",126.0,71.0,"estimation auteur")]
+       ("T3 2026",121.0,65.4,"estimation auteur"),("T4 2026",126.0,71.0,"estimation auteur")]
     vmax=210
     b=axes(x0,x1,y0,y1,0,vmax,[0,50,100,150,200],lambda v:fr(v))
     bw=(x1-x0)/len(T)*0.46

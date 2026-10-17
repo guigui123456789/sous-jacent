@@ -147,6 +147,7 @@ const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@
         <a href="/etudes" aria-current={actif('/etudes')}>Les études</a>
         <a href="/mecanisme" aria-current={actif('/mecanisme')}>Le mécanisme</a>
         <a href="/fondamentaux" aria-current={actif('/fondamentaux')}>Les fondamentaux</a>
+        <a href="/societes-suivies" aria-current={actif("/societes-suivies")}>Les sociétés suivies</a>
         <a href="/methode" aria-current={actif('/methode')}>La méthode</a>
         <a href="/a-propos" aria-current={actif('/a-propos')}>À propos</a>
       </nav>
@@ -172,6 +173,7 @@ const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@
             <li><a href="/etudes">Les études</a></li>
             <li><a href="/mecanisme">Le mécanisme de la semaine</a></li>
             <li><a href="/fondamentaux">Les fondamentaux</a></li>
+            <li><a href="/societes-suivies">Les sociétés suivies</a></li>
           </ul>
         </div>
 
@@ -204,6 +206,27 @@ const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@
         </div>
       </div>
 
+      <form class="lettre" id="lettre" novalidate>
+        <div class="lettre-texte">
+          <h3>Recevoir les études</h3>
+          <p>
+            Un message à chaque publication : l'étude, sa note de suivi trimestrielle, et rien
+            d'autre. Gratuit, sans contrepartie, désinscription en un clic.
+          </p>
+        </div>
+        <div class="lettre-champ">
+          <label class="visuellement-cache" for="lettre-email">Votre adresse électronique</label>
+          <input id="lettre-email" name="email" type="email" inputmode="email" autocomplete="email"
+                 placeholder="prenom@exemple.com" required />
+          <button type="submit">S'inscrire</button>
+        </div>
+        <p class="lettre-etat" id="lettre-etat" role="status" aria-live="polite"></p>
+        <p class="lettre-rgpd">
+          Votre adresse sert uniquement à l'envoi de ces publications et n'est ni revendue, ni cédée.
+          <a href="/donnees-personnelles">Vos données</a>.
+        </p>
+      </form>
+
       <p class="pied-avert">
         <strong>Ceci n'est pas un conseil en investissement.</strong> Les contenus publiés ici ont une
         vocation pédagogique. Ils ne constituent ni une recommandation d'investissement, ni une
@@ -230,6 +253,45 @@ const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@
       </div>
     </div>
   </footer>
+<script is:inline>
+  (function () {
+    var f = document.getElementById('lettre');
+    if (!f) return;
+    var etat = document.getElementById('lettre-etat');
+    f.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var champ = document.getElementById('lettre-email');
+      var bouton = f.querySelector('button');
+      etat.className = 'lettre-etat';
+      if (!champ.value || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(champ.value.trim())) {
+        etat.className = 'lettre-etat lettre-etat--erreur';
+        etat.textContent = 'Cette adresse ne semble pas valide.';
+        return;
+      }
+      bouton.disabled = true;
+      etat.textContent = 'Envoi…';
+      try {
+        var r = await fetch('/api/abonnement', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: champ.value.trim() })
+        });
+        var d = await r.json().catch(function () { return {}; });
+        if (r.ok && d.ok) {
+          f.innerHTML = '<p class="lettre-merci">C\u2019est noté. Vous recevrez la prochaine étude.</p>';
+          return;
+        }
+        etat.className = 'lettre-etat lettre-etat--erreur';
+        etat.textContent = d.erreur || "L'inscription n'a pas pu aboutir.";
+      } catch (err) {
+        etat.className = 'lettre-etat lettre-etat--erreur';
+        etat.textContent = "L'inscription n'a pas pu aboutir.";
+      }
+      bouton.disabled = false;
+    });
+  })();
+</script>
+
 
   <script is:inline>
     (function () {

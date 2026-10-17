@@ -26,6 +26,12 @@ const etudes = defineCollection({
     memoirePdf: z.string().optional(),
     cours: z.string().optional(),
     partage: z.string().optional(),
+    prochaineRevue: z.string().optional(),
+    revisions: z.array(z.object({
+      date: z.string(),
+      valeur: z.string(),
+      motif: z.string(),
+    })).default([]),
   }),
 });
 
