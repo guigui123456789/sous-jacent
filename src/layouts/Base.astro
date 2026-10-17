@@ -46,12 +46,51 @@ const SITE = {
   inLanguage: 'fr-FR',
   description:
     "L'analyse de sociétés cotées peu suivies : vingt et un exercices de comptes retraités au même gabarit, publiés avec les données brutes et le modèle de valorisation. La méthode, pas le verdict.",
-  publisher: { '@id': AUTEUR['@id'] },
+  publisher: { '@id': EDITEUR['@id'] },
 };
 
-const graphe = [SITE, EDITEUR, AUTEUR, ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])].map((n) =>
+/* Fil d'Ariane : sousjacent.com › Les études › Vicor Corporation…
+   Google l'affiche à la place de l'URL sous le titre, et il situe la page
+   dans l'arborescence pour les moteurs de réponse. */
+const LIBELLES_ARIANE = {
+  etudes: 'Les études',
+  mecanisme: 'Le mécanisme de la semaine',
+  fondamentaux: 'Les fondamentaux',
+  methode: 'La méthode',
+  'a-propos': 'À propos',
+  'informations-legales': 'Informations légales',
+  cookies: 'Cookies',
+  'donnees-personnelles': 'Données personnelles',
+  'vigilance-fraude': 'Vigilance fraude',
+};
+
+const segments = path.split('/').filter(Boolean);
+
+const ARIANE = segments.length
+  ? {
+      '@type': 'BreadcrumbList',
+      '@id': url + '#ariane',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: origine + '/' },
+        ...segments.map((seg, i) => ({
+          '@type': 'ListItem',
+          position: i + 2,
+          name: LIBELLES_ARIANE[seg] ?? (i === segments.length - 1 && titre ? titre : seg),
+          item: origine + '/' + segments.slice(0, i + 1).join('/') + '/',
+        })),
+      ],
+    }
+  : null;
+
+const graphe = [
+  SITE,
+  EDITEUR,
+  AUTEUR,
+  ...(ARIANE ? [ARIANE] : []),
+  ...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
+].map((n) =>
   n['@type'] === 'Article' || n['@type'] === 'TechArticle'
-    ? { mainEntityOfPage: url, url, author: { '@id': AUTEUR['@id'] }, publisher: { '@id': AUTEUR['@id'] }, isPartOf: { '@id': SITE['@id'] }, inLanguage: 'fr-FR', ...n }
+    ? { mainEntityOfPage: url, url, author: { '@id': AUTEUR['@id'] }, publisher: { '@id': EDITEUR['@id'] }, isPartOf: { '@id': SITE['@id'] }, inLanguage: 'fr-FR', ...n }
     : n
 );
 const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@graph': graphe });
