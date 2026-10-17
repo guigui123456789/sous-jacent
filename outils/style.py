@@ -124,8 +124,7 @@ CSS += r"""
 /* ====== photographie ====== */
 .page.photo{ background:var(--navy); color:#EDE8DF; padding:0; }
 .photo-bg{ position:absolute; inset:0; background-size:cover; background-position:center; }
-.photo-veil{ position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(10,24,42,.62) 0%, rgba(10,24,42,.78) 52%, rgba(8,19,34,.94) 100%); }
+.photo-veil{ display:none; }
 .photo-inner{ position:absolute; inset:0; padding:26mm 22mm 20mm; display:flex; flex-direction:column; justify-content:center; }
 .page.photo .eyebrow{ color:#B3C4D3; }
 .page.photo .rule-v{ background:var(--gold-l); opacity:.95; }
@@ -165,18 +164,18 @@ CSS += r"""
 }
 .filigrane .bloc{
   transform:rotate(-30deg); text-align:center; white-space:nowrap;
-  color:var(--ink); opacity:.105;
+  color:var(--ink); opacity:.135;
 }
 .filigrane .mot{
-  font-family:'Latin Modern Roman',serif; font-size:54pt;
+  font-family:'Latin Modern Roman',serif; font-size:72pt;
   letter-spacing:.10em; line-height:1;
 }
 .filigrane .url{
-  font-family:Inter,Helvetica,Arial,sans-serif; font-size:9.6pt;
-  letter-spacing:.44em; text-transform:uppercase; margin-top:3.5mm;
+  font-family:Inter,Helvetica,Arial,sans-serif; font-size:12.5pt;
+  letter-spacing:.46em; text-transform:uppercase; margin-top:4.5mm;
   padding-left:.44em;
 }
-.page.navy .filigrane .bloc,.page.photo .filigrane .bloc{ color:#D7E2EE; opacity:.11; }
+.page.navy .filigrane .bloc,.page.photo .filigrane .bloc{ color:#E3EBF3; opacity:.155; }
 .page.photo .photo-inner,.page.feature .feat-body{ position:relative; z-index:6; }
 
 /* ====== rendu papier : aucun liseré entre les pages ====== */

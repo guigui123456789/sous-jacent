@@ -38,17 +38,34 @@ passe par Playwright avec `prefer_css_page_size`, et la mise en page des
 pages vedettes utilise une boîte flexible plutôt qu'un positionnement
 absolu, qui débordait de 62 mm.
 
-**2. Les photographies viraient au rose dans les visualiseurs intégrés
-aux navigateurs.** Deux causes cumulées : les JPEG étaient enregistrés en
-mode progressif, et Chromium enrobait chaque image dans un espace
-colorimétrique ICCBased que les visualiseurs n'appliquent pas tous de la
-même façon. Les images doivent donc être enregistrées **en JPEG de base**
-(`progressive=False`, sans profil ICC, sans marqueur Adobe APP14), et
-`normaliser.py` doit être exécuté après chaque rendu pour ramener les
-espaces colorimétriques à `DeviceRGB`. Contrôle :
+**2. Les pages de partie viraient au rose dans les visualiseurs intégrés
+aux navigateurs.** La cause n'était pas l'image : c'était le **voile marine
+semi-transparent** posé par-dessus en CSS. PDF.js, le moteur des
+visualiseurs intégrés, rendait mal ce dégradé à transparence, et toute la
+page basculait dans le magenta. Le voile est désormais **fusionné dans le
+JPEG** par la fonction `voile()` du script de préparation des images : le
+PDF ne contient plus aucune transparence sur ces pages, donc plus rien à
+mal interpréter.
+
+Par précaution, deux autres durcissements ont été conservés : les images
+sont enregistrées **en JPEG de base** (`progressive=False`, sans profil
+ICC, sans marqueur Adobe APP14), et `normaliser.py` ramène les espaces
+colorimétriques à `DeviceRGB`.
 
 ```bash
 pdfimages -list Etude-Vicor-2005-2025.pdf   # la colonne « color » doit dire rgb, jamais icc
+```
+
+**Comment vérifier pour de bon.** Les rendus par `pdftoppm` (poppler) et
+par les visualiseurs de bureau ne reproduisent pas le défaut : ils sont
+plus tolérants. Le seul test fiable est de rendre le PDF avec **PDF.js**,
+le moteur des navigateurs :
+
+```bash
+npm install pdfjs-dist
+# charger le PDF dans une page qui appelle pdfjsLib.getDocument(),
+# rendre la page dans un <canvas>, et contrôler la couleur moyenne :
+# une page de partie doit ressortir autour de (16, 28, 43), jamais R > B.
 ```
 
 `normaliser.py` pose aussi les métadonnées du document : titre, auteur,
