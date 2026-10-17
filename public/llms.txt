@@ -1,0 +1,61 @@
+# sous-jacent
+
+> Publication indépendante d'analyse financière. Les comptes d'une société cotée
+> sur vingt et un exercices, retraités au même gabarit, publiés avec les données
+> brutes et le modèle de valorisation. Écrit et calculé par Guillaume Le Merour,
+> étudiant en master de finance à l'université Paris-Panthéon-Assas.
+
+Le principe éditorial du site est de montrer la méthode plutôt que de rendre un
+verdict : chaque retraitement comptable est énoncé, chiffré et rattaché à sa
+source, et chaque hypothèse de valorisation est isolée pour que le lecteur puisse
+la remplacer par la sienne. Aucun objectif de cours n'est publié, aucun avis
+d'achat ou de vente n'est émis. Les publications ne sont pas un conseil en
+investissement.
+
+Site : https://www.sousjacent.com
+Contact : contact@sousjacent.com
+Langue : français
+Licence d'usage : consultation libre ; citation de courts extraits permise avec
+mention de « Sous-jacent — sousjacent.com » et lien vers la page d'origine ;
+reproduction intégrale soumise à autorisation écrite.
+
+## Les études
+
+Analyses longues d'une société cotée sur vingt et un exercices (2005-2025),
+publiées avec les comptes retraités au format CSV et un résumé de deux pages.
+
+- [Vicor Corporation : ce que vingt et un ans de comptes disent d'une valeur d'intelligence artificielle](https://www.sousjacent.com/etudes/vicor-2005-2025): Étude n° 1. Vicor (NASDAQ : VICR) a logé en 2025 un règlement judiciaire de 45 M$ à l'intérieur de son chiffre d'affaires, balisé comme tel dans ses données XBRL déposées auprès de la SEC — 452,7 M$ en donnée structurée contre 407,7 M$ dans les états financiers. Ce produit non récurrent représente 55 % du résultat opérationnel de l'exercice et crée 4,7 points d'écart de présentation sur la marge brute. Vingt et un exercices retraités donnent 4,2 % de croissance annuelle moyenne, 3,5 % de marge opérationnelle courante et 4,6 % de rentabilité du capital employé. Un DCF inversé situe la valeur intrinsèque entre 90 et 116 dollars par action (point central 102) contre un cours de 202,40 dollars au 16 octobre 2026.
+- [Index des études](https://www.sousjacent.com/etudes)
+
+## Le mécanisme de la semaine
+
+Un fait d'actualité de marché, et le mécanisme qui l'explique. Format court,
+intemporel.
+
+- [Index des mécanismes](https://www.sousjacent.com/mecanisme)
+- [La pentification de la courbe avant décision](https://www.sousjacent.com/mecanisme/2026-10-13-pentification-avant-decision)
+
+## Les fondamentaux
+
+Notions d'analyse financière expliquées une fois, puis citées en renvoi dans les
+études.
+
+- [Index des fondamentaux](https://www.sousjacent.com/fondamentaux)
+- [EBITDA et free cash flow : ce qui les sépare](https://www.sousjacent.com/fondamentaux/ebitda-vs-free-cash-flow)
+- [Remettre les loyers au bilan : le retraitement IFRS 16](https://www.sousjacent.com/fondamentaux/remettre-les-loyers-au-bilan)
+
+## À propos du site
+
+- [La méthode](https://www.sousjacent.com/methode): le protocole de retraitement et les limites assumées
+- [À propos](https://www.sousjacent.com/a-propos): le parcours de l'auteur
+- [Informations légales et réglementaires](https://www.sousjacent.com/informations-legales)
+- [Données personnelles](https://www.sousjacent.com/donnees-personnelles)
+- [Cookies](https://www.sousjacent.com/cookies)
+- [Vigilance fraude](https://www.sousjacent.com/vigilance-fraude)
+
+## Données et documents
+
+- [Vicor, comptes retraités 2005-2025 (CSV)](https://www.sousjacent.com/donnees/vicor-comptes-retraites-2005-2025.csv)
+- [Vicor, étude complète, 30 pages (PDF)](https://www.sousjacent.com/documents/sous-jacent-vicor-etude-complete.pdf)
+- [Vicor, résumé de deux pages (PDF)](https://www.sousjacent.com/documents/sous-jacent-vicor-resume.pdf)
+- [Flux RSS](https://www.sousjacent.com/rss.xml)

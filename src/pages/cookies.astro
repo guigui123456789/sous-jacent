@@ -1,0 +1,108 @@
+---
+import Base from '../layouts/Base.astro';
+const maj = '17 octobre 2026';
+---
+
+<Base
+  titre="Cookies"
+  description="Ce site ne dépose aucun cookie et n'utilise aucun traceur. Explication de ce que cela signifie concrètement et de ce que votre navigateur stocke malgré tout."
+  schema={{ '@type': 'WebPage', name: 'Cookies', description: "Politique de cookies du site sousjacent.com : aucun cookie, aucun traceur, aucune mesure d'audience.", dateModified: '2026-10-17' }}
+>
+  <article class="article">
+    <div class="enveloppe">
+      <div class="article-tete">
+        <p class="sur">Informations</p>
+        <h1>Cookies</h1>
+        <p class="chapo">Ce site ne dépose aucun cookie. Aucune bannière de consentement n'est donc nécessaire — et cette page explique pourquoi.</p>
+        <div class="article-meta"><span>Mise à jour : {maj}</span></div>
+      </div>
+
+      <nav class="cartouche">
+        <p>Les autres informations</p>
+        <ul>
+          <li><a href="/informations-legales">Informations légales</a></li>
+          <li><a href="/donnees-personnelles">Données personnelles</a></li>
+          <li><a href="/vigilance-fraude">Vigilance fraude</a></li>
+        </ul>
+      </nav>
+
+      <div class="corps">
+        <h2>Ce qu'est un cookie</h2>
+        <p>
+          Un cookie est un petit fichier déposé par un site sur votre appareil et relu à vos visites
+          suivantes. Certains sont indispensables au fonctionnement d'un site (maintenir une session
+          ouverte, retenir un panier) ; d'autres servent à mesurer l'audience ou à suivre un internaute
+          d'un site à l'autre à des fins publicitaires.
+        </p>
+
+        <h2>Ce que ce site dépose : rien</h2>
+        <p>
+          <strong>sousjacent.com ne dépose aucun cookie</strong>, d'aucune nature. Ni cookie technique,
+          ni cookie de mesure d'audience, ni cookie publicitaire, ni cookie tiers.
+        </p>
+        <p>Concrètement, cela signifie que :</p>
+        <ul>
+          <li>aucun outil de mesure d'audience n'est installé — ni Google Analytics, ni équivalent ;</li>
+          <li>aucune régie publicitaire n'a accès au site ;</li>
+          <li>aucun bouton de partage de réseau social n'est intégré ; les liens vers LinkedIn sont de simples liens hypertextes qui ne chargent aucun script ;</li>
+          <li>aucun profil de navigation n'est constitué, ni revendu, ni partagé ;</li>
+          <li>aucune bannière de consentement ne vous est imposée, puisqu'il n'y a rien à consentir.</li>
+        </ul>
+        <p>
+          Les articles 82 de la loi « informatique et libertés » et 5(3) de la directive ePrivacy
+          imposent le recueil du consentement avant tout dépôt de traceur non strictement nécessaire.
+          Ce site est hors du champ de cette obligation, faute de traceur.
+        </p>
+
+        <h2>Ce que votre navigateur stocke malgré tout</h2>
+        <p>
+          Comme pour tout site, votre navigateur conserve en mémoire cache les fichiers nécessaires à
+          l'affichage des pages — feuilles de style, images, polices de caractères. Ce cache est local,
+          propre à votre appareil, et n'est jamais relu par le site. Vous pouvez le vider à tout moment
+          depuis les réglages de votre navigateur.
+        </p>
+
+        <h2>Les services tiers sollicités par vos pages</h2>
+        <p>
+          Deux services extérieurs sont appelés lors de l'affichage du site, sans dépôt de cookie :
+        </p>
+        <ul>
+          <li>
+            <strong>Google Fonts</strong>, pour les polices de caractères Spectral et Source Sans 3.
+            Votre navigateur se connecte aux serveurs de Google pour les télécharger, ce qui transmet
+            techniquement votre adresse IP. Google indique ne pas utiliser ces requêtes à des fins
+            publicitaires et ne déposer aucun cookie depuis ce service.
+          </li>
+          <li>
+            <strong>Vercel</strong>, l'hébergeur, qui conserve des journaux techniques de connexion.
+            Voir la page <a href="/donnees-personnelles">Données personnelles</a>.
+          </li>
+        </ul>
+        <p>
+          Si l'hébergement local des polices devenait souhaitable pour supprimer cette dernière
+          dépendance, le changement serait fait et signalé ici.
+        </p>
+
+        <h2>Si cela devait changer</h2>
+        <p>
+          Si un outil de mesure d'audience venait à être installé — par exemple une solution sans
+          cookie et sans donnée personnelle — cette page serait mise à jour avant sa mise en service,
+          avec la date, la finalité, la durée de conservation et les moyens de s'y opposer.
+        </p>
+
+        <h2>Une question</h2>
+        <p>
+          <a href="mailto:contact@sousjacent.com">contact@sousjacent.com</a>
+        </p>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .cartouche { margin-top: var(--e-10); padding: var(--e-6) var(--e-7); background: var(--pierre-20); border-left: 1px solid var(--or); max-width: 36rem; }
+  .cartouche p { font-size: .8125rem; letter-spacing: .17em; text-transform: uppercase; color: var(--graphite-80); margin-bottom: var(--e-4); }
+  .cartouche ul { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--e-7); flex-wrap: wrap; font-size: .9375rem; }
+  .cartouche a { color: var(--bleu); text-decoration: none; border-bottom: 1px solid var(--graphite-20); }
+  .cartouche a:hover { border-bottom-color: var(--bleu); }
+</style>

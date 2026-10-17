@@ -23,7 +23,7 @@ const formats = [
     image: '/images/parc-haussmann.webp',
     titre: "L'étude",
     texte:
-      "Vingt et un exercices de comptes repris et retraités au même gabarit, un DCF inversé, trois scénarios, et le fichier de données en téléchargement.",
+      "Vingt et un exercices de comptes repris et retraités au même gabarit, un DCF inversé, une fourchette de valeur et sa grille de sensibilité, et le fichier de données en téléchargement.",
     lien: '/etudes',
     libelle: 'Voir les études',
   },
@@ -48,7 +48,7 @@ const formats = [
 const chiffres = [
   { valeur: 2005, suffixe: '', texte: "Première année de la série : celle du passage obligatoire aux IFRS, pour que les comptes restent comparables d'un bout à l'autre." },
   { valeur: 21, suffixe: '', texte: "Exercices repris un à un, à partir des documents d'enregistrement universels et des rapports annuels." },
-  { valeur: 3, suffixe: '', texte: "Jeux d'hypothèses publiés côte à côte, avec ce que chacun suppose écrit noir sur blanc." },
+  { valeur: 20, suffixe: '', texte: "Combinaisons d'hypothèses publiées côte à côte dans la grille de sensibilité, chacune refaisable." },
   { valeur: 0, suffixe: '', texte: "Objectif de cours. La méthode est montrée, la conclusion revient au lecteur." },
 ];
 ---
@@ -56,7 +56,7 @@ const chiffres = [
 <Base
   titreComplet="sous-jacent — l'analyse d'une société cotée, vingt et un exercices, en public"
   titre="sous-jacent"
-  description="Une société cotée française peu suivie, vingt et un exercices de comptes retraités au même gabarit, publiés avec les données et le modèle. La méthode, pas le verdict."
+  description="Une société cotée peu suivie, vingt et un exercices de comptes retraités au même gabarit, publiés avec les données brutes et le modèle de valorisation. La méthode, pas le verdict."
   enteteTransparente={true}
 >
   <!-- ============== OUVERTURE ============== -->
@@ -69,7 +69,7 @@ const chiffres = [
       <p class="sur hero-sur">Analyse financière indépendante</p>
       <h1>Ce que le cours<br />ne dit pas encore</h1>
       <p class="hero-texte">
-        Une société cotée française peu suivie, reprise exercice par exercice depuis 2005. Les comptes
+        Une société cotée peu suivie, reprise exercice par exercice depuis 2005. Les comptes
         retraités, le modèle et les hypothèses sont publiés avec l'analyse.
       </p>
       <div class="hero-actions">

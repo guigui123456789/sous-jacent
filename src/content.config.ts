@@ -23,6 +23,8 @@ const etudes = defineCollection({
     donneesCsv: z.string().optional(),
     numero: z.number(),
     resumePdf: z.string().optional(),
+    memoirePdf: z.string().optional(),
+    cours: z.string().optional(),
   }),
 });
 

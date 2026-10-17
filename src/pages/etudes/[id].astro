@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const entrees = await getCollection('etudes');
+  const entrees = await getCollection('etudes', (e) => !e.data.brouillon);
   return entrees.map((e) => ({ params: { id: e.id }, props: { e } }));
 }
 const { e } = Astro.props;
@@ -25,6 +25,15 @@ const schema = [
       ...(e.data.isin ? { identifier: { '@type': 'PropertyValue', propertyID: 'ISIN', value: e.data.isin } } : {}),
     },
     temporalCoverage: e.data.periode.replace(/\s*–\s*/, '/'),
+    isAccessibleForFree: true,
+    inLanguage: 'fr-FR',
+    keywords: [e.data.societe, 'analyse financière', 'comptes retraités', 'valorisation', 'DCF inversé', 'equity research'],
+    ...(e.data.memoirePdf
+      ? { associatedMedia: { '@type': 'MediaObject', encodingFormat: 'application/pdf', contentUrl: new URL(e.data.memoirePdf, Astro.site ?? 'https://www.sousjacent.com').href, name: `${e.data.titre} — étude complète au format PDF` } }
+      : {}),
+    citation: [
+      'Vicor Corporation, formulaires 10-K 2005-2025, U.S. Securities and Exchange Commission, CIK 0000751978',
+    ],
   },
   ...(e.data.donneesCsv
     ? [
@@ -75,14 +84,17 @@ const schema = [
             <div><dt>Société</dt><dd>{e.data.societe}</dd></div>
             {e.data.isin && <div><dt>ISIN</dt><dd>{e.data.isin}</dd></div>}
             <div><dt>Exercices</dt><dd>{e.data.periode}</dd></div>
-            <div><dt>Scénarios</dt><dd>3</dd></div>
+            {e.data.cours && <div><dt>Cours de référence</dt><dd>{e.data.cours}</dd></div>}
           </dl>
         </div>
 
-        {(e.data.resumePdf || e.data.donneesCsv) && (
+        {(e.data.memoirePdf || e.data.resumePdf || e.data.donneesCsv) && (
           <div class="bloc">
             <h2>À télécharger</h2>
             <ul class="fichiers">
+              {e.data.memoirePdf && (
+                <li><a href={e.data.memoirePdf}>L'étude complète, 30 pages <span>PDF</span></a></li>
+              )}
               {e.data.resumePdf && (
                 <li><a href={e.data.resumePdf}>Le résumé de deux pages <span>PDF</span></a></li>
               )}
@@ -123,7 +135,17 @@ const schema = [
 
   .grille-etude { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
   @media (max-width: 1024px) { .grille-etude { grid-template-columns: 1fr; } .flanc { order: -1; } }
-  .grille-etude .corps { margin-top: 0; }
+  .grille-etude .corps { margin-top: 0; max-width: none; }
+  .grille-etude .corps > p,
+  .grille-etude .corps > h2,
+  .grille-etude .corps > h3,
+  .grille-etude .corps > ul,
+  .grille-etude .corps > ol,
+  .grille-etude .corps > blockquote,
+  .grille-etude .corps > .encadre,
+  .grille-etude .corps > .sommaire-etude { max-width: 36rem; }
+  .grille-etude .corps > table { max-width: 44rem; }
+  .grille-etude .corps > figure { max-width: 52rem; }
 
   .flanc { position: sticky; top: 7rem; display: grid; gap: var(--e-9); }
   @media (max-width: 1024px) { .flanc { position: static; } }

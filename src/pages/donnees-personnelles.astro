@@ -1,0 +1,135 @@
+---
+import Base from '../layouts/Base.astro';
+const maj = '17 octobre 2026';
+---
+
+<Base
+  titre="Données personnelles"
+  description="Quelles données le site sousjacent.com traite, pourquoi, combien de temps, et comment exercer vos droits au titre du RGPD."
+  schema={{ '@type': 'WebPage', name: 'Données personnelles', description: "Politique de protection des données personnelles du site sousjacent.com.", dateModified: '2026-10-17' }}
+>
+  <article class="article">
+    <div class="enveloppe">
+      <div class="article-tete">
+        <p class="sur">Informations</p>
+        <h1>Données personnelles</h1>
+        <p class="chapo">Ce site ne demande aucune inscription et ne collecte aucune donnée personnelle de son propre fait. Voici malgré tout, précisément, ce qui est traité.</p>
+        <div class="article-meta"><span>Mise à jour : {maj}</span></div>
+      </div>
+
+      <nav class="cartouche">
+        <p>Les autres informations</p>
+        <ul>
+          <li><a href="/informations-legales">Informations légales</a></li>
+          <li><a href="/cookies">Cookies</a></li>
+          <li><a href="/vigilance-fraude">Vigilance fraude</a></li>
+        </ul>
+      </nav>
+
+      <div class="corps">
+        <h2>Responsable du traitement</h2>
+        <p>
+          Guillaume Le Merour, éditeur du site à titre personnel et non commercial.<br />
+          Contact : <a href="mailto:contact@sousjacent.com">contact@sousjacent.com</a>
+        </p>
+        <p>
+          Compte tenu de la nature et du volume des traitements, la désignation d'un délégué à la
+          protection des données n'est pas requise.
+        </p>
+
+        <h2>Le principe</h2>
+        <p>
+          Le site est un ensemble de pages statiques. Il ne propose <strong>aucun compte,
+          aucun formulaire, aucune inscription, aucune newsletter et aucun commentaire</strong>. Il
+          n'existe donc pas de base de données d'utilisateurs, et la consultation du site n'implique de
+          votre part aucune communication volontaire de données.
+        </p>
+
+        <h2>Les deux seuls traitements existants</h2>
+
+        <h3>1. Les journaux techniques de l'hébergeur</h3>
+        <p>
+          Comme tout serveur web, l'infrastructure de Vercel enregistre automatiquement des journaux de
+          connexion : adresse IP, date et heure de la requête, page demandée, type de navigateur et
+          système d'exploitation, page de provenance.
+        </p>
+        <ul>
+          <li><strong>Finalité</strong> : sécurité du service, prévention des abus, diagnostic des pannes.</li>
+          <li><strong>Base légale</strong> : intérêt légitime de l'éditeur à maintenir un service disponible et sûr (article 6.1.f du RGPD).</li>
+          <li><strong>Destinataire</strong> : Vercel Inc., en qualité de sous-traitant.</li>
+          <li><strong>Transfert hors Union européenne</strong> : les serveurs peuvent être situés aux États-Unis. Le transfert est encadré par les clauses contractuelles types de la Commission européenne et par l'adhésion de Vercel au <em>Data Privacy Framework</em>.</li>
+          <li><strong>Durée</strong> : conservation limitée par l'hébergeur, de l'ordre de quelques semaines.</li>
+        </ul>
+        <p>
+          Ces journaux ne sont pas exploités à des fins d'analyse d'audience par l'éditeur, qui n'y
+          accède qu'en cas d'incident technique.
+        </p>
+
+        <h3>2. Les messages que vous envoyez</h3>
+        <p>
+          Si vous écrivez à l'adresse de contact, votre adresse électronique et le contenu de votre
+          message sont traités.
+        </p>
+        <ul>
+          <li><strong>Finalité</strong> : répondre à votre message, et uniquement cela.</li>
+          <li><strong>Base légale</strong> : votre démarche volontaire, qui vaut consentement (article 6.1.a du RGPD).</li>
+          <li><strong>Destinataire</strong> : l'éditeur seul. Aucune transmission à un tiers, aucune revente, aucune inscription à quoi que ce soit.</li>
+          <li><strong>Durée</strong> : le temps nécessaire à l'échange, puis archivage dans la messagerie ; suppression sur simple demande.</li>
+        </ul>
+
+        <h2>Ce qui n'existe pas</h2>
+        <p>
+          Aucune mesure d'audience. Aucun profilage. Aucune décision automatisée. Aucune prospection
+          commerciale. Aucun partage, aucune cession, aucune revente de données, à titre gratuit comme
+          onéreux. Aucun cookie — voir la page <a href="/cookies">Cookies</a>.
+        </p>
+
+        <h2>Vos droits</h2>
+        <p>
+          Le règlement général sur la protection des données vous reconnaît un droit d'accès, de
+          rectification, d'effacement, de limitation du traitement, d'opposition et de portabilité, ainsi
+          que le droit de définir des directives relatives au sort de vos données après votre décès.
+        </p>
+        <p>
+          Pour les exercer, écrivez à
+          <a href="mailto:contact@sousjacent.com">contact@sousjacent.com</a>. Une réponse vous sera
+          apportée dans un délai d'un mois. En pratique, s'agissant d'un site sans compte ni base de
+          données, la seule donnée susceptible de vous concerner est un éventuel échange de courriels.
+        </p>
+        <p>
+          Si la réponse ne vous satisfait pas, vous pouvez introduire une réclamation auprès de la
+          <strong>Commission nationale de l'informatique et des libertés</strong> (CNIL), 3 place de
+          Fontenoy, TSA 80715, 75334 Paris Cedex 07 — <a href="https://www.cnil.fr" rel="noopener" target="_blank">cnil.fr</a>.
+        </p>
+
+        <h2>Les personnes citées dans les publications</h2>
+        <p>
+          Les études publiées sur ce site mentionnent des dirigeants de sociétés cotées, exclusivement
+          à raison de leurs fonctions et sur la base d'informations rendues publiques par ces sociétés
+          dans leurs documents réglementaires. Ce traitement relève de la liberté d'expression et
+          d'information. Toute personne concernée peut écrire à l'adresse de contact pour signaler une
+          inexactitude.
+        </p>
+
+        <h2>Sécurité</h2>
+        <p>
+          Le site est servi exclusivement en HTTPS. Son contenu est statique, sans base de données ni
+          exécution de code côté serveur, ce qui réduit fortement la surface d'exposition.
+        </p>
+
+        <h2>Modifications</h2>
+        <p>
+          Toute évolution de cette politique sera publiée sur cette page, avec sa date de mise à jour.
+        </p>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .cartouche { margin-top: var(--e-10); padding: var(--e-6) var(--e-7); background: var(--pierre-20); border-left: 1px solid var(--or); max-width: 36rem; }
+  .cartouche p { font-size: .8125rem; letter-spacing: .17em; text-transform: uppercase; color: var(--graphite-80); margin-bottom: var(--e-4); }
+  .cartouche ul { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--e-7); flex-wrap: wrap; font-size: .9375rem; }
+  .cartouche a { color: var(--bleu); text-decoration: none; border-bottom: 1px solid var(--graphite-20); }
+  .cartouche a:hover { border-bottom-color: var(--bleu); }
+</style>

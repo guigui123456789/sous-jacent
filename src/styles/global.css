@@ -338,3 +338,52 @@ footer.site a:hover{color:var(--blanc)}
   .reveler{opacity:1;transform:none}
   .cadre-image img{transform:none}
 }
+
+/* ---------------- figures et encadrés d'étude ---------------- */
+.corps figure{margin-block:var(--e-10)}
+.corps figure img,.corps figure svg{width:100%;height:auto;background:var(--blanc)}
+.corps figcaption{margin-top:var(--e-5);font-size:.875rem;line-height:1.55;color:var(--graphite-80)}
+.corps figcaption .source{display:block;margin-top:.35rem;font-size:.8125rem;font-style:italic}
+.corps .large{max-width:none;width:100%}
+
+.encadre{
+  margin-block:var(--e-10);padding-top:var(--e-6);
+  border-top:1px solid var(--or);border-bottom:1px solid var(--graphite-20);
+  padding-bottom:var(--e-6);
+}
+.encadre > p:first-child{
+  font-family:var(--sans);font-size:.8125rem;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--or);margin-bottom:var(--e-5);
+}
+.encadre p{font-size:.9375rem;line-height:1.62}
+.encadre p + p{margin-top:var(--e-5)}
+.encadre .formule{
+  font-family:var(--serif);font-style:italic;font-size:1.0625rem;
+  color:var(--bleu);text-align:center;margin-block:var(--e-6);
+}
+
+.reperes{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));
+  gap:var(--e-8) var(--e-7);margin-block:var(--e-10);
+  padding-block:var(--e-8);border-top:1px solid var(--bleu);border-bottom:1px solid var(--graphite-20);
+  max-width:none;
+}
+.reperes div{text-align:center}
+.reperes b{
+  display:block;font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.9rem,1.4rem + 1.6vw,2.6rem);line-height:1;color:var(--bleu);
+}
+.reperes span{display:block;margin-top:var(--e-4);font-size:.8125rem;line-height:1.45;color:var(--graphite-80)}
+
+.sommaire-etude{
+  margin-block:var(--e-9);padding:var(--e-7);background:var(--pierre-20);
+  border-left:1px solid var(--or);
+}
+.sommaire-etude p:first-child{
+  font-family:var(--sans);font-size:.8125rem;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--graphite-80);margin-bottom:var(--e-5);
+}
+.sommaire-etude ol{margin:0;padding-left:1.1rem;font-size:.9375rem;columns:2;column-gap:var(--e-8)}
+@media (max-width:640px){.sommaire-etude ol{columns:1}}
+.sommaire-etude a{border-bottom:none}
+.sommaire-etude a:hover{border-bottom:1px solid var(--bleu)}

@@ -3,7 +3,7 @@ import Article from '../../layouts/Article.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
-  const entrees = await getCollection('fondamentaux');
+  const entrees = await getCollection('fondamentaux', (e) => !e.data.brouillon);
   return entrees.map((e) => ({ params: { id: e.id }, props: { e } }));
 }
 const { e } = Astro.props;

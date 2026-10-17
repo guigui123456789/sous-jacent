@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Embleme from '../components/Embleme.astro';
 
-const { titre, description, titreComplet, enteteTransparente = false, schema } = Astro.props;
+const { titre, description, titreComplet, enteteTransparente = false, schema, image } = Astro.props;
 const path = Astro.url.pathname;
 const actif = (p) => (path === p || path.startsWith(p + '/') ? 'page' : undefined);
 const annee = new Date().getFullYear();
@@ -25,6 +25,19 @@ const AUTEUR = {
   knowsAbout: ['analyse financière', 'valorisation d\'entreprise', 'small caps', 'comptabilité IFRS'],
 };
 
+const EDITEUR = {
+  '@type': 'Organization',
+  '@id': origine + '/#editeur',
+  name: 'Sous-jacent',
+  alternateName: 'sousjacent.com',
+  url: origine + '/',
+  email: 'contact@sousjacent.com',
+  logo: { '@type': 'ImageObject', url: origine + '/apple-touch-icon.png', width: 180, height: 180 },
+  founder: { '@id': origine + '/a-propos/#personne' },
+  description:
+    "Publication indépendante d'analyse financière : les comptes d'une société cotée sur vingt et un exercices, retraités au même gabarit et publiés avec les données et le modèle.",
+};
+
 const SITE = {
   '@type': 'WebSite',
   '@id': origine + '/#site',
@@ -32,11 +45,11 @@ const SITE = {
   name: 'sous-jacent',
   inLanguage: 'fr-FR',
   description:
-    "L'analyse de sociétés cotées françaises peu suivies : vingt et un exercices de comptes retraités, publiés avec les données et le modèle.",
+    "L'analyse de sociétés cotées peu suivies : vingt et un exercices de comptes retraités au même gabarit, publiés avec les données brutes et le modèle de valorisation. La méthode, pas le verdict.",
   publisher: { '@id': AUTEUR['@id'] },
 };
 
-const graphe = [SITE, AUTEUR, ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])].map((n) =>
+const graphe = [SITE, EDITEUR, AUTEUR, ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])].map((n) =>
   n['@type'] === 'Article' || n['@type'] === 'TechArticle'
     ? { mainEntityOfPage: url, url, author: { '@id': AUTEUR['@id'] }, publisher: { '@id': AUTEUR['@id'] }, isPartOf: { '@id': SITE['@id'] }, inLanguage: 'fr-FR', ...n }
     : n
@@ -56,6 +69,15 @@ const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="fr_FR" />
   <meta property="og:url" content={new URL(path, Astro.site ?? "https://www.sousjacent.com")} />
+  <meta property="og:site_name" content="sous-jacent" />
+  <meta property="og:image" content={new URL(image ?? '/images/accueil-facade.webp', Astro.site ?? 'https://www.sousjacent.com')} />
+  <meta property="og:image:alt" content={titre} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={titre} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL(image ?? '/images/accueil-facade.webp', Astro.site ?? 'https://www.sousjacent.com')} />
+  <meta name="author" content="Guillaume Le Merour" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <link rel="canonical" href={new URL(path, Astro.site ?? 'https://www.sousjacent.com')} />
   <script type="application/ld+json" is:inline set:html={donneesStructurees} />
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -97,8 +119,8 @@ const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@
         <div>
           <span class="pied-marque"><Embleme taille={26} /> sous-jacent</span>
           <p style="font-size:.9375rem;line-height:1.6;max-width:24rem">
-            Les comptes d'une société cotée française sur vingt et un exercices, retraités au même
-            gabarit et publiés avec les données.
+            Les comptes d'une société cotée sur vingt et un exercices, retraités au même gabarit et
+            publiés avec les données brutes et le modèle.
           </p>
         </div>
 
@@ -132,9 +154,10 @@ const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@
         <div>
           <h3>Informations</h3>
           <ul>
-            <li><a href="/methode">Avertissements</a></li>
-            <li><a href="/mentions-legales">Mentions légales</a></li>
-            <li><a href="/mentions-legales">Données personnelles</a></li>
+            <li><a href="/informations-legales">Informations légales</a></li>
+            <li><a href="/donnees-personnelles">Données personnelles</a></li>
+            <li><a href="/cookies">Cookies</a></li>
+            <li><a href="/vigilance-fraude">Vigilance fraude</a></li>
           </ul>
         </div>
       </div>
@@ -150,9 +173,10 @@ const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@
       <div class="pied-bas">
         <span>{annee} sousjacent.com ©</span>
         <div class="pied-legal">
-          <a href="/mentions-legales">Mentions légales</a>
-          <a href="/mentions-legales">Cookies</a>
-          <a href="/mentions-legales">Données personnelles</a>
+          <a href="/informations-legales">Informations légales</a>
+          <a href="/cookies">Cookies</a>
+          <a href="/donnees-personnelles">Données personnelles</a>
+          <a href="/vigilance-fraude">Vigilance fraude</a>
         </div>
         <div class="pied-social">
           <a href="https://www.linkedin.com/in/guillaumelemerour" aria-label="LinkedIn" rel="me noopener" target="_blank">
