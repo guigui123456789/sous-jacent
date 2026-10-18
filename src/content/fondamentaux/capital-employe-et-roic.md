@@ -1,7 +1,7 @@
 ---
 titre: "Le capital employé et le ROIC"
 rubrique: "Rentabilité"
-chapo: "Ce que mesure la rentabilité du capital, la définition retenue ici, et pourquoi la seule comparaison qui compte n'est pas avec zéro."
+chapo: "Ce que mesure la rentabilité du capital, la définition retenue ici, et pourquoi la seule comparaison qui compte n’est pas avec zéro."
 date: 2026-10-17
 brouillon: false
 ---

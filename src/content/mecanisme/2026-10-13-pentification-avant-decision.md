@@ -1,6 +1,6 @@
 ---
 titre: "Pourquoi la courbe se pentifie avant la décision, pas après"
-chapo: "Ce que le segment 2-10 ans intègre d'anticipations, et pourquoi le mouvement est déjà fait le jour de l'annonce."
+chapo: "Ce que le segment 2-10 ans intègre d’anticipations, et pourquoi le mouvement est déjà fait le jour de l’annonce."
 fait: "L'écart 2-10 ans s'est écarté de 18 points de base dans les cinq séances précédant la réunion."
 date: 2026-10-13
 brouillon: false

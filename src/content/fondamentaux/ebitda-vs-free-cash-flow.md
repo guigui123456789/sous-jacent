@@ -1,7 +1,7 @@
 ---
 titre: "EBITDA ou free cash flow : lequel ment le moins"
 rubrique: "Flux"
-chapo: "Pourquoi l'un se pilote et l'autre se constate, et ce que l'écart entre les deux raconte."
+chapo: "Pourquoi l’un se pilote et l’autre se constate, et ce que l’écart entre les deux raconte."
 date: 2026-10-08
 brouillon: false
 ---

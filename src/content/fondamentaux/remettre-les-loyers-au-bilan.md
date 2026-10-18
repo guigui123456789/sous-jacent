@@ -1,7 +1,7 @@
 ---
 titre: "Remettre les loyers au bilan"
 rubrique: "Retraitement"
-chapo: "IFRS 16, dette locative, et l'effet sur les multiples avant et après retraitement."
+chapo: "IFRS 16, dette locative, et l’effet sur les multiples avant et après retraitement."
 date: 2026-09-24
 brouillon: false
 ---

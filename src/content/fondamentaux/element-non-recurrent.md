@@ -1,7 +1,7 @@
 ---
-titre: "L'élément non récurrent, et comment le neutraliser"
+titre: "L’élément non récurrent, et comment le neutraliser"
 rubrique: "Retraitement"
-chapo: "Un produit ou une charge qui a bien eu lieu, mais qui ne dit rien de ce que l'entreprise sait faire. Où il se cache, et la règle qui évite l'erreur la plus courante."
+chapo: "Un produit ou une charge qui a bien eu lieu, mais qui ne dit rien de ce que l’entreprise sait faire. Où il se cache, et la règle qui évite l’erreur la plus courante."
 date: 2026-10-17
 brouillon: false
 ---
