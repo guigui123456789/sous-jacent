@@ -34,7 +34,7 @@ const schema = [
     ...(e.data.memoirePdf
       ? { associatedMedia: { '@type': 'MediaObject', encodingFormat: 'application/pdf', contentUrl: new URL(e.data.memoirePdf, Astro.site ?? 'https://www.sousjacent.com').href, name: `${e.data.titre} — étude complète au format PDF` } }
       : {}),
-    citation: [
+    citation: e.data.citations ?? [
       'Vicor Corporation, formulaires 10-K 2005-2025, U.S. Securities and Exchange Commission, CIK 0000751978',
     ],
   },
@@ -61,7 +61,7 @@ const schema = [
 <Base titre={e.data.titre} description={e.data.chapo} image={e.data.partage} enteteTransparente={true} schema={schema}>
   <header class="tete" data-hero>
     <div class="tete-image">
-      <img src="/images/tours-contreplongee.webp" alt="" fetchpriority="high" />
+      <img src={e.data.imageTete ?? '/images/tours-contreplongee.webp'} alt="" fetchpriority="high" />
     </div>
     <div class="tete-voile"></div>
     <div class="enveloppe tete-contenu">
@@ -89,21 +89,26 @@ const schema = [
             {e.data.isin && <div><dt>ISIN</dt><dd>{e.data.isin}</dd></div>}
             <div><dt>Exercices</dt><dd>{e.data.periode}</dd></div>
             {e.data.cours && <div><dt>Cours de référence</dt><dd>{e.data.cours}</dd></div>}
+            {e.data.objectif && <div><dt>Objectif de cours</dt><dd>{e.data.objectif}</dd></div>}
+            {e.data.horizon && <div><dt>Horizon</dt><dd>{e.data.horizon}</dd></div>}
           </dl>
         </div>
 
-        {(e.data.memoirePdf || e.data.resumePdf || e.data.donneesCsv) && (
+        {(e.data.memoirePdf || e.data.resumePdf || e.data.donneesCsv || e.data.classeurXlsx) && (
           <div class="bloc">
             <h2>À télécharger</h2>
             <ul class="fichiers">
               {e.data.memoirePdf && (
-                <li><a href={e.data.memoirePdf}>L'étude complète, 30 pages <span>PDF</span></a></li>
+                <li><a href={e.data.memoirePdf}>L'étude complète, {e.data.pagesPdf ?? 30} pages <span>PDF</span></a></li>
               )}
               {e.data.resumePdf && (
                 <li><a href={e.data.resumePdf}>Le résumé de deux pages <span>PDF</span></a></li>
               )}
               {e.data.donneesCsv && (
                 <li><a href={e.data.donneesCsv}>Les comptes retraités <span>CSV</span></a></li>
+              )}
+              {e.data.classeurXlsx && (
+                <li><a href={e.data.classeurXlsx}>Le classeur de calcul <span>XLSX</span></a></li>
               )}
             </ul>
           </div>
@@ -113,7 +118,7 @@ const schema = [
           <h2>Le suivi de cette étude</h2>
           <p>
             Cette étude est revue après chaque publication trimestrielle de la société. Toute
-            révision de la fourchette est inscrite ci-dessous, datée et motivée. Rien n'est
+            révision {e.data.objectif ? "de l'objectif" : 'de la fourchette'} est inscrite ci-dessous, datée et motivée. Rien n'est
             corrigé en silence.
           </p>
           {e.data.prochaineRevue && (
@@ -121,8 +126,8 @@ const schema = [
           )}
           <ol class="suivi-journal">
             <li>
-              <span class="suivi-date">17 octobre 2026</span>
-              <span class="suivi-valeur">90 – 116 $, valeur centrale 102 $</span>
+              <span class="suivi-date">{e.data.publication?.date ?? '17 octobre 2026'}</span>
+              <span class="suivi-valeur">{e.data.publication?.valeur ?? '90 – 116 $, valeur centrale 102 $'}</span>
               <span class="suivi-motif">Publication initiale.</span>
             </li>
             {e.data.revisions.map((r) => (
@@ -135,6 +140,20 @@ const schema = [
           </ol>
         </div>
 
+        {e.data.objectif ? (
+        <div class="bloc bloc--note">
+          <h2>Statut de cette étude</h2>
+          <p>
+            Cette étude publie un objectif de cours, assorti d'un horizon : c'est une recommandation
+            d'investissement au sens du règlement (UE) n° 596/2014. Elle est établie selon les
+            obligations du règlement délégué (UE) 2016/958 : méthode, sources, horizon, déclaration
+            d'intérêts et historique des objectifs. L'auteur ne détient aucun titre de la société. Ce
+            n'est pas un conseil en investissement personnalisé.
+          </p>
+          <a class="lien" href="/informations-legales">Le statut réglementaire</a>
+          <p class="bloc-version">Construite sous la méthode <a href="/documents/sous-jacent-methode-v1.0.pdf">version 1.0</a>.</p>
+        </div>
+        ) : (
         <div class="bloc bloc--note">
           <h2>Ce que cette étude ne fait pas</h2>
           <p>
@@ -145,6 +164,7 @@ const schema = [
           <a class="lien" href="/methode">La méthode</a>
           <p class="bloc-version">Construite sous la méthode <a href="/documents/sous-jacent-methode-v1.0.pdf">version 1.0</a>.</p>
         </div>
+        )}
       </aside>
     </div>
   </section>

@@ -16,7 +16,7 @@ const entrees = (await getCollection('etudes'))
       societe: e.data.societe,
       periode: e.data.periode,
       publiee: dateFr(e.data.date),
-      valeur: rev.length ? rev[rev.length - 1].valeur : '90 – 116 $, valeur centrale 102 $',
+      valeur: rev.length ? rev[rev.length - 1].valeur : (e.data.publication?.valeur ?? '90 – 116 $, valeur centrale 102 $'),
       majLe: rev.length ? rev[rev.length - 1].date : dateFr(e.data.date),
       prochaine: e.data.prochaineRevue ?? 'à la prochaine publication trimestrielle',
     };
@@ -39,9 +39,10 @@ const entrees = (await getCollection('etudes'))
     <div class="enveloppe">
       <div class="corps">
         <p class="preambule">
-          Ce tableau dit, à tout moment, ce que le site soutient et depuis quand. Les fourchettes qui
-          y figurent sont des valeurs intrinsèques issues d'hypothèses déclarées : ni horizon, ni avis
-          d'achat ou de vente, ni recommandation. <a href="/methode">La méthode</a> explique la
+          Ce tableau dit, à tout moment, ce que le site soutient et depuis quand. Il tient lieu
+          d'historique des recommandations : chaque objectif de cours y figure avec sa date, et ses
+          révisions s'ajoutent sans retrait. L'étude Vicor publie une fourchette de valeur sans
+          horizon ; les études suivantes, un objectif de cours à douze mois. <a href="/methode">La méthode</a> explique la
           distinction.
         </p>
       </div>
@@ -54,7 +55,7 @@ const entrees = (await getCollection('etudes'))
               <p class="couv-periode">{e.periode}</p>
             </div>
             <dl class="couv-detail">
-              <div><dt>Fourchette en vigueur</dt><dd class="couv-valeur">{e.valeur}</dd></div>
+              <div><dt>Valeur ou objectif en vigueur</dt><dd class="couv-valeur">{e.valeur}</dd></div>
               <div><dt>Étude publiée le</dt><dd>{e.publiee}</dd></div>
               <div><dt>Dernière mise à jour</dt><dd>{e.majLe}</dd></div>
               <div><dt>Prochaine revue</dt><dd>{e.prochaine}</dd></div>

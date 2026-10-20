@@ -1,0 +1,138 @@
+@font-face{font-family:Bod;font-weight:400;src:url(fonts/fontsource-bodoni-moda-5.3.0/files/bodoni-moda-latin-400-normal.woff2)}
+@font-face{font-family:Bod;font-weight:500;src:url(fonts/fontsource-bodoni-moda-5.3.0/files/bodoni-moda-latin-500-normal.woff2)}
+@font-face{font-family:Bod;font-style:italic;font-weight:400;src:url(fonts/fontsource-bodoni-moda-5.3.0/files/bodoni-moda-latin-400-italic.woff2)}
+:root{
+ --navy:#132A47; --navy2:#34496A; --cu:#A8693E; --cu2:#D6A177;
+ --stone:#E8E3D8; --pale:#DDE3EA; --creme:#FBF9F3; --ink:#262625; --slate:#7E8494;
+ --l1:#cdd8e6; --l2:#d6deea; --l3:#e8edf4;
+}
+@page{size:210mm 297mm;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff}
+body{font-family:Inter,sans-serif;font-weight:300;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact;font-feature-settings:"tnum" 1}
+b,strong{font-weight:500}
+sup{font-size:.62em;line-height:0}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;background:#fff}
+.panel{position:absolute;left:5mm;top:5mm;width:200mm;height:287mm;overflow:hidden}
+.full{position:absolute;inset:0}
+.kicker{font-family:Inter;font-weight:400;font-size:6.6pt;letter-spacing:.32em;text-transform:uppercase}
+.tick{width:0;height:8mm;border-left:.25pt solid currentColor;margin:0 auto}
+.foot{position:absolute;left:10mm;right:10mm;bottom:6.5mm;display:flex;justify-content:space-between;font-size:6.2pt;letter-spacing:.18em;text-transform:uppercase;font-weight:400;color:var(--navy2)}
+.dark .foot{color:var(--l1)}
+.run{position:absolute;left:0;right:0;top:6mm;text-align:center;font-size:6.4pt;letter-spacing:.3em;text-transform:uppercase;font-weight:400;color:var(--navy2)}
+.dark .run{color:var(--l1)}
+.serif{font-family:Bod,serif}
+
+/* ===== fonds ===== */
+.bg-stone .panel{background:var(--stone)}
+.bg-pale .panel{background:var(--pale)}
+.bg-navy .panel{background:var(--navy);color:#fff}
+.bg-creme{background:var(--creme)!important}
+
+/* ===== titres de chapitre ===== */
+.chap{position:relative}
+.chap .num{font-family:Bod;font-size:11pt;color:var(--cu);letter-spacing:.06em}
+.chap h2{font-family:Bod;font-weight:400;font-size:25pt;line-height:1.08;color:var(--navy);margin-top:1.5mm}
+.dark .chap h2{color:var(--cu2)}
+.chap .lead{font-family:Bod;font-style:italic;font-size:13pt;line-height:1.32;color:var(--navy);margin-top:4mm}
+.dark .chap .lead{color:#fff}
+.center{text-align:center}
+.thick{border-top:1.5pt solid #000}
+.dark .thick{border-top:1pt solid rgba(255,255,255,.6)}
+.thin{border-top:.25pt solid var(--navy)}
+
+/* ===== page de texte (crème) ===== */
+.txt .body{position:absolute;left:15mm;top:16mm;width:176mm}
+.txt .cols{column-count:2;column-gap:8mm;margin-top:6mm;font-size:8.9pt;line-height:1.42}
+.txt .one{margin-top:6mm;font-size:9.3pt;line-height:1.45;width:150mm}
+p{margin:0 0 2.6mm}
+h3{font-family:Inter;font-weight:500;font-size:8.6pt;color:var(--navy);margin:4mm 0 1.4mm;break-after:avoid;letter-spacing:.01em}
+.cols h3:first-child,.one h3:first-child{margin-top:0}
+.op{border-left:.6pt solid var(--cu);padding-left:3mm;font-family:Bod;font-style:italic;font-size:10.5pt;line-height:1.35;color:var(--navy);margin:2mm 0 3mm;break-inside:avoid}
+.op .tag{display:block;font-family:Inter;font-style:normal;font-size:5.8pt;letter-spacing:.24em;text-transform:uppercase;color:var(--cu);margin-bottom:1mm}
+.src{font-size:6.2pt;color:var(--slate);line-height:1.45}
+.note{font-size:6pt;line-height:1.5;color:var(--slate)}
+.dark .note{color:#b3c1d4}
+.calc{color:var(--cu);font-size:.85em}
+
+/* ===== page à rail ===== */
+.rail .main{position:absolute;left:10mm;top:16mm;width:136mm;bottom:14mm}
+.rail .vrule{position:absolute;left:151.6mm;top:16mm;bottom:14mm;border-left:.25pt solid var(--navy);opacity:.6}
+.rail .side{position:absolute;left:156mm;top:16mm;width:39mm;bottom:14mm}
+.rb{border-top:.6pt solid var(--navy);padding-top:2mm;margin-bottom:12mm}
+.rb .lab{font-size:6.6pt;font-weight:500;letter-spacing:.06em;color:var(--navy)}
+.rb .n{font-family:Bod;font-size:20pt;line-height:1.08;color:var(--navy);margin-top:1mm}
+.rb .n small{font-size:.48em;vertical-align:.8em;margin-left:.05em}
+.rb .cap{font-family:Bod;font-style:italic;font-size:9.4pt;line-height:1.28;color:var(--navy2);margin-top:1mm}
+.dark .rb{border-top-color:rgba(255,255,255,.6)} .dark .rb .lab,.dark .rb .n{color:#fff} .dark .rb .cap{color:var(--l1)}
+.rail .main .txtb{font-size:8.7pt;line-height:1.42}
+
+/* ===== tableaux ===== */
+table.t{width:100%;border-collapse:collapse;font-size:7.4pt}
+table.t th{font-weight:400;font-size:6.4pt;color:var(--navy2);text-align:right;padding:1.3mm 1mm;border-bottom:.25pt solid var(--navy);vertical-align:bottom}
+table.t td{text-align:right;padding:1.15mm 1mm;border-bottom:.25pt solid rgba(19,42,71,.18);vertical-align:top}
+table.t th:first-child,table.t td:first-child{text-align:left;padding-left:0}
+table.t td.l,table.t th.l{text-align:left}
+table.t tr.tot td{font-weight:500;border-top:.5pt solid #000;border-bottom:.5pt solid #000}
+table.t tr.sub td{font-weight:500}
+table.t tr.hl td{background:rgba(168,105,62,.12)}
+table.t.small{font-size:6.6pt} table.t.small td{padding:.85mm .7mm} table.t.small th{font-size:5.9pt;padding:1mm .7mm}
+.dark table.t th{color:var(--l1);border-bottom-color:rgba(255,255,255,.5)}
+.dark table.t td{border-bottom-color:rgba(255,255,255,.16);color:var(--l3)}
+.blockhead{border-top:1.5pt solid #000;padding-top:2mm;margin:5mm 0 2.5mm}
+.dark .blockhead{border-top:1pt solid rgba(255,255,255,.6)}
+.blockhead .tt{font-family:Bod;font-size:12pt;color:var(--navy)}
+.blockhead .tt i{font-style:italic;font-size:9.5pt}
+.dark .blockhead .tt{color:#fff}
+svg text{font-family:Inter;font-weight:300}
+
+/* ===== intercalaire photo ===== */
+.inter img,.fiche img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.inter .ttl{position:absolute}
+.inter .pn{font-family:Inter;font-weight:400;font-size:7pt;letter-spacing:.34em;text-transform:uppercase}
+.inter h1{font-family:Bod;font-style:italic;font-weight:400;font-size:46pt;line-height:1.02;margin-top:3mm}
+.inter .man{font-family:Bod;font-style:italic;font-size:15pt;line-height:1.3;margin-top:5mm}
+.inter .toc{margin-top:7mm;font-size:7.6pt;line-height:1.9}
+.inter .toc span{display:inline-block;width:9mm;font-family:Bod;font-size:9.5pt}
+.credit{position:absolute;right:2mm;bottom:3mm;font-size:4.8pt;writing-mode:vertical-rl;transform:rotate(180deg);opacity:.8}
+
+/* ===== intercalaire demi-page ===== */
+.half .ph{position:absolute;left:0;top:0;bottom:0;width:100mm;overflow:hidden}
+.half .ph img{width:100%;height:100%;object-fit:cover}
+.half .right{position:absolute;left:112mm;right:10mm;top:22mm;bottom:20mm}
+
+/* ===== fiche événement ===== */
+.fiche .box{position:absolute;width:88mm;border-left:.25pt solid currentColor;padding-left:5mm}
+.fiche .band{font-size:6.4pt;font-weight:500;letter-spacing:.3em;text-transform:uppercase}
+.fiche h2{font-family:Bod;font-weight:400;font-size:26pt;line-height:1.05;margin-top:3mm}
+.fiche .ch{font-family:Bod;font-style:italic;font-size:11pt;line-height:1.3;margin-top:2.5mm}
+.fiche .id{margin-top:4mm;font-size:7.1pt}
+.fiche .id div{display:grid;grid-template-columns:27mm 1fr;border-bottom:.25pt solid currentColor;padding:1.2mm 0}
+.fiche .id div:first-child{border-top:.25pt solid currentColor}
+.fiche .id b{font-weight:500}
+.fiche .why{margin-top:4mm;font-size:7.4pt;line-height:1.45}
+.fiche .why h4{font-weight:500;font-size:7.4pt;margin-bottom:1.4mm}
+.fiche .nums{display:grid;grid-template-columns:1fr 1fr;gap:3mm 4mm;margin-top:4mm}
+.fiche .nums .n{font-family:Bod;font-size:19pt;line-height:1}
+.fiche .nums .c{font-size:6.4pt;line-height:1.35;margin-top:.8mm}
+.fiche.ink{color:var(--navy)} .fiche.white{color:#fff}
+.fiche .veilbox{background:rgba(251,249,243,.92);padding:6mm 6mm 6mm 6mm;border-left:none}
+.fiche .veilbox.navy{background:rgba(19,42,71,.9)}
+
+/* ===== chiffres cles ===== */
+.kgrid{display:grid;grid-template-columns:1fr 1fr;margin:0 10mm}
+.kgrid .cell{text-align:center;padding:9mm 6mm 8mm;border-bottom:.25pt solid rgba(19,42,71,.35)}
+.kgrid .cell:nth-child(odd){border-right:.25pt solid rgba(19,42,71,.5)}
+.kgrid .cell.last{border-bottom:none}
+.kgrid .n{font-family:Bod;font-size:36pt;line-height:1;color:var(--navy)}
+.kgrid .n small{font-size:.42em;vertical-align:.95em;margin-left:.08em}
+.kgrid .n .ar{font-family:Inter;font-weight:200;font-size:.42em;vertical-align:.5em;color:var(--cu);margin:0 .18em}
+.kgrid .l{font-size:8.4pt;line-height:1.38;margin:3mm auto 0;max-width:68mm}
+.kgrid .s{font-size:6pt;color:var(--slate);margin-top:1.6mm}
+table.t td{white-space:nowrap}
+table.t td:first-child,table.t td.l{white-space:normal}
+table.t.small td:first-child{min-width:30mm}
+
+.wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-38deg);text-align:center;pointer-events:none;opacity:.105;color:var(--navy);z-index:50;white-space:nowrap}
+.dark .wm,.fiche .wm,.inter .wm{color:#fff;opacity:.11}
+.wm .a{font-family:Bod;font-size:58pt}.wm .b{font-size:11pt;letter-spacing:.5em;text-transform:uppercase;margin-top:2mm}

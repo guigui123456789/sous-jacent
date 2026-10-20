@@ -27,6 +27,13 @@ const etudes = defineCollection({
     cours: z.string().optional(),
     partage: z.string().optional(),
     prochaineRevue: z.string().optional(),
+    imageTete: z.string().optional(),
+    pagesPdf: z.number().optional(),
+    classeurXlsx: z.string().optional(),
+    objectif: z.string().optional(),
+    horizon: z.string().optional(),
+    citations: z.array(z.string()).optional(),
+    publication: z.object({ date: z.string(), valeur: z.string() }).optional(),
     revisions: z.array(z.object({
       date: z.string(),
       valeur: z.string(),
