@@ -188,7 +188,7 @@ header.site[data-fond="transparent"] .menu-bouton{color:var(--blanc)}
 
 /* l'en-tête est fixe : la première section des pages sans hero
    doit démarrer en dessous */
-main > *:first-child:not(.hero){padding-top:7.5rem}
+main > *:first-child:not(.hero):not(.tete):not(.bandeau){padding-top:7.5rem}
 
 /* ---------------- boutons et liens ---------------- */
 
