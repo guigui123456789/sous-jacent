@@ -151,7 +151,7 @@ const schema = [
             n'est pas un conseil en investissement personnalisé.
           </p>
           <a class="lien" href="/informations-legales">Le statut réglementaire</a>
-          <p class="bloc-version">Construite sous la méthode <a href="/documents/sous-jacent-methode-v1.0.pdf">version 1.0</a>.</p>
+          <p class="bloc-version">Construite sous la méthode <a href={`/documents/sous-jacent-methode-v${e.data.methode}.pdf`}>version {e.data.methode}</a>.</p>
         </div>
         ) : (
         <div class="bloc bloc--note">
@@ -162,7 +162,7 @@ const schema = [
             et la conclusion vous appartient.
           </p>
           <a class="lien" href="/methode">La méthode</a>
-          <p class="bloc-version">Construite sous la méthode <a href="/documents/sous-jacent-methode-v1.0.pdf">version 1.0</a>.</p>
+          <p class="bloc-version">Construite sous la méthode <a href={`/documents/sous-jacent-methode-v${e.data.methode}.pdf`}>version {e.data.methode}</a>.</p>
         </div>
         )}
       </aside>

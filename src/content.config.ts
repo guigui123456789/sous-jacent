@@ -31,6 +31,7 @@ const etudes = defineCollection({
     pagesPdf: z.number().optional(),
     classeurXlsx: z.string().optional(),
     objectif: z.string().optional(),
+    methode: z.string().default('1.0'),
     horizon: z.string().optional(),
     citations: z.array(z.string()).optional(),
     publication: z.object({ date: z.string(), valeur: z.string() }).optional(),

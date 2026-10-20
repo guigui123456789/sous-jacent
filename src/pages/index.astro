@@ -23,7 +23,7 @@ const formats = [
     image: '/images/parc-haussmann.webp',
     titre: "L’étude",
     texte:
-      "Vingt et un exercices de comptes repris et retraités au même gabarit, un DCF inversé, une fourchette de valeur et sa grille de sensibilité, et le fichier de données en téléchargement.",
+      "Les comptes repris et retraités au même gabarit, ce que personne ne chiffre publiquement enfin mesuré, un objectif de cours avec sa grille de sensibilité et son calculateur, un résumé de deux pages et les données en téléchargement.",
     lien: '/etudes',
     libelle: 'Voir les études',
   },
@@ -46,17 +46,17 @@ const formats = [
 ];
 
 const chiffres = [
-  { valeur: 2005, suffixe: '', texte: "Première année de la série, choisie pour que les comptes restent comparables d'un bout à l'autre de la période." },
-  { valeur: 21, suffixe: '', texte: "Exercices repris un à un, à partir des rapports annuels et des documents déposés auprès des autorités de marché." },
-  { valeur: 20, suffixe: '', texte: "Combinaisons d'hypothèses publiées côte à côte dans la grille de sensibilité, chacune refaisable." },
-  { valeur: 0, suffixe: '', texte: "Avis d'achat ou de vente. La fourchette de valeur est publiée avec ses hypothèses ; la conclusion revient au lecteur." },
+  { valeur: etudes.length, suffixe: '', texte: "Études publiées, chacune avec ses comptes retraités, son classeur de calcul et son résumé de deux pages." },
+  { valeur: 1, suffixe: '', texte: "Étude en cours d'analyse. Le nom de la société sera donné le jour de la publication, pas avant." },
+  { valeur: 4, suffixe: '', texte: "Repères maison, calculés de la même façon dans chaque étude pour que l'on puisse les comparer d'un dossier à l'autre." },
+  { valeur: 0, suffixe: '', texte: "Position détenue sur les sociétés étudiées. Chaque prix publié est revu après chaque résultat trimestriel, sans jamais effacer le précédent." },
 ];
 ---
 
 <Base
   titreComplet="sous-jacent — analyse financière indépendante et ouverte"
   titre="sous-jacent"
-  description="Une société cotée peu suivie, reprise exercice par exercice depuis 2005. Les comptes retraités, les données brutes et le modèle de valorisation sont publiés avec l’analyse."
+  description="Des sociétés cotées reprises exercice par exercice, jusqu’au prix. Les comptes retraités, les données brutes et le modèle de valorisation sont publiés avec l’analyse."
   enteteTransparente={true}
 >
   <!-- ============== OUVERTURE ============== -->
@@ -69,8 +69,8 @@ const chiffres = [
       <p class="sur hero-sur">Analyse financière indépendante</p>
       <h1>Ce que le cours<br />ne dit pas encore</h1>
       <p class="hero-texte">
-        Une société cotée peu suivie, reprise exercice par exercice depuis 2005. Les comptes
-        retraités, le modèle et les hypothèses sont publiés avec l'analyse.
+        Des sociétés cotées reprises exercice par exercice, jusqu'au prix. Les comptes retraités, le
+        modèle et les hypothèses sont publiés avec l'analyse, pour que chacun puisse refaire le calcul.
       </p>
       <div class="hero-actions">
         <a class="bouton bouton--clair" href="/etudes">Voir les études</a>
@@ -98,6 +98,7 @@ const chiffres = [
           <dl class="fiche">
             <div><dt>Société</dt><dd>{etude.data.societe}</dd></div>
             <div><dt>Exercices</dt><dd>{etude.data.periode}</dd></div>
+            {etude.data.objectif && <div><dt>Objectif</dt><dd>{etude.data.objectif.split(' (')[0]}</dd></div>}
             <div><dt>Résumé</dt><dd>2 pages, PDF</dd></div>
             <div><dt>Données</dt><dd>CSV téléchargeable</dd></div>
           </dl>
@@ -122,10 +123,11 @@ const chiffres = [
     <div class="enveloppe">
       <div class="tete reveler">
         <p class="sur">Ce que je publie</p>
-        <h2>Une seule société, traitée en profondeur</h2>
+        <h2>Peu de sociétés, chacune jusqu'au bout</h2>
         <p class="tete-texte">
-          Les bureaux indépendants couvrent quatre cents valeurs, en surface, derrière un abonnement.
-          Ici c'est l'inverse : une société à la fois, tout montré, en accès libre.
+          Une étude à la fois, mais pas une seule : chaque dossier va des comptes au prix, montre tout
+          le chemin, et reste en accès libre. Les fondamentaux expliquent les outils, les mécanismes
+          l'actualité des marchés.
         </p>
       </div>
 
@@ -149,7 +151,7 @@ const chiffres = [
   <!-- ============== CHIFFRES ============== -->
   <section class="section section--pierre">
     <div class="enveloppe">
-      <p class="sur sur--graphite reveler" style="margin-bottom:var(--e-10)">La série</p>
+      <p class="sur sur--graphite reveler" style="margin-bottom:var(--e-10)">En chiffres</p>
       <div class="grille-4">
         {chiffres.map((c, i) => (
           <div class="chiffre reveler" data-rang={i}>
@@ -196,14 +198,14 @@ const chiffres = [
     <div class="enveloppe methode-grille">
       <div class="reveler">
         <p class="sur">La méthode, puis le prix</p>
-        <h2>Un prix cible vieillit en une semaine.<br />Une méthode se laisse contredire.</h2>
+        <h2>Un prix ne vaut que par<br />ce qui pourrait le contredire.</h2>
       </div>
       <div class="reveler" data-rang="1">
         <p class="methode-texte">
-          Les études aboutissent à un prix daté, avec la liste des faits qui me donneraient tort. Les
-          hypothèses sont écrites et modifiables, les données se téléchargent, et chaque graphique
-          renvoie au document et à la page dont il est tiré. Vous pouvez refaire le calcul et aboutir
-          à autre chose que moi — c'est le but.
+          Chaque étude aboutit à un objectif de cours daté, avec son horizon, sa grille de sensibilité
+          et la liste des faits qui me donneraient tort. Les hypothèses se déplacent dans un
+          calculateur, les données se téléchargent, et chaque chiffre renvoie au document dont il est
+          tiré. Vous pouvez refaire le calcul et aboutir à autre chose que moi — c'est le but.
         </p>
         <a class="bouton bouton--clair" href="/methode">Comment c'est calculé</a>
       </div>

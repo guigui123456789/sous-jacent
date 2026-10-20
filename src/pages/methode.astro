@@ -6,22 +6,22 @@ const etapes = [
   {
     titre: 'Reprendre tous les exercices',
     texte:
-      "La série couvre 2005 à 2025. Pour une société européenne, 2005 est l'année du passage obligatoire aux IFRS : avant, les comptes sont en normes nationales et ne se comparent pas sans retraitements lourds. Pour une société américaine, la même profondeur est retenue par cohérence d'une étude à l'autre, les comptes étant alors en US GAAP. Les exercices sont saisis un à un depuis les documents d'enregistrement universels, les rapports annuels ou les formulaires 10-K.",
+      "Chaque étude remonte aussi loin que les comptes restent comparables : depuis le passage aux IFRS, depuis la création de la société, ou depuis le dernier changement de périmètre majeur. Vicor est reprise depuis 2005, Amundi depuis sa naissance en 2010. Les exercices sont saisis un à un depuis les documents d'enregistrement universels, les rapports annuels ou les formulaires 10-K, et chaque rupture de série est signalée.",
   },
   {
     titre: 'Retraiter au même gabarit',
     texte:
-      "Neutralisation des éléments non récurrents, capital employé et rentabilité du capital, NOPAT, flux de trésorerie disponible, dette nette. Selon la société et le référentiel comptable s'y ajoutent la capitalisation des loyers antérieurs à IFRS 16 et le capital employé hors écarts d'acquisition. Le gabarit est le même partout, pour que deux études restent comparables, et chaque retraitement renvoie au fondamental qui l'explique.",
+      "Neutralisation des éléments non récurrents, capital employé et rentabilité du capital, NOPAT, flux de trésorerie disponible, dette nette. Pour une société financière, la rentabilité des fonds propres tangibles remplace celle du capital employé. Selon la société s'y ajoutent la capitalisation des loyers antérieurs à IFRS 16 ou l'économie unitaire en points de base. Le gabarit est le même partout, pour que deux études restent comparables, et chaque retraitement renvoie au fondamental qui l'explique.",
   },
   {
-    titre: 'Construire le modèle, puis le retourner',
+    titre: 'Construire la valeur, puis lire le cours',
     texte:
-      "Le modèle est une actualisation des flux de trésorerie disponibles : des hypothèses écrites une à une produisent une fourchette de valeur. Cette fourchette n'est pas la conclusion, c'est l'instrument. On la retourne ensuite contre le cours : que faudrait-il ajouter au modèle pour qu'il produise le prix du marché ? La réponse est une phrase de la forme « à ce cours, il faut croire à telle croissance et à telle marge », qui se compare aux exercices observés.",
+      "Des hypothèses écrites une à une produisent une valeur : par actualisation des flux pour une société industrielle, par somme des parties et multiples de pairs pour une société financière. On retourne ensuite le calcul contre le cours : que faut-il croire pour que le prix du marché soit juste ? La réponse se compare à ce que la société a réellement fait. L'écart entre les deux est l'analyse.",
   },
   {
-    titre: 'Publier les hypothèses et les données',
+    titre: 'Publier le prix, et ce qui lui donnerait tort',
     texte:
-      "La grille de sensibilité qui soutient la fourchette, les hypothèses écrites une à une, un calculateur qui laisse déplacer chacune d'elles, et le fichier des comptes retraités en téléchargement. Chaque graphique renvoie au document et à la page dont il est tiré. Vous pouvez refaire le calcul, changer une hypothèse et obtenir un autre résultat que le mien — c'est le but.",
+      "Un objectif de cours à douze mois, la grille de sensibilité qui l'encadre, les hypothèses écrites une à une, un calculateur qui laisse déplacer chacune d'elles, la liste des faits datés qui l'invalideraient, et le fichier des comptes retraités en téléchargement. Chaque graphique renvoie au document et à la page dont il est tiré. Vous pouvez refaire le calcul, changer une hypothèse et obtenir un autre résultat que le mien — c'est le but.",
   },
 ];
 
@@ -31,11 +31,11 @@ const etapes = [
 const questions = [
   {
     q: "Qu'est-ce qu'un DCF inversé ?",
-    r: "Un modèle d'actualisation des flux classique part d'hypothèses de croissance, de marge et de coût du capital, et en déduit une valeur. Le DCF inversé fait le chemin contraire : il part du cours observé et remonte aux hypothèses qu'il faut retenir pour que ce cours soit justifié. Sa sortie n'est pas un prix, c'est une phrase de la forme « à ce cours, le marché suppose une croissance de X % et une marge de Y % ». Les études d'ici font les deux dans cet ordre : un modèle direct produit d'abord une fourchette de valeur à partir d'hypothèses écrites une à une, puis un pont de valeur mesure ce qu'il faut ajouter à ces hypothèses pour atteindre le cours. Le second passage est le DCF inversé, et c'est lui qui porte la conclusion : l'écart entre ce que le marché suppose et ce que la société a réellement fait devient mesurable au lieu d'être affirmé.",
+    r: "Un modèle d'actualisation des flux classique part d'hypothèses de croissance, de marge et de coût du capital, et en déduit une valeur. Le DCF inversé fait le chemin contraire : il part du cours observé et remonte aux hypothèses qu'il faut retenir pour que ce cours soit justifié. Sa sortie n'est pas un prix, c'est une phrase de la forme « à ce cours, le marché suppose une croissance de X % et une marge de Y % ». Les études d'ici font les deux dans cet ordre : un modèle direct produit d'abord une valeur à partir d'hypothèses écrites une à une, puis un pont de valeur mesure ce qu'il faut ajouter à ces hypothèses pour atteindre le cours. Le second passage est le DCF inversé, et c'est lui qui porte la conclusion : l'écart entre ce que le marché suppose et ce que la société a réellement fait devient mesurable au lieu d'être affirmé.",
   },
   {
-    q: "Fourchette de valeur ou objectif de cours : que publient les études ?",
-    r: "Parce que ce ne sont pas la même chose. Un objectif de cours est une prévision assortie d'un avis : il annonce où ira le prix, à quel horizon, et ce qu'il convient d'en faire. Une fourchette de valeur intrinsèque est le résultat arithmétique d'hypothèses déclarées — on en change une, elle change. L'étude n° 1 (Vicor) publie une fourchette de valeur. Depuis l'étude n° 2 (Amundi), les études publient en plus un objectif de cours à douze mois : c'est une recommandation d'investissement au sens du règlement européen sur les abus de marché, présentée avec toutes les obligations du règlement délégué (UE) 2016/958 — méthode, sources, horizon, positions détenues, historique des objectifs — et la liste des faits datés qui l'invalideraient.",
+    q: "Que publie exactement une étude ?",
+    r: "Trois chiffres, dans cet ordre. Une valeur intrinsèque, qui est le résultat arithmétique des hypothèses déclarées. Une fourchette, qui montre ce que deviennent cette valeur quand on fait varier les deux hypothèses les plus décisives. Et un objectif de cours à douze mois, qui porte la valeur à l'horizon et en retranche le dividende attendu. Chaque étude publie aussi les faits datés et observables qui lui donneraient tort, et elle est revue après chaque résultat trimestriel de la société. La première étude, Vicor, s'arrêtait à la fourchette ; toutes les suivantes vont jusqu'à l'objectif.",
   },
   {
     q: "Qu'est-ce qu'un élément non récurrent, et pourquoi le neutraliser ?",
@@ -50,8 +50,8 @@ const questions = [
     r: "Des documents déposés par les sociétés elles-mêmes auprès des autorités de marché : rapports annuels, documents d'enregistrement universels, et pour les sociétés américaines les formulaires 10-K déposés auprès de la SEC, ainsi que leurs données XBRL. Aucun chiffre ne provient d'un agrégateur financier. Lorsqu'une donnée ne figure pas dans un document réglementaire — un cours de clôture historique, par exemple — la source est signalée comme telle dans la note de méthode. Chaque graphique renvoie au document et à la page dont il est tiré, et les comptes retraités sont publiés en CSV sous chaque étude.",
   },
   {
-    q: "Pourquoi analyser une seule société en profondeur plutôt que d'en suivre beaucoup ?",
-    r: "Les bureaux d'analyse indépendants couvrent plusieurs centaines de valeurs, en continu, derrière un abonnement : leur contrainte est l'étendue. Une société reçoit donc quelques heures par an. Le choix fait ici est l'inverse : une société à la fois, tous ses exercices repris un à un, quinze à vingt heures de travail, et tout est publié en accès libre — le texte, les données, le modèle. Ce n'est possible que parce qu'il ne s'agit pas de vendre de la recherche. Sur une valeur peu suivie, des comptes retraités sur toute la durée au même gabarit n'existent nulle part ailleurs.",
+    q: "Pourquoi peu d'études plutôt qu'une large couverture ?",
+    r: "Parce que la valeur d'une étude tient à ce qu'elle mesure et que personne d'autre ne mesure. Les maisons de recherche couvrent des centaines de valeurs, derrière un abonnement ; ici, chaque dossier est traité l'un après l'autre, jusqu'au bout, et tout est publié en accès libre — le texte, les données, le classeur, le modèle. Une étude est publiée quand elle est finie, et chaque société déjà couverte reste suivie trimestre après trimestre pendant que la suivante se prépare.",
   },
   {
     q: "Ces analyses sont-elles un conseil en investissement ?",
@@ -79,7 +79,7 @@ const engagements = [
 
 <Base
   titre="La méthode"
-  description="Comment une étude est construite : les exercices retraités au même gabarit, un DCF inversé, une fourchette de valeur avec sa grille de sensibilité, et les données publiées."
+  description="Comment une étude est construite : les comptes retraités au même gabarit, la valeur par trois chemins, un objectif de cours avec sa grille de sensibilité, son calculateur, et les données publiées."
   enteteTransparente={true}
   schema={schemaFaq}
 >
@@ -95,18 +95,19 @@ const engagements = [
       <div class="doc-methode">
         <div>
           <p class="doc-sur">Document de référence</p>
-          <h2>Méthode d'analyse — version 1.0</h2>
+          <h2>Méthode d'analyse — version 1.1</h2>
           <p class="doc-texte">
             Les règles résumées sur cette page sont consignées en entier dans un document daté et
             versionné : choix des sociétés, période retenue, retraitements, définition officielle du
-            capital employé, modèle de valorisation, construction de la fourchette, quatre repères,
-            dispositif de suivi et statut réglementaire. Il est antérieur aux conclusions qu'il permet
+            capital employé et sa variante pour les sociétés financières, modèles de valorisation,
+            construction de la valeur et de l'objectif de cours, quatre repères, dispositif de suivi
+            et statut réglementaire. Il est antérieur aux conclusions qu'il permet
             d'obtenir, et chaque étude indique la version sous laquelle elle a été construite.
           </p>
         </div>
         <div class="doc-action">
-          <a class="bouton" href="/documents/sous-jacent-methode-v1.0.pdf">Le document complet</a>
-          <p class="doc-date">PDF, 11 pages — version 1.0 du 17 octobre 2026</p>
+          <a class="bouton" href="/documents/sous-jacent-methode-v1.1.pdf">Le document complet</a>
+          <p class="doc-date">PDF, 11 pages — version 1.1 du 21 octobre 2026 · <a href="/documents/sous-jacent-methode-v1.0.pdf">version 1.0</a></p>
         </div>
       </div>
 
@@ -128,15 +129,14 @@ const engagements = [
     <div class="enveloppe pourquoi">
       <div class="reveler">
         <p class="sur">Le point réglementaire</p>
-        <h2>D'une fourchette de valeur à un objectif de cours</h2>
+        <h2>Publier un prix, et ce que cela engage</h2>
       </div>
       <div class="reveler" data-rang="1">
         <p>
-          La distinction est au cœur de ce site, et elle mérite d'être posée franchement. Un objectif
-          de cours est une prévision assortie d'un avis : il annonce où ira le prix, à quel horizon, et
-          ce qu'il convient d'en faire. Une fourchette de valeur intrinsèque est le résultat arithmétique
-          d'hypothèses déclarées — changez-en une, elle change. La première engage son auteur sur
-          l'avenir ; la seconde n'engage que la cohérence d'un calcul que le lecteur peut refaire.
+          Un objectif de cours engage son auteur sur l'avenir : il dit où le prix devrait aller, à quel
+          horizon, et sur quelles hypothèses. C'est plus exposé qu'une simple fourchette de valeur, et
+          c'est précisément pour cela que je le publie : une analyse qui ne s'engage sur rien ne peut
+          jamais avoir tort, donc n'apprend rien à personne.
         </p>
         <p>
           La première étude s'en est tenue à la fourchette. Depuis l'étude n° 2, les études assument
@@ -146,10 +146,9 @@ const engagements = [
           des recommandations passées — qu'un avertissement en pied de page ne remplacerait pas.
         </p>
         <p>
-          Le choix n'est pas un repli derrière une règle. Un prix cible vieillit en une semaine ; un
-          modèle dont toutes les hypothèses sont visibles se réutilise, se critique et se transmet. Le
-          chiffre publié n'est pas la conclusion de l'étude : il est le point de départ de la seule
-          question qui vaille, celle de l'écart entre ce calcul et le cours.
+          Un prix publié seul vieillit vite. Publié avec toutes ses hypothèses, un calculateur et la
+          liste des faits qui l'invalideraient, il devient vérifiable : chacun peut le refaire, le
+          contester sur une hypothèse précise, et voir à chaque trimestre s'il tient.
         </p>
       </div>
     </div>

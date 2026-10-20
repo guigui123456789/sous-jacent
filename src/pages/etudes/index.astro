@@ -17,14 +17,21 @@ const entrees = (await getCollection('etudes'))
   <EnTetePage
     sur="Analyse d'entreprise"
     titre="Les études"
-    intro="Une société à la fois, traitée en profondeur. Les comptes sont repris exercice par exercice depuis 2005, l'année du passage obligatoire aux IFRS, pour que la série reste homogène d'un bout à l'autre."
+    intro="Chaque étude prend une société cotée, reconstitue ses comptes exercice par exercice aussi loin qu'ils restent comparables, mesure ce que personne ne chiffre publiquement, et va jusqu'au prix, avec la liste des faits qui lui donneraient tort."
     image="/images/tours-defense.webp"
   />
 
   <section class="section">
     <div class="enveloppe">
       {entrees.length > 0 ? (
+        <>
         <Liste entrees={entrees} base="/etudes" />
+        <div class="prochaine reveler">
+          <p class="sur">En cours d'analyse</p>
+          <h2>L'étude n° 03 est sur la table</h2>
+          <p>Une nouvelle société est en train d'être étudiée : comptes en cours de reconstitution, sources en cours de lecture, question de départ déjà écrite. Son nom sera donné le jour de la publication, pas avant — c'est la règle qui empêche de choisir la conclusion avant d'avoir ouvert les comptes.</p>
+        </div>
+        </>
       ) : (
         <div class="attente reveler">
           <div>
@@ -53,6 +60,9 @@ const entrees = (await getCollection('etudes'))
 </Base>
 
 <style>
+  .prochaine { margin-top: var(--e-11, 5rem); padding: var(--e-9); background: var(--pierre-20); border-left: 2px solid var(--or); }
+  .prochaine h2 { margin-top: var(--e-5); font-size: var(--h4, 1.75rem); }
+  .prochaine p:last-child { margin-top: var(--e-6); max-width: 44rem; line-height: 1.7; }
   .attente { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
   @media (max-width: 980px) { .attente { grid-template-columns: 1fr; gap: var(--e-10); } }
   .attente-texte { margin-top: var(--e-7); font-size: 1.0625rem; line-height: 1.6; }

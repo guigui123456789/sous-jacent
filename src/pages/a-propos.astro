@@ -58,39 +58,49 @@ const travaux = [
 
 <Base
   titre="À propos"
-  description="Guillaume Le Merour, étudiant en master de finance. Pourquoi ce site existe et ce qu'on y trouve."
+  description="Guillaume Le Merour, étudiant en master de finance à Paris-Panthéon-Assas, à la recherche de deux stages de césure de six mois, en France ou à l’international."
   enteteTransparente={true}
   schema={{ '@type': 'ProfilePage', mainEntity: { '@id': (Astro.site ?? new URL('https://www.sousjacent.com')).origin + '/a-propos/#personne' } }}
 >
   <EnTetePage
     sur="À propos"
     titre="Guillaume Le Merour"
-    intro="Étudiant en master de finance. J'écris ici l'analyse que j'aurais voulu lire en commençant : une société, ses comptes sur toute la durée publiée, et tout le chemin de calcul montré plutôt que résumé."
+    intro="Étudiant en master de finance à Paris-Panthéon-Assas, passé par l'University of Maine at Augusta. J'écris ici les analyses que j'aurais voulu lire en commençant : de vraies sociétés, de vrais comptes, jusqu'au prix."
     image="/images/pantheon-dome.webp"
   />
 
   <section class="section">
     <div class="enveloppe apropos">
       <div class="reveler">
-        <p class="sur">Pourquoi ce site</p>
-        <h2>Occuper la place que personne ne prend</h2>
+        <p class="sur">Qui écrit ici</p>
+        <h2>Apprendre la finance en la faisant, et le montrer</h2>
         <p class="texte">
-          Les bureaux d'analyse couvrent des centaines de valeurs à la fois, pour des professionnels,
-          derrière un abonnement : large, continu, forcément rapide sur chaque dossier. Une société y
-          reçoit quelques heures par an. Il n'existe presque rien de public qui en prenne une seule et
-          passe quinze heures dessus, en montrant tout le chemin de calcul.
+          Je m'appelle Guillaume Le Merour. Je suis en master de finance à l'université
+          Paris-Panthéon-Assas, après une année passée aux États-Unis, à l'University of Maine at
+          Augusta, où j'ai suivi mes cours de finance en anglais — les cours, les examens et les
+          travaux rendus. Avant cela, deux étés en agence au CIC, à Fouesnant, m'ont montré la finance
+          depuis le guichet : des clients, des produits, des contraintes réglementaires bien réelles.
         </p>
         <p class="texte">
-          C'est l'espace que j'occupe. Je ne vends pas de la recherche, donc je peux me permettre la
-          lenteur : reprendre les comptes depuis 2005, les retraiter ligne à ligne, et publier le
-          fichier avec l'article.
+          Ce site est né d'une frustration simple. En cours, on apprend à évaluer une entreprise sur
+          des exemples propres. Dans la réalité, les comptes sont désordonnés, les présentations
+          changent d'une année à l'autre, et la question intéressante est rarement celle qu'on
+          attendait. J'ai voulu apprendre sur de vraies sociétés, avec de vrais documents, et
+          m'obliger à aller jusqu'au bout : jusqu'à un prix, daté, que l'on peut vérifier et qui
+          peut se révéler faux.
         </p>
         <p class="texte">
-          Je ne m'interdis aucune taille ni aucune place. Une petite valeur française peu suivie et
-          une société du NASDAQ de douze milliards de dollars posent des questions différentes, et
-          toutes deux m'intéressent. Le choix de chaque étude est le mien, assumé comme tel : je retiens
-          la société dont les comptes racontent quelque chose que le cours ne dit pas
-          encore. La première est américaine ; rien ne dit que la suivante le sera.
+          Chaque étude part donc d'une question écrite avant de commencer, reconstitue les comptes
+          exercice par exercice, cherche le chiffre que personne ne publie — la marge réelle d'un
+          contrat de distribution, un produit exceptionnel logé dans un chiffre d'affaires — et se
+          termine par un objectif de cours, avec la liste des faits qui me donneraient tort. Je publie
+          tout : le texte, le classeur, les données. Si je me trompe, cela se verra, et la correction
+          restera visible. C'est la meilleure école que j'aie trouvée.
+        </p>
+        <p class="texte">
+          Je ne m'impose ni taille ni pays : un fabricant américain de modules d'alimentation, puis
+          le premier gestionnaire d'actifs européen, et la suivante est déjà en cours d'analyse. Ce
+          qui les relie, c'est une question que le cours ne tranche pas encore.
         </p>
       </div>
 
@@ -112,13 +122,16 @@ const travaux = [
           <div><dt>Terrain</dt><dd>Sociétés cotées, France et États-Unis</dd></div>
           <div><dt>Langues</dt><dd>Français, anglais</dd></div>
           <div><dt>Césure</dt><dd>Deux stages de six mois, à partir de juin 2027</dd></div>
-          <div><dt>Recherche</dt><dd>Stages de césure, Paris, Londres ou Francfort</dd></div>
+          <div><dt>Recherche</dt><dd>Deux stages de six mois, en France ou à l'international</dd></div>
         </dl>
         <div class="actions">
           {cv && <a class="bouton" href={cv}>Télécharger le CV</a>}
-          <a class="bouton bouton--ligne" href={`mailto:${courriel}`}>Écrire un message</a>
+          <a class="bouton bouton--ligne" href={`https://mail.google.com/mail/?view=cm&fs=1&to=${courriel}`} target="_blank" rel="noopener">Écrire un message</a>
           {linkedin && <a class="bouton bouton--ligne" href={linkedin}>LinkedIn</a>}
         </div>
+        <p class="courriel">
+          Ou directement : <a href={`mailto:${courriel}`}>{courriel}</a>
+        </p>
       </aside>
     </div>
   </section>
@@ -165,16 +178,16 @@ const travaux = [
       </div>
       <div class="reveler" data-rang="1">
         <p>
-          Je publie un prix, parce qu'un calcul qui n'aboutit à rien ne se vérifie pas. Depuis
-          l'étude n° 2, c'est un objectif de cours daté, avec son horizon, sa grille de sensibilité et
-          la liste des faits qui me donneraient tort ; je le revois à chaque publication de la société,
-          sans jamais effacer les versions précédentes. Je ne détiens
-          aucune position sur les sociétés étudiées et n'ai aucune affiliation, ni courtier, ni
-          sponsor. Les sociétés ne sont ni prévenues ni consultées.
+          Je publie un prix, parce qu'un calcul qui n'aboutit à rien ne se vérifie pas : un objectif
+          de cours daté, avec son horizon, sa grille de sensibilité et la liste des faits qui me
+          donneraient tort. Je le revois à chaque publication de la société, sans jamais effacer les
+          versions précédentes. Je ne détiens aucune position sur les sociétés étudiées et n'ai aucune
+          affiliation, ni courtier, ni sponsor. Les sociétés ne sont ni prévenues ni consultées.
         </p>
         <p>
-          Ce que je publie est pédagogique : une méthode, des hypothèses explicites, et de quoi refaire
-          le calcul autrement. <a href="/methode">La méthode est détaillée ici.</a>
+          Ce n'est pas un conseil en investissement : rien ici ne tient compte de votre situation. Ce
+          sont des analyses signées, avec des hypothèses explicites et de quoi refaire le calcul
+          autrement. <a href="/methode">La méthode est détaillée ici.</a>
         </p>
       </div>
     </div>
@@ -186,10 +199,10 @@ const travaux = [
         <p class="sur">Pour les recruteurs</p>
         <h2>Chaque étude existe aussi en deux pages</h2>
         <p class="recruteurs-texte">
-          En PDF, avec les comptes retraités en pièce jointe. C'est le format que j'envoie en
-          candidature, et vous pouvez le télécharger directement depuis chaque étude. Je cherche
-          actuellement mes deux stages de césure, à partir de juin 2027, en analyse financière ou en
-          structuration — Paris, Londres ou Francfort.
+          En PDF, avec le classeur de calcul et les comptes retraités. C'est le format que j'envoie en
+          candidature, et vous pouvez le télécharger depuis chaque étude. Je cherche mon année de
+          césure : deux stages de six mois, à partir de juin 2027, en analyse financière ou en
+          structuration — en France ou à l'international.
         </p>
       </div>
       <a class="bouton bouton--clair" href="/etudes">Voir les études</a>
@@ -198,6 +211,8 @@ const travaux = [
 </Base>
 
 <style>
+  .courriel { margin-top: var(--e-6); font-size: .875rem; color: var(--graphite-80); }
+  .courriel a { color: var(--bleu); }
   .apropos { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
   @media (max-width: 980px) { .apropos { grid-template-columns: 1fr; gap: var(--e-10); } }
   .apropos h2 { margin-top: var(--e-6); }
