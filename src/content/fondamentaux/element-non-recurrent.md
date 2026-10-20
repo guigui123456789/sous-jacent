@@ -25,7 +25,7 @@ Soustraire indistinctement tous les éléments non récurrents de la marge brute
 
 Rarement dans un tableau de synthèse, presque toujours dans le texte.
 
-1. **Le compte de résultat consolidé lui-même.** Les lignes portant un libellé explicite — *gain sur transactions judiciaires*, *charges de restructuration*, *dépréciation d'écart d'acquisition* — sont les plus faciles. Noter le libellé exact, le montant et l'exercice : c'est ce qui permettra au lecteur de remettre dans le résultat ce qu'il juge, lui, récurrent.
+1. **Le compte de résultat consolidé lui-même.** Les lignes portant un libellé explicite (*gain sur transactions judiciaires*, *charges de restructuration*, *dépréciation d'écart d'acquisition*) sont les plus faciles. Noter le libellé exact, le montant et l'exercice : c'est ce qui permettra au lecteur de remettre dans le résultat ce qu'il juge, lui, récurrent.
 2. **Les colonnes comparatives.** Un compte de résultat présente souvent trois exercices. Un montant lu dans la mauvaise colonne attribue une charge à la mauvaise année, et fait basculer un exercice entier.
 3. **Le commentaire de la direction.** Un écart inexpliqué entre deux exercices y trouve généralement sa cause, en toutes lettres.
 
@@ -40,7 +40,7 @@ Sur les vingt et un exercices de [l'étude Vicor](/etudes/vicor-2005-2025), la m
 | 2006 | −17,3 % | **+2,1 %** | perte nette de 37,2 M$ sur le litige Ericsson |
 | 2024 | −0,4 % | **+5,1 %** | provision de 19,5 M$ sur le litige SynQor |
 
-Le retraitement joue ici en faveur de l'entreprise : deux années données pour catastrophiques se révèlent simplement normales. Il joue parfois dans l'autre sens — l'exercice 2007 de la même société, publié à +0,55 %, ressort à **−0,14 %** une fois retiré un gain judiciaire. C'est la marque d'un retraitement honnête : il ne va pas systématiquement dans le même sens.
+Le retraitement joue ici en faveur de l'entreprise : deux années données pour catastrophiques se révèlent simplement normales. Il joue parfois dans l'autre sens (l'exercice 2007 de la même société, publié à +0,55 %, ressort à **−0,14 %** une fois retiré un gain judiciaire). C'est la marque d'un retraitement honnête : il ne va pas systématiquement dans le même sens.
 
 ## Le cas difficile : le non-récurrent qui se répète
 

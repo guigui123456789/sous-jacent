@@ -66,7 +66,7 @@ const schema = [
     <div class="tete-voile"></div>
     <div class="enveloppe tete-contenu">
       <a class="retour" href="/etudes">Toutes les études</a>
-      <p class="sur">Étude n° {String(e.data.numero).padStart(2, '0')} — {e.data.societe}</p>
+      <p class="sur">Étude n° {String(e.data.numero).padStart(2, '0')} · {e.data.societe}</p>
       <h1>{e.data.titre}</h1>
       <p class="tete-chapo">{e.data.chapo}</p>
       <div class="tete-meta">
