@@ -351,13 +351,13 @@ const schema = [
   .tete-image img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.08); animation: ample 14s var(--ease-ample) forwards; }
   @keyframes ample { to { transform: scale(1); } }
   .tete-voile { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(22,43,75,.8) 0%, rgba(22,43,75,.66) 40%, rgba(22,43,75,.9) 100%); }
-  .tete-contenu { position: relative; width: 100%; padding-block: 7.5rem var(--e-11); }
+  .tete-contenu { position: relative; width: 100%; padding-block: 6.5rem clamp(2rem, 6vh, 4rem); }
 
-  .retour { display: inline-block; margin-bottom: var(--e-5); font-size: .875rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.72); text-decoration: none; }
+  .retour { display: inline-block; margin-bottom: var(--e-3); font-size: .875rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.72); text-decoration: none; }
   .retour:hover { color: #fff; }
-  .tete h1 { color: #fff; font-size: var(--h2); margin-top: var(--e-6); max-width: 22ch; }
-  .tete-chapo { margin-top: var(--e-7); max-width: 38rem; color: rgba(255,255,255,.84); font-family: var(--serif); font-weight: 300; font-size: 1.375rem; line-height: 1.45; }
-  .tete-meta { display: flex; gap: var(--e-8); flex-wrap: wrap; margin-top: var(--e-9); padding-top: var(--e-6); border-top: 1px solid rgba(255,255,255,.22); font-size: .875rem; color: rgba(255,255,255,.7); }
+  .tete h1 { color: #fff; font-size: clamp(1.9rem, 1rem + 2.6vw + 1.2vh, 3.1rem); line-height: 1.1; margin-top: var(--e-4); max-width: 30ch; }
+  .tete-chapo { margin-top: var(--e-6); max-width: 50rem; color: rgba(255,255,255,.84); font-family: var(--serif); font-weight: 300; font-size: clamp(1rem, .85rem + .45vw + .3vh, 1.2rem); line-height: 1.5; }
+  .tete-meta { display: flex; gap: var(--e-8); flex-wrap: wrap; margin-top: var(--e-7); padding-top: var(--e-5); border-top: 1px solid rgba(255,255,255,.22); font-size: .875rem; color: rgba(255,255,255,.7); }
 
   .grille-etude { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
   @media (max-width: 1024px) { .grille-etude { grid-template-columns: 1fr; } .flanc { order: -1; } }
