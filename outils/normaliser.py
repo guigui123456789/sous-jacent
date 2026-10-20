@@ -36,7 +36,7 @@ def normaliser(chemin):
                     corriges += 1
         # métadonnées du document
         with pdf.open_metadata(set_pikepdf_as_editor=False) as meta:
-            meta['dc:title'] = "Vicor Corporation — l'analyse de vingt et un ans de comptes retraités"
+            meta['dc:title'] = "Vicor Corporation — le prix d’une entreprise qu’elle n’a jamais été"
             meta['dc:creator'] = ['Guillaume Le Merour']
             meta['dc:publisher'] = ['Sous-jacent']
             meta['dc:rights'] = ("© 2026 Sous-jacent. Reproduction soumise à autorisation écrite ; "

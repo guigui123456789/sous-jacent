@@ -4,7 +4,7 @@ import EnTetePage from '../components/EnTetePage.astro';
 
 const etapes = [
   {
-    titre: 'Reprendre vingt et un exercices',
+    titre: 'Reprendre tous les exercices',
     texte:
       "La série couvre 2005 à 2025. Pour une société européenne, 2005 est l'année du passage obligatoire aux IFRS : avant, les comptes sont en normes nationales et ne se comparent pas sans retraitements lourds. Pour une société américaine, la même profondeur est retenue par cohérence d'une étude à l'autre, les comptes étant alors en US GAAP. Les exercices sont saisis un à un depuis les documents d'enregistrement universels, les rapports annuels ou les formulaires 10-K.",
   },
@@ -16,7 +16,7 @@ const etapes = [
   {
     titre: 'Construire le modèle, puis le retourner',
     texte:
-      "Le modèle est une actualisation des flux de trésorerie disponibles : des hypothèses écrites une à une produisent une fourchette de valeur. Cette fourchette n'est pas la conclusion, c'est l'instrument. On la retourne ensuite contre le cours : que faudrait-il ajouter au modèle pour qu'il produise le prix du marché ? La réponse est une phrase de la forme « à ce cours, il faut croire à telle croissance et à telle marge », qui se compare aux vingt et un exercices observés.",
+      "Le modèle est une actualisation des flux de trésorerie disponibles : des hypothèses écrites une à une produisent une fourchette de valeur. Cette fourchette n'est pas la conclusion, c'est l'instrument. On la retourne ensuite contre le cours : que faudrait-il ajouter au modèle pour qu'il produise le prix du marché ? La réponse est une phrase de la forme « à ce cours, il faut croire à telle croissance et à telle marge », qui se compare aux exercices observés.",
   },
   {
     titre: 'Publier les hypothèses et les données',
@@ -31,7 +31,7 @@ const etapes = [
 const questions = [
   {
     q: "Qu'est-ce qu'un DCF inversé ?",
-    r: "Un modèle d'actualisation des flux classique part d'hypothèses de croissance, de marge et de coût du capital, et en déduit une valeur. Le DCF inversé fait le chemin contraire : il part du cours observé et remonte aux hypothèses qu'il faut retenir pour que ce cours soit justifié. Sa sortie n'est pas un prix, c'est une phrase de la forme « à ce cours, le marché suppose une croissance de X % et une marge de Y % ». Les études d'ici font les deux dans cet ordre : un modèle direct produit d'abord une fourchette de valeur à partir d'hypothèses écrites une à une, puis un pont de valeur mesure ce qu'il faut ajouter à ces hypothèses pour atteindre le cours. Le second passage est le DCF inversé, et c'est lui qui porte la conclusion : l'écart entre ce que le marché suppose et ce que la société a réellement fait sur vingt et un exercices devient mesurable au lieu d'être affirmé.",
+    r: "Un modèle d'actualisation des flux classique part d'hypothèses de croissance, de marge et de coût du capital, et en déduit une valeur. Le DCF inversé fait le chemin contraire : il part du cours observé et remonte aux hypothèses qu'il faut retenir pour que ce cours soit justifié. Sa sortie n'est pas un prix, c'est une phrase de la forme « à ce cours, le marché suppose une croissance de X % et une marge de Y % ». Les études d'ici font les deux dans cet ordre : un modèle direct produit d'abord une fourchette de valeur à partir d'hypothèses écrites une à une, puis un pont de valeur mesure ce qu'il faut ajouter à ces hypothèses pour atteindre le cours. Le second passage est le DCF inversé, et c'est lui qui porte la conclusion : l'écart entre ce que le marché suppose et ce que la société a réellement fait devient mesurable au lieu d'être affirmé.",
   },
   {
     q: "Fourchette de valeur ou objectif de cours : que publient les études ?",
@@ -51,7 +51,7 @@ const questions = [
   },
   {
     q: "Pourquoi analyser une seule société en profondeur plutôt que d'en suivre beaucoup ?",
-    r: "Les bureaux d'analyse indépendants couvrent plusieurs centaines de valeurs, en continu, derrière un abonnement : leur contrainte est l'étendue. Une société reçoit donc quelques heures par an. Le choix fait ici est l'inverse : une société à la fois, vingt et un exercices repris un à un, quinze à vingt heures de travail, et tout est publié en accès libre — le texte, les données, le modèle. Ce n'est possible que parce qu'il ne s'agit pas de vendre de la recherche. Sur une valeur peu suivie, vingt ans de comptes retraités au même gabarit n'existent nulle part ailleurs.",
+    r: "Les bureaux d'analyse indépendants couvrent plusieurs centaines de valeurs, en continu, derrière un abonnement : leur contrainte est l'étendue. Une société reçoit donc quelques heures par an. Le choix fait ici est l'inverse : une société à la fois, tous ses exercices repris un à un, quinze à vingt heures de travail, et tout est publié en accès libre — le texte, les données, le modèle. Ce n'est possible que parce qu'il ne s'agit pas de vendre de la recherche. Sur une valeur peu suivie, des comptes retraités sur toute la durée au même gabarit n'existent nulle part ailleurs.",
   },
   {
     q: "Ces analyses sont-elles un conseil en investissement ?",
@@ -79,7 +79,7 @@ const engagements = [
 
 <Base
   titre="La méthode"
-  description="Comment une étude est construite : vingt et un exercices retraités au même gabarit, un DCF inversé, une fourchette de valeur avec sa grille de sensibilité, et les données publiées."
+  description="Comment une étude est construite : les exercices retraités au même gabarit, un DCF inversé, une fourchette de valeur avec sa grille de sensibilité, et les données publiées."
   enteteTransparente={true}
   schema={schemaFaq}
 >

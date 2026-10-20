@@ -177,7 +177,7 @@ const schema = [
      sensibilité. Toute modification doit être reportée des deux côtés. */
   (function () {
     const racine = document.getElementById('calculateur');
-    if (!racine) return;
+    if (!racine || racine.dataset.modele === 'amundi') return;
 
     const CA2026 = 639.8;                                             // M$
     const CA2025 = 407.701;                                           // M$
@@ -273,6 +273,77 @@ const schema = [
   })();
 </script>
 
+
+<script>
+  /* Calculateur Amundi. Portage exact du modèle de l'étude n° 2 (BASE-08, ch. 17 et 23) :
+     aux valeurs par défaut il redonne la valeur de 89,2 € et l'objectif de 94 €. */
+  (function () {
+    const racine = document.getElementById('calculateur');
+    if (!racine || racine.dataset.modele !== 'amundi') return;
+    const COEUR26 = 1185, ENTREE = 47, QP = 327, COTE = 3070 + 2200 + 318, AUTRES = 264, EXCES = 500;
+    const ACTIONS = 200, DIV = 4.40, MULT = 12.5, COURS = 87.65, DISTRIB = 0.9;
+    const DEFAUTS = { uc: 300, pen: 60, org: 3.5, comp: 1, ke: 10, g: 2.5, dec: 10 };
+    function modele(h) {
+      const ke = h.ke / 100, g = h.g / 100;
+      const coeur = COEUR26 + ENTREE + COEUR26 * (h.org - h.comp) / 100 - h.uc * 0.8 * 0.75 - h.pen * 0.75;
+      const per = DISTRIB / (ke - g);
+      const sotp = (coeur * per + COTE * (1 - h.dec / 100) + AUTRES + EXCES) / ACTIONS;
+      const bpa = (coeur + QP) / ACTIONS;
+      const mult = bpa * MULT;
+      const valeur = sotp * 2 / 3 + mult / 3;
+      return { coeur, per, sotp, bpa, mult, valeur, objectif: valeur * (1 + ke) - DIV };
+    }
+    const nf = (v, d) => v.toLocaleString('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d });
+    const curseurs = Array.from(racine.querySelectorAll('input[type="range"]'));
+    const o = (k) => document.getElementById('o-' + k);
+    function rendre() {
+      const h = {};
+      curseurs.forEach((c) => { h[c.dataset.cle] = parseFloat(c.value); });
+      const r = modele(h);
+      o('uc').textContent = nf(h.uc, 0) + ' M€';
+      o('pen').textContent = nf(h.pen, 0) + ' M€';
+      o('org').textContent = nf(h.org, 1) + ' %';
+      o('comp').textContent = nf(h.comp, 1) + ' %';
+      o('ke').textContent = nf(h.ke, 2).replace(/,?0+$/, '') + ' %';
+      o('g').textContent = nf(h.g, 2).replace(/,?0+$/, '') + ' %';
+      o('dec').textContent = nf(h.dec, 0) + ' %';
+      if (h.ke - h.g < 3) { o('valeur').textContent = '—'; o('ecart').textContent = 'coût des fonds propres trop proche de la croissance'; return; }
+      o('valeur').textContent = nf(r.objectif, 0);
+      o('vi').textContent = nf(r.valeur, 1) + ' €';
+      o('sotp').textContent = nf(r.sotp, 1) + ' €';
+      o('mult').textContent = nf(r.mult, 1) + ' €';
+      o('coeur').textContent = nf(r.coeur, 0) + ' M€';
+      o('bpa').textContent = nf(r.bpa, 2) + ' €';
+      o('per').textContent = nf(r.per, 1);
+      const ecart = (r.objectif - COURS) / COURS * 100;
+      o('ecart').textContent = Math.abs(ecart) < 0.5 ? 'au niveau du cours'
+        : (ecart > 0 ? '+' : '−') + nf(Math.abs(ecart), 0) + ' % par rapport au cours de 87,65 €';
+      o('barre').style.width = Math.max(2, Math.min(100, COURS / Math.max(r.objectif, COURS) * 100)) + '%';
+      o('barre2').style.width = Math.max(2, Math.min(100, r.objectif / Math.max(r.objectif, COURS) * 100)) + '%';
+    }
+    curseurs.forEach((c) => c.addEventListener('input', rendre));
+    const reset = document.getElementById('c-reset');
+    if (reset) reset.addEventListener('click', function () {
+      curseurs.forEach((c) => { c.value = String(DEFAUTS[c.dataset.cle]); }); rendre();
+    });
+    rendre();
+  })();
+
+  /* Colonne de droite : elle défile avec la page tant qu'elle est plus haute que l'écran,
+     puis reste accrochée par le bas, pour que la fin du bloc reste visible. */
+  (function () {
+    const flanc = document.querySelector('.flanc');
+    if (!flanc) return;
+    const caler = function () {
+      const haut = 112, marge = 24;
+      const h = flanc.offsetHeight, vh = window.innerHeight;
+      flanc.style.top = (h + haut + marge > vh ? (vh - h - marge) : haut) + 'px';
+    };
+    caler();
+    window.addEventListener('resize', caler);
+    window.addEventListener('load', caler);
+  })();
+</script>
 <style>
   .tete { position: relative; display: flex; align-items: flex-end; overflow: hidden; min-height: 34rem; }
   @media (max-width: 760px) { .tete { min-height: 26rem; } }

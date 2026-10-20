@@ -35,7 +35,7 @@ const EDITEUR = {
   logo: { '@type': 'ImageObject', url: origine + '/apple-touch-icon.png', width: 180, height: 180 },
   founder: { '@id': origine + '/a-propos/#personne' },
   description:
-    "Publication indépendante d'analyse financière : les comptes d'une société cotée sur vingt et un exercices, retraités au même gabarit et publiés avec les données et le modèle.",
+    "Publication indépendante d'analyse financière : les comptes de sociétés cotées sur la durée, retraités au même gabarit et publiés avec les données et le modèle.",
 };
 
 const SITE = {
@@ -45,7 +45,7 @@ const SITE = {
   name: 'sous-jacent',
   inLanguage: 'fr-FR',
   description:
-    "L'analyse de sociétés cotées peu suivies : vingt et un exercices de comptes retraités au même gabarit, publiés avec les données brutes et le modèle de valorisation. Des études signées, qui disent ce qui leur donnerait tort.",
+    "L'analyse de sociétés cotées : des comptes retraités au même gabarit, publiés avec les données brutes et le modèle de valorisation. Des études signées, qui disent ce qui leur donnerait tort.",
   publisher: { '@id': EDITEUR['@id'] },
 };
 
@@ -162,7 +162,7 @@ const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@
         <div>
           <span class="pied-marque"><Embleme taille={26} /> sous-jacent</span>
           <p style="font-size:.9375rem;line-height:1.6;max-width:24rem">
-            Les comptes d'une société cotée sur vingt et un exercices, retraités au même gabarit et
+            Les comptes de sociétés cotées sur la durée, retraités au même gabarit et
             publiés avec les données brutes et le modèle.
           </p>
         </div>
@@ -312,7 +312,7 @@ const donneesStructurees = JSON.stringify({ '@context': 'https://schema.org', '@
       if (entete && entete.getAttribute('data-mode') === 'hero') {
         var hero = document.querySelector('[data-hero]');
         var bascule = function () {
-          var limite = hero ? hero.offsetHeight - 76 : 160;
+          var limite = 8; /* transparent tout en haut, plein dès qu'on descend */
           entete.setAttribute('data-fond', window.scrollY > limite ? 'verre' : 'transparent');
         };
         bascule();

@@ -33,7 +33,7 @@ P1=f"""<section class="page egg" style="padding:24mm 22mm 14mm">{FIL}
 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8mm">
   <div><div class="eyebrow" style="margin-bottom:4mm">Sous-jacent · Étude n° 1 · Résumé</div>
   <h2 style="font-size:24pt;margin-bottom:2mm">Vicor Corporation</h2>
-  <div class="small" style="font-size:9.4pt">NASDAQ : VICR &nbsp;·&nbsp; vingt et un exercices retraités, 2005-2025 &nbsp;·&nbsp; 17 octobre 2026</div></div>
+  <div class="small" style="font-size:9.4pt">NASDAQ : VICR &nbsp;·&nbsp; 2005-2025 &nbsp;·&nbsp; 17 octobre 2026</div></div>
   <div style="flex:0 0 auto">{c.logo("sombre",34)}</div>
 </div>
 <hr class="hr-strong" style="margin:6mm 0">

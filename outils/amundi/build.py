@@ -75,7 +75,7 @@ panel('cover', '''
  <div style="position:absolute;left:16mm;top:62mm;color:var(--navy)">
   <div style="font-family:Bod;font-size:76pt;line-height:.95">Amundi</div>
   <div style="font-family:Bod;font-style:italic;font-size:18pt;line-height:1.18;margin-top:6mm;max-width:92mm">L'épargne de l'Europe, et ce que coûte d'appartenir à une banque</div>
-  <div style="margin-top:7mm;font-size:7pt;letter-spacing:.3em;text-transform:uppercase;font-weight:400">Seize exercices · 2010 — 2026</div>
+  <div style="margin-top:7mm;font-size:7pt;letter-spacing:.3em;text-transform:uppercase;font-weight:400">Euronext Paris · 2010 — 2026</div>
  </div>
  <div style="position:absolute;left:0;right:0;bottom:0;height:50mm;background:var(--navy);color:#fff;display:grid;grid-template-columns:1fr .25pt 1fr .25pt 1fr;align-items:center;padding:0 12mm 9mm">
   <div style="text-align:center"><div style="font-family:Bod;font-size:30pt;color:var(--cu2)">94 €</div><div class="kicker" style="margin-top:2.4mm;color:var(--l2);letter-spacing:.2em">Objectif à 12 mois</div></div>
@@ -123,13 +123,13 @@ panel('bg-navy', f'''
 # ====================================================================== 3. CHIFFRES CLES
 cells = [("710<span class='ar'>→</span>2 581","milliards d'euros d'encours, de la fusion de 2010 au 30 juin 2026","Rapport 2011 ; communiqué S1 2026"),
  ("49,6<small>%</small>","des revenus absorbés par les charges au 1<sup>er</sup> semestre 2026, contre 58 % à 79 % chez les grands pairs européens","Communiqué S1 2026 ; DWS, Schroders, Aberdeen"),
- ("1","seule année de décollecte en seize ans : 2011, crise des dettes souveraines (−35 Md€)","Rapport 2011 ; communiqués annuels"),
+ ("1","seule année de décollecte depuis la création : 2011, crise des dettes souveraines (−35 Md€)","Rapport 2011 ; communiqués annuels"),
  ("19,2<span class='ar'>→</span>15,8","points de base de marge sur les encours : le prix du passage à la gestion passive","Rapport 2011 ; communiqué S1 2026"),
  ("68,3<small>%</small>","du capital détenu par le groupe Crédit Agricole, qui préside le conseil","URD 2025"),
  ("<span style='font-family:Inter;font-weight:200;font-size:.6em;vertical-align:.25em'>≈</span> 300","millions d'euros de revenus annuels liés au réseau UniCredit, dont le contrat expire en juillet 2027","Calcul de l'auteur, prospectus italiens (ch. 14)")]
 g = ''.join(f'<div class="cell{" last" if i>=4 else ""}"><div class="n">{n}</div><div class="l">{l}</div><div class="s">{s}</div></div>' for i,(n,l,s) in enumerate(cells))
 panel('bg-stone', f'''
- <div style="text-align:center;padding-top:9mm;color:var(--navy2)"><div class="kicker">Amundi · seize exercices en six chiffres</div>
+ <div style="text-align:center;padding-top:9mm;color:var(--navy2)"><div class="kicker">Amundi en six chiffres</div>
  <div style="font-family:Bod;font-size:27pt;color:var(--navy);margin-top:5mm">Ce que disent les comptes</div><div class="tick" style="color:var(--navy);margin-top:3mm"></div></div>
  <div class="thick" style="margin:6mm 10mm 0"></div>
  <div style="font-family:Bod;font-style:italic;font-size:15pt;line-height:1.28;text-align:center;margin:5mm 22mm;color:var(--navy)">Une entreprise qui a triplé de taille sans jamais perdre la main sur ses coûts, et dont la seule vraie faiblesse ne vient pas d'elle.</div>
@@ -140,7 +140,7 @@ panel('bg-stone', f'''
 
 # ====================================================================== 4. SOMMAIRE
 toc = [("I","Cadre",[("1","Ce que ce dossier est, et comment le lire"),("2","La thèse en une page")]),
- ("II","Le terrain de jeu",[("3","L'économie de la gestion d'actifs"),("4","Seize ans d'économie, année par année"),("5","Le cadre réglementaire comme variable économique")]),
+ ("II","Le terrain de jeu",[("3","L'économie de la gestion d'actifs"),("4","L'économie, année par année"),("5","Le cadre réglementaire comme variable économique")]),
  ("III","L'entreprise",[("6","Le modèle, en une mécanique"),("7","Construction de l'entreprise, 2010-2026"),("8","Implantation, effectifs, organisation"),("9","Actionnariat, contrôle, gouvernance")]),
  ("IV","Les gens",[("10","Qui dirige, et d'où ils viennent")]),
  ("V","Ce qui est vendu, et à quel prix",[("11","La gamme, famille par famille"),("12","Les prix réels"),("13","Ce que l'étude ne mesure pas : la performance des fonds")]),
@@ -159,7 +159,7 @@ panel('bg-pale', f'''<div style="text-align:center;padding-top:9mm;color:var(--n
 
 # ====================================================================== 5. CH1
 onepage("Partie I · Cadre", chap("Chapitre 1", "Ce que ce dossier est, et comment le lire", "Une étude d'entreprise, signée, datée, qui publie un prix et dit sur quoi il repose."), '''
-<h3>Objet et période</h3><p>Le dossier étudie Amundi, premier gestionnaire d'actifs européen, de sa création au 1<sup>er</sup> janvier 2010 au premier semestre 2026 : seize exercices complets et un semestre. La période commence avec la société elle-même, née de la fusion de Crédit Agricole Asset Management et de Société Générale Asset Management. Les données sont arrêtées au 20 octobre 2026 ; le cours de référence est la clôture du 19 octobre 2026, 87,65 €.</p>
+<h3>Objet et période</h3><p>Le dossier étudie Amundi, premier gestionnaire d'actifs européen, de sa création au 1<sup>er</sup> janvier 2010 au premier semestre 2026 , exercice par exercice. La période commence avec la société elle-même, née de la fusion de Crédit Agricole Asset Management et de Société Générale Asset Management. Les données sont arrêtées au 20 octobre 2026 ; le cours de référence est la clôture du 19 octobre 2026, 87,65 €.</p>
 <h3>Ce qui est fait, et ce qui ne l'est pas</h3><p>Les comptes ont été reconstitués exercice par exercice à partir des documents publiés (rapport 2011, document de base de l'introduction en Bourse, documents de référence et d'enregistrement universel 2015-2025, communiqués trimestriels jusqu'au T2 2026). Les tarifs ont été relevés sur 636 ETF et 40 fonds italiens. La macroéconomie vient des séries de la BCE et de la Réserve fédérale de Saint-Louis. Trois choses n'ont pas pu être mesurées et sont dites comme telles : la performance des fonds pour leurs clients, les comptes de la filiale italienne (accès payant, non acheté) et le montant des pénalités versées par UniCredit (non publié).</p>
 <h3>Comment distinguer les faits des opinions</h3><p>Tout chiffre porte sa source. Les calculs de l'auteur sont signalés <span class="calc">[calc]</span>. Les opinions sont composées en italique, dans un filet cuivre, sous la mention « Opinion de l'auteur ». Rien n'est estimé en silence : quand une donnée manque, le texte l'écrit.</p>
 <h3>Statut réglementaire</h3><p>Ce dossier publie un objectif de cours : c'est une recommandation d'investissement au sens du règlement (UE) n° 596/2014 et de son règlement délégué (UE) 2016/958. L'auteur applique volontairement les obligations prévues pour les experts : identité, méthode accessible, horizon, sources, déclaration d'intérêts et historique des recommandations des douze derniers mois (chapitre 26). Ce dossier n'est pas un conseil en investissement personnalisé.</p>
@@ -184,7 +184,7 @@ railpage("Partie I · Cadre", chap("Chapitre 2", "La thèse en une page", "Posé
 panel('inter', '''<img src="img/i2.jpg" style="object-position:50% 70%">
 <div class="ttl" style="left:14mm;top:26mm;color:var(--navy);width:150mm"><div class="pn">Partie II</div><h1>Le terrain de jeu</h1>
 <div class="man">Un métier où l'on gagne un pourcentage de ce que l'on ne possède pas, dans une Europe qui épargne beaucoup et paie de moins en moins pour la gestion.</div>
-<div class="toc"><div><span>3</span>L'économie de la gestion d'actifs</div><div><span>4</span>Seize ans d'économie, année par année</div><div><span>5</span>Le cadre réglementaire comme variable économique</div></div></div>
+<div class="toc"><div><span>3</span>L'économie de la gestion d'actifs</div><div><span>4</span>L'économie, année par année</div><div><span>5</span>Le cadre réglementaire comme variable économique</div></div></div>
 <div class="credit" style="color:#fff">Photographie : Léo Crouzille, Unsplash</div>''', folio=False)
 
 # ====================================================================== 8. CH3 economie gestion
@@ -216,7 +216,7 @@ for r in MACRO:
     y = int(r[0])
     mrows.append([r[0] + ('*' if y == 2026 else ''), f1(r[1],2), f1(r[2]), f1(r[3]), f1(r[4],2), f1(r[5],2), f1(r[6],2), f1(r[7],3), fr(r[8],0), f1(r[9]), f1(r[11]), fr(aum_d[y],0), fr(fl_d[y],1), f1(mg_d.get(y))])
 es = [r[8] for r in MACRO]; dfr = [r[1] for r in MACRO]
-panel('bg-pale', '<div style="position:absolute;left:10mm;right:10mm;top:16mm">' + chap("Chapitre 4", "Seize ans d'économie, année par année", "Les revenus d'Amundi sont des pourcentages d'encours ; les encours dépendent des marchés, des taux et de la peur des épargnants.")
+panel('bg-pale', '<div style="position:absolute;left:10mm;right:10mm;top:16mm">' + chap("Chapitre 4", "L'économie, année par année", "Les revenus d'Amundi sont des pourcentages d'encours ; les encours dépendent des marchés, des taux et de la peur des épargnants.")
  + bh("L'économie et Amundi", "fin d'année sauf mention") + table(mh, mrows, cls='t small')
  + '<div class="note" style="margin-top:2mm">* 2026 : taux BCE au 20/10, EUR/USD au 19/10, taux à 10 ans et Euro Stoxx en moyenne de septembre, PIB = glissement annuel du T1, encours au 30/06, collecte et marge du S1. Inflation = IPCH zone euro, glissement de décembre. Variations d\'indices de décembre à décembre sur moyennes mensuelles <span class="calc">[calc]</span>. Marge 2010-2013 et 2025 : définitions publiées de l\'année (2025 : 15,9 pb à périmètre comparable).<br>Sources : BCE, Statistical Data Warehouse ; FRED (Nasdaq) ; Amundi, rapport 2011, document de base, URD 2015-2025, communiqué S1 2026.</div>'
  + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8mm">'
@@ -262,7 +262,7 @@ panel('half', '''<div class="ph"><img src="img/i3.jpg"></div>
 <div style="font-family:Bod;font-style:italic;font-size:40pt;line-height:1.05;margin-top:3mm">L'entreprise</div>
 <div class="tick" style="margin:6mm 0 6mm;color:var(--navy)"></div>
 <div style="font-size:8pt;line-height:2">''' + ''.join(f'<div style="display:flex;gap:4mm;border-bottom:.25pt solid rgba(19,42,71,.2)"><span style="font-family:Bod;width:7mm">{n}</span>{t}</div>' for n,t in [("6","Le modèle, en une mécanique"),("7","Construction de l'entreprise, 2010-2026"),("8","Implantation, effectifs, organisation"),("9","Actionnariat, contrôle, gouvernance")]) + '''</div>
-<div style="font-family:Bod;font-style:italic;font-size:17pt;line-height:1.3;position:absolute;bottom:0">Seize ans pour tripler, en achetant ce que les banques européennes vendaient, sans jamais déprécier un euro de ce qu'elle a payé.</div></div>
+<div style="font-family:Bod;font-style:italic;font-size:17pt;line-height:1.3;position:absolute;bottom:0">Une entreprise qui a triplé en achetant ce que les banques européennes vendaient, sans jamais déprécier un euro de ce qu'elle a payé.</div></div>
 <div class="credit" style="left:95mm;color:#fff">Photographie : Michael Yuan, Unsplash</div>''', folio=False)
 
 # ====================================================================== 13. CH6 MODELE (pont)
@@ -444,7 +444,7 @@ panel('bg-navy', '<div style="position:absolute;left:10mm;right:10mm;top:16mm">'
 # ====================================================================== 27. INTERCALAIRE VII CHIFFRES
 panel('inter', '''<img src="img/i6.jpg" style="object-position:50% 40%">
 <div class="ttl" style="left:14mm;top:24mm;color:#fff;width:150mm"><div class="pn">Partie VII</div><h1>Les chiffres</h1>
-<div class="man">Seize exercices reconstitués, une marge qui recule de trois points de base, et un coût qui ne dérape jamais.</div>
+<div class="man">Des comptes reconstitués depuis 2010, une marge qui recule de trois points de base, et un coût qui ne dérape jamais.</div>
 <div class="toc"><div><span>15</span>Les comptes, exercice par exercice</div><div><span>16</span>L'économie unitaire</div><div><span>17</span>Qualité du résultat</div></div></div>
 <div class="credit" style="color:#fff">Photographie : Mat, Unsplash</div>''', folio=False)
 
@@ -457,7 +457,7 @@ cr = [rr("Encours fin d'année, Md€", AUM), rr("Collecte nette, Md€", FLOW, 
       ["Coefficient ajusté, %"] + [ (f1(-c/r*100,1) if (c and r) else '—') for c, r in zip(CHA, REVA)],
       rr("Résultat net part du groupe publié", RNPG), rr("Résultat net ajusté", RNA), rr("Capitaux propres part du groupe", CP), rr("Écarts d'acquisition", GW), rr("Dividende par action, €", DPS, 2), rr("Marge sur commissions, pb", MARG, 1), rr("Effectif fin d'année", STAFF)]
 panel('bg-pale', '<div style="position:absolute;left:10mm;right:10mm;top:16mm">' + chap("Chapitre 15", "Les comptes, exercice par exercice", "M€ sauf mention. Publié et ajusté, côte à côte.")
- + bh("Seize exercices", "M€") + table(["Ligne"] + yy, cr, cls='t small', hl=[9])
+ + bh("Exercice par exercice", "M€") + table(["Ligne"] + yy, cr, cls='t small', hl=[9])
  + '''<div class="note" style="margin-top:2mm">Ajusté = définitions d'Amundi (hors amortissement des contrats de distribution, coûts d'intégration et éléments exceptionnels ; 2025 hors plus-value Victory de 402 M€). Revenus et charges ajustés publiés depuis 2016. 2010-2011 : présentation de gestion du rapport 2011, pro forma BFT ; rupture de présentation entre 2011 et 2012. 2012 : JV comptées à 100 % dans les encours. 2017 : Pioneer consolidé au 3 juillet. 2019 : aucun dividende (recommandation BCE). Effectif : ETP ou ordre de grandeur publié. Collecte 2021-2022 corrigée (60,2 et 7,0 Md€ ; les chiffres de 65,6 et 15,0 étaient ceux du T4).</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8mm">''' + '<div>' + bh("Résultat net ajusté", "M€") + columns(yy, RNA, w=86, h=48, d=0, lab_every=3, hi=[15]) + '</div><div>' + bh("Coefficient d'exploitation ajusté", "%") + lines([str(y) for y in range(2016,2026)], [("", [-c/r*100 for c, r in zip(CHA[6:], REVA[6:])], NAVY)], w=86, h=48, ymin=44, ymax=58, ticks=[45,50,55], d=1, lab_every=3, legend=False) + '</div></div>'
  + '<div class="src" style="margin-top:2mm">Sources : rapport 2011 ; document de base ; URD 2015-2025 ; communiqués T4 ; classeur publié (feuilles CR_comptable, CR_ajuste, Encours_collecte, Bilan, Action).</div></div>', run="Partie VII · Les chiffres")

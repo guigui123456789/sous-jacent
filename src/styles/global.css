@@ -476,7 +476,7 @@ footer.site a:hover{color:var(--blanc)}
 }
 .sortie-valeur{
   font-family:var(--serif);font-weight:300;line-height:1;color:var(--bleu);
-  font-size:clamp(3rem,2rem+3vw,4rem);margin-top:var(--e-4);
+  font-size:clamp(3rem, 2rem + 3vw, 4rem);margin-top:var(--e-4);
   font-variant-numeric:lining-nums tabular-nums;
 }
 .sortie-valeur .devise{font-size:.45em;vertical-align:.5em;color:var(--graphite-80)}
@@ -565,3 +565,4 @@ footer.site a:hover{color:var(--blanc)}
 @media (max-width: 760px) { .lettre-etat, .lettre-rgpd { grid-column: 1; } }
 .lettre-merci { font-family: var(--serif); font-size: 1.0625rem; }
 .bloc-version { margin-top: .7rem; font-size: .8rem; color: var(--graphite-80); }
+.corps .calculateur .sortie-valeur{font-size:clamp(3rem, 2rem + 3vw, 4rem);line-height:1}

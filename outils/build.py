@@ -51,8 +51,8 @@ P('egg cover', f"""
 </div>
 <div style="height:52mm;margin:22mm 0 20mm"></div>
 <div class="ctr serif"><div class="t1">Vicor Corporation</div>
-<div class="t2">Vingt et un exercices retraités, 2005-2025</div></div>
-<div style="margin-top:26mm;text-align:center" class="small">NASDAQ : VICR &nbsp;·&nbsp; exercices clos au 31 décembre<br>Publié le 17 octobre 2026</div>
+<div class="t2">Le prix d’une entreprise qu’elle n’a jamais été</div></div>
+<div style="margin-top:26mm;text-align:center" class="small">NASDAQ : VICR &nbsp;·&nbsp; 2005-2025<br>Publié le 17 octobre 2026</div>
 """, foot=False, filigrane=False)
 
 # ======================================================== 2 · AVERTISSEMENT
