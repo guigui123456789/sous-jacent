@@ -18,12 +18,8 @@ const { sur, titre, intro, image, hauteur = 'moyenne' } = Astro.props;
 
 <style>
   .bandeau { position: relative; display: flex; align-items: flex-end; overflow: hidden; }
-  .bandeau--moyenne { min-height: 30rem; }
-  .bandeau--haute { min-height: 42rem; }
-  @media (max-width: 760px) {
-    .bandeau--moyenne { min-height: 24rem; }
-    .bandeau--haute { min-height: 30rem; }
-  }
+  /* toutes les bannières occupent l'écran entier, comme celle du mécanisme */
+  .bandeau--moyenne, .bandeau--haute { min-height: 100vh; min-height: 100svh; }
 
   .bandeau-image { position: absolute; inset: 0; }
   .bandeau-image img {
