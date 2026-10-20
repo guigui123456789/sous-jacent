@@ -15,7 +15,7 @@ const recents = [...meca, ...fonda]
     titre: e.data.titre,
     chapo: e.data.chapo,
     lien: (e.data.rubrique ? '/fondamentaux/' : '/mecanisme/') + e.id,
-    categorie: e.data.rubrique ? `Fondamentaux — ${e.data.rubrique}` : 'Le mécanisme',
+    categorie: e.data.rubrique ? `Fondamentaux · ${e.data.rubrique}` : 'Le mécanisme',
   }));
 
 const formats = [
@@ -56,7 +56,7 @@ const chiffres = [
 ---
 
 <Base
-  titreComplet="sous-jacent — analyse financière indépendante et ouverte"
+  titreComplet="sous-jacent · analyse financière indépendante et ouverte"
   titre="sous-jacent"
   description="Des sociétés cotées reprises exercice par exercice, jusqu’au prix. Les comptes retraités, les données brutes et le modèle de valorisation sont publiés avec l’analyse."
   enteteTransparente={true}

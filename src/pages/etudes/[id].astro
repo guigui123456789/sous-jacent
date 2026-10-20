@@ -42,7 +42,7 @@ const schema = [
     ? [
         {
           '@type': 'Dataset',
-          name: `${e.data.societe} — comptes retraités ${e.data.periode}`,
+          name: `${e.data.societe} · comptes retraités ${e.data.periode}`,
           description: `Comptes annuels de ${e.data.societe} repris et retraités au même gabarit sur la période ${e.data.periode}.`,
           creator: { '@id': (Astro.site ?? new URL('https://www.sousjacent.com')).origin + '/a-propos/#personne' },
           license: new URL('/informations-legales', Astro.site ?? 'https://www.sousjacent.com').href,
