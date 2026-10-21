@@ -5,7 +5,7 @@ date: 2026-10-21
 societe: "Vicor Corporation"
 etude: "vicor-2005-2025"
 trimestre: "Troisième trimestre 2026, publié le 20 octobre 2026"
-cours: "190,68 $ au 19 octobre 2026"
+cours: "204,14 $, clôture du 20 octobre 2026"
 objectif: "111 $ à douze mois (valeur intrinsèque 101 $, fourchette 89 – 115 $)"
 objectifPrecedent: "Fourchette de valeur 90 – 116 $, valeur centrale 102 $, sans horizon"
 sens: "initié"
@@ -15,10 +15,11 @@ citations:
   - "Vicor Corporation, échange avec les analystes du 20 octobre 2026"
   - "Vicor Corporation, communiqué du 12 octobre 2026 sur l'ouverture de l'enquête de l'ITC"
   - "Comptes retraités 2005-2025 et modèle publiés avec l'étude n° 1 du 17 octobre 2026"
+  - "Cours de clôture du 20 octobre 2026 relevé sur stockanalysis.com, réconcilié avec la clôture de 190,68 $ du 19 octobre"
 ---
 
 <div class="reperes">
-<div><b>111 $</b><span>Objectif de cours à douze mois, contre 190,68 $ au 19 octobre 2026</span></div>
+<div><b>111 $</b><span>Objectif de cours à douze mois, contre 204,14 $ à la clôture du 20 octobre 2026</span></div>
 <div><b>640,0 M$</b><span>Chiffre d'affaires 2026 mesuré, contre 639,8 M$ supposés dans l'étude</span></div>
 <div><b>37,2 %</b><span>Rentabilité du capital employé annualisée, contre 4,6 % de moyenne sur 2005-2025</span></div>
 <div><b>70 %</b><span>du résultat opérationnel du trimestre vient des redevances, nettes des frais juridiques</span></div>
@@ -104,7 +105,7 @@ Capacité : les premiers équipements de la deuxième usine, à Merrimack, sont 
 <h2 id="objectif">L'objectif de cours</h2>
 
 <div class="encadre">
-<p><b>Objectif de cours : 111 $ à douze mois, au 21 octobre 2027.</b> Valeur intrinsèque 101 $, portée à douze mois au coût du capital de 10 % ; aucun dividende n'est attendu sur la période. Cours de référence : 190,68 $, clôture du 19 octobre 2026, dernière séance avant la publication. L'écart est de <b>−42 %</b>. Opinion de l'auteur ; l'auteur ne détient aucun titre Vicor, ni à l'achat ni à la vente.</p>
+<p><b>Objectif de cours : 111 $ à douze mois, au 21 octobre 2027.</b> Valeur intrinsèque 101 $, portée à douze mois au coût du capital de 10 % ; aucun dividende n'est attendu sur la période. Cours de référence : <b>204,14 $</b>, clôture du 20 octobre 2026, première séance qui intègre les résultats (le titre a gagné 7,1 % ce jour-là, sur une clôture de 190,68 $ la veille). L'écart est de <b>−46 %</b>. Opinion de l'auteur ; l'auteur ne détient aucun titre Vicor, ni à l'achat ni à la vente.</p>
 </div>
 
 Cette note initie l'objectif de cours sur Vicor. L'étude du 17 octobre s'arrêtait à une fourchette de valeur sans horizon ; depuis l'étude n° 2, la méthode du site va jusqu'au prix, et ce suivi aligne l'étude n° 1 sur la méthode en vigueur.
@@ -117,7 +118,7 @@ Cette note initie l'objectif de cours sur Vicor. L'étude du 17 octobre s'arrêt
 
 La grille de sensibilité n'a pas changé de nature. À un coût du capital de 10 %, une marge normative de 40 %, supérieure à celle d'Analog Devices et proche de ce que Vicor vient de réaliser sur un trimestre, donne 119 $ de valeur intrinsèque et 131 $ d'objectif. **Aucune hypothèse de marge défendable ne rejoint le cours.**
 
-Le débat s'est donc déplacé, et il faut le dire clairement : il ne porte plus sur la marge, que le trimestre valide, ni sur le point de départ, que le trimestre confirme. Il porte sur la **durée**. Pour justifier 190,68 $ avec les autres hypothèses du modèle, il faut soit une marge normative de **68 %**, que n'atteint aucun semi-conducteur coté, soit une trajectoire de croissance **1,86 fois plus forte** que celle retenue, c'est-à-dire un chiffre d'affaires de **3 981 M$ en 2035**, soit 9,8 fois celui de 2025.
+Le débat s'est donc déplacé, et il faut le dire clairement : il ne porte plus sur la marge, que le trimestre valide, ni sur le point de départ, que le trimestre confirme. Il porte sur la **durée**. Pour justifier 204,14 $ avec les autres hypothèses du modèle, il faut soit une marge normative de **73 %**, que n'atteint aucun semi-conducteur coté, soit une trajectoire de croissance **1,96 fois plus forte** que celle retenue, c'est-à-dire **59 % de croissance en 2027** et un chiffre d'affaires de **4 313 M$ en 2035**, soit 10,6 fois celui de 2025. Au cours du 20 octobre, le marché capitalise 9 719 M$, soit **14,4 fois le chiffre d'affaires de 2026** et deux fois la valeur que ce modèle calcule.
 
 Un mot sur cette trajectoire, parce qu'elle est maintenant l'hypothèse qui porte tout le désaccord. Le modèle retient +30 % en 2027, puis une décroissance jusqu'à 4 % en 2035. Vérification faite sur les chiffres publiés : le plancher du quatrième trimestre, annualisé, donne 746 M$, et les 832 M$ qu'implique le modèle pour 2027 représentent **11,5 % de plus que ce rythme de sortie**. La trajectoire du modèle n'est donc pas démentie par le trimestre ; elle intègre déjà le saut qu'il vient de produire.
 
