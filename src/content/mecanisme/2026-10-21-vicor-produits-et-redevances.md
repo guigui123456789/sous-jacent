@@ -2,10 +2,11 @@
 titre: "Un quart du chiffre d'affaires de Vicor vient désormais de ses brevets"
 chapo: "En 2023, les redevances de licence pesaient 3,9 % des ventes de Vicor. En 2026, elles en pèsent 25,1 %, et le métier industriel a enfin dépassé son niveau d'avant."
 date: 2026-10-21
+format: "graphique"
 image: "/graphiques/vicor-2005-2025/produits-redevances-2023-2026.svg"
 alt: "Chiffre d'affaires de Vicor de 2023 à 2026, réparti entre ventes de produits et redevances de licence. Les redevances passent de 3,9 % à 25,1 % du total."
 source: "Vicor Corporation, rapports annuels 2023 à 2025 et communiqués trimestriels 2026 ; plancher du quatrième trimestre annoncé le 20 octobre 2026 ; calculs de l'auteur."
-lecture: "Barres marine : les ventes de produits. Barres cuivre : les redevances de licence, avec leur part du total. Le trait grenat marque le niveau des produits de 2023."
+lecture: "Barres marine : les ventes de produits. Barres cuivre : les redevances de licence. La part des redevances dans le total est portée sous chaque année."
 lien: "/notes/vicor-t3-2026"
 lienLibelle: "La note de suivi du troisième trimestre 2026"
 ---

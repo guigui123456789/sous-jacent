@@ -7,7 +7,7 @@ const jour = (d) => new Date(d).toLocaleDateString('fr-FR', { day: '2-digit', mo
   {entrees.map((e, i) => (
     <a class="entree reveler" href={`${base}/${e.id}`} data-rang={i}>
       <span class="categorie">
-        {e.data.rubrique ?? jour(e.data.date)}
+        {e.data.format === 'graphique' ? 'Graphique · ' : ''}{e.data.rubrique ?? jour(e.data.date)}
       </span>
       <div>
         <h3>{e.data.titre}</h3>

@@ -40,11 +40,10 @@ d'origine n'est jamais réécrite : les deux chiffres restent consultables côte
 
 ## Le graphique de la semaine
 
-Un graphique dessiné pour le site à partir de documents publics, sa source exacte, et trois
-phrases pour le lire.
+Second format de la rubrique « Le mécanisme de la semaine » : un graphique dessiné pour le
+site à partir de documents publics, sa source exacte, et trois phrases pour le lire.
 
-- [Index des graphiques](https://www.sousjacent.com/graphique)
-- [Un quart du chiffre d'affaires de Vicor vient désormais de ses brevets](https://www.sousjacent.com/graphique/2026-10-21-vicor-produits-et-redevances): 21/10/2026. Les redevances de licence de Vicor passent de 3,9 % du chiffre d'affaires en 2023 (15,9 M$) à 25,1 % en 2026 (160,4 M$), tandis que les ventes de produits, après être tombées 10 % sous leur niveau de 2023, ressortent à environ 480 M$ en 2026, soit 23 % au-dessus de 2023.
+- [Un quart du chiffre d'affaires de Vicor vient désormais de ses brevets](https://www.sousjacent.com/mecanisme/2026-10-21-vicor-produits-et-redevances): 21/10/2026. Les redevances de licence de Vicor passent de 3,9 % du chiffre d'affaires en 2023 (15,9 M$) à 25,1 % en 2026 (160,4 M$), tandis que les ventes de produits, après être tombées 10 % sous leur niveau de 2023, ressortent à environ 480 M$ en 2026, soit 23 % au-dessus de 2023.
 
 ## Le mécanisme de la semaine
 

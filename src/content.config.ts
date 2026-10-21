@@ -8,9 +8,23 @@ const commun = {
   brouillon: z.boolean().default(false),
 };
 
+/* La rubrique « Le mécanisme de la semaine » porte deux formats courts :
+   le mécanisme écrit, et le graphique de la semaine (un graphique dessiné
+   pour le site, sa source, et trois phrases). Le champ `format` les sépare. */
 const mecanisme = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/mecanisme' }),
-  schema: z.object({ ...commun, fait: z.string().optional() }),
+  schema: z.object({
+    ...commun,
+    fait: z.string().optional(),
+    format: z.enum(['mecanisme', 'graphique']).default('mecanisme'),
+    image: z.string().optional(),
+    alt: z.string().optional(),
+    source: z.string().optional(),
+    lecture: z.string().optional(),
+    lien: z.string().optional(),
+    lienLibelle: z.string().optional(),
+    partage: z.string().optional(),
+  }),
 });
 
 const etudes = defineCollection({
@@ -68,20 +82,4 @@ const notes = defineCollection({
   }),
 });
 
-/* Le graphique de la semaine : un graphique dessiné pour le site, sa source,
-   et trois phrases. Format court, publié entre deux études. */
-const graphique = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/graphique' }),
-  schema: z.object({
-    ...commun,
-    image: z.string(),
-    alt: z.string(),
-    source: z.string(),
-    lecture: z.string().optional(),
-    lien: z.string().optional(),
-    lienLibelle: z.string().optional(),
-    partage: z.string().optional(),
-  }),
-});
-
-export const collections = { mecanisme, etudes, fondamentaux, notes, graphique };
+export const collections = { mecanisme, etudes, fondamentaux, notes };

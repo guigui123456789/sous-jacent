@@ -155,10 +155,6 @@ header.site[data-fond="transparent"] .menu-bouton{color:var(--blanc)}
   font-size:.875rem;letter-spacing:.14em;text-transform:uppercase;
   text-decoration:none;color:var(--bleu);padding-block:.5rem;
 }
-/* sept entrées : on resserre la graisse typographique avant que le menu ne passe à la ligne */
-@media (min-width: 981px) and (max-width: 1400px) {
-  .nav a{font-size:.8125rem;letter-spacing:.1em}
-}
 .nav a::after{
   content:"";position:absolute;left:0;bottom:.15rem;
   width:100%;height:1px;background:currentColor;

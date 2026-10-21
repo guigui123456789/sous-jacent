@@ -60,25 +60,28 @@ def grille(x0, x1, y0, y1, vmax, pas, suffixe=""):
 
 # ---------------------------------------------------------------- graphique 1
 def produits_redevances():
-    """Produits et redevances de licence, 2023-2026. Le graphique de la semaine."""
-    W, H = 660, 300
-    x0, x1, y0, y1 = 46, 648, 56, 232
+    """Produits et redevances de licence, 2023-2026. Le graphique de la semaine.
+
+    Règle de mise en page : aucune étiquette ne se superpose à une barre ni à
+    une autre étiquette. Le total va au-dessus de la barre, la part des
+    redevances sous l'année, et le commentaire du repère sous l'axe.
+    """
+    W, H = 660, 330
+    x0, x1, y0, y1 = 46, 648, 58, 236
     SERIES = [
         (2023, 389.2, 15.9, "publié"),
         (2024, 312.5, 46.6, "publié"),
         (2025, 350.3, 57.4, "publié"),
-        (2026, 479.6, 160.4, "neuf mois publiés + plancher T4"),
+        (2026, 479.6, 160.4, "9 mois publiés, plancher T4"),
     ]
     vmax, pas = 700, 100
     b = grille(x0, x1, y0, y1, vmax, pas)
-    bw = (x1 - x0) / len(SERIES) * 0.42
+    bw = (x1 - x0) / len(SERIES) * 0.46
 
-    # repère : le niveau des produits de 2023, étiquette à gauche pour ne croiser aucune barre
+    # repère : le niveau des ventes de produits de 2023, sans étiquette dans le tracé
     yr = y1 - 389.2 / vmax * (y1 - y0)
     b += (f'<line x1="{x0}" y1="{yr:.1f}" x2="{x1}" y2="{yr:.1f}" stroke="{GRENAT}" '
           f'stroke-width="0.9" stroke-dasharray="4 3"/>')
-    b += (f'<text x="{x0 + 4}" y="{yr + 12:.1f}" font-family="{SANS}" '
-          f'font-size="8.4" fill="{GRENAT}">niveau des ventes de produits de 2023 : 389 M$</text>')
 
     for i, (an, p, r, note) in enumerate(SERIES):
         cx = x0 + (x1 - x0) * (i + 0.5) / len(SERIES)
@@ -88,24 +91,23 @@ def produits_redevances():
               f'height="{hp:.1f}" fill="{BLEU}" opacity="0.88"/>')
         b += (f'<rect x="{cx - bw / 2:.1f}" y="{y1 - hp - hr:.1f}" width="{bw:.1f}" '
               f'height="{hr:.1f}" fill="{OR}"/>')
-        b += (f'<text x="{cx:.1f}" y="{y1 - hp - hr - 8:.1f}" text-anchor="middle" '
-              f'font-family="{SERIF}" font-size="13.5" fill="{BLEU}">{fr(p + r)}</text>')
-        b += (f'<text x="{cx:.1f}" y="{y1 + 16}" text-anchor="middle" font-family="{SANS}" '
-              f'font-size="9.4" fill="{BLEU}">{an}</text>')
-        b += (f'<text x="{cx:.1f}" y="{y1 + 27}" text-anchor="middle" font-family="{SANS}" '
+        # total, au-dessus de la barre
+        b += (f'<text x="{cx:.1f}" y="{y1 - hp - hr - 9:.1f}" text-anchor="middle" '
+              f'font-family="{SERIF}" font-size="14.5" fill="{BLEU}">{fr(p + r)}</text>')
+        # sous l'axe : année, nature du chiffre, puis la part des redevances
+        b += (f'<text x="{cx:.1f}" y="{y1 + 17}" text-anchor="middle" font-family="{SANS}" '
+              f'font-size="9.6" fill="{BLEU}">{an}</text>')
+        b += (f'<text x="{cx:.1f}" y="{y1 + 28}" text-anchor="middle" font-family="{SANS}" '
               f'font-size="7.6" fill="{DOUX}">{note}</text>')
-        # part des redevances : dans la barre si elle est assez haute, à côté sinon
-        part = f'{fr(r / (p + r) * 100)} %'
-        if hr >= 13:
-            b += (f'<text x="{cx:.1f}" y="{y1 - hp - hr / 2 + 3:.1f}" text-anchor="middle" '
-                  f'font-family="{SANS}" font-size="8" fill="#fff">{part}</text>')
-        else:
-            b += (f'<text x="{cx + bw / 2 + 5:.1f}" y="{y1 - hp - hr - 2:.1f}" '
-                  f'font-family="{SANS}" font-size="8" fill="{OR}">{part}</text>')
+        b += (f'<text x="{cx:.1f}" y="{y1 + 43}" text-anchor="middle" font-family="{SANS}" '
+              f'font-size="9" fill="{OR}">redevances {fr(r / (p + r) * 100, 1)} %</text>')
 
     b += f'<line x1="{x0}" y1="{y1}" x2="{x1}" y2="{y1}" stroke="{BLEU}" stroke-width="0.8"/>'
     b += (f'<text x="{x0 - 7}" y="{y0 - 8}" text-anchor="end" font-family="{SANS}" '
           f'font-size="8" fill="{DOUX}">M$</text>')
+    b += (f'<text x="{x0}" y="{y1 + 64}" font-family="{SANS}" font-size="8.2" fill="{GRENAT}">'
+          f'Le trait grenat marque le niveau des ventes de produits de 2023, 389 M$ : '
+          f'il a fallu trois ans pour le repasser.</text>')
     return cadre(W, H, b,
                  "Vicor, chiffre d'affaires par nature, 2023-2026",
                  [("Ventes de produits", BLEU), ("Redevances de licence", OR)],
@@ -144,17 +146,16 @@ def trimestres_2026():
         b += (f'<text x="{cx:.1f}" y="{y1 + 27}" text-anchor="middle" font-family="{SANS}" '
               f'font-size="7.6" fill="{DOUX}">{note}</text>')
         if guide:
+            # le repère se lit sous l'axe : une étiquette ici tomberait sur la barre
             hg = guide / vmax * (y1 - y0)
-            b += (f'<line x1="{cx - bw * 0.8:.1f}" y1="{y1 - hg:.1f}" '
-                  f'x2="{cx + bw * 0.8:.1f}" y2="{y1 - hg:.1f}" stroke="{GRENAT}" '
-                  f'stroke-width="1.5" stroke-dasharray="3 2"/>')
-            b += (f'<text x="{cx + bw * 0.9:.1f}" y="{y1 - hg + 3:.1f}" font-family="{SANS}" '
-                  f'font-size="8" fill="{GRENAT}">{fr(guide, 1)} attendus</text>')
+            b += (f'<line x1="{cx - bw * 0.85:.1f}" y1="{y1 - hg:.1f}" '
+                  f'x2="{cx + bw * 0.85:.1f}" y2="{y1 - hg:.1f}" stroke="{GRENAT}" '
+                  f'stroke-width="1.6" stroke-dasharray="3 2"/>')
 
     b += f'<line x1="{x0}" y1="{y1}" x2="{x1}" y2="{y1}" stroke="{BLEU}" stroke-width="0.8"/>'
     b += (f'<text x="{x0 - 7}" y="{y0 - 8}" text-anchor="end" font-family="{SANS}" '
           f'font-size="8" fill="{DOUX}">M$</text>')
-    b += (f'<text x="{x0}" y="{y1 + 44}" font-family="{SANS}" font-size="8" fill="{DOUX}">'
+    b += (f'<text x="{x0}" y="{y1 + 46}" font-family="{SANS}" font-size="8.2" fill="{GRENAT}">'
           f'Le trait grenat situe le troisième trimestre que les indications de juillet '
           f'laissaient attendre : 129,2 M$, contre 197,1 publiés.</text>')
     return cadre(W, H, b,
