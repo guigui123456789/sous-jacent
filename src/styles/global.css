@@ -149,11 +149,15 @@ header.site[data-fond="transparent"] .marque,
 header.site[data-fond="transparent"] .nav a,
 header.site[data-fond="transparent"] .menu-bouton{color:var(--blanc)}
 
-.nav{display:flex;align-items:center;gap:var(--e-8)}
+.nav{display:flex;align-items:center;gap:clamp(1.1rem, 1.9vw, 2rem)}
 .nav a{
-  position:relative;
+  position:relative;white-space:nowrap;
   font-size:.875rem;letter-spacing:.14em;text-transform:uppercase;
   text-decoration:none;color:var(--bleu);padding-block:.5rem;
+}
+/* sept entrées : on resserre la graisse typographique avant que le menu ne passe à la ligne */
+@media (min-width: 981px) and (max-width: 1400px) {
+  .nav a{font-size:.8125rem;letter-spacing:.1em}
 }
 .nav a::after{
   content:"";position:absolute;left:0;bottom:.15rem;
@@ -291,6 +295,12 @@ main > *:first-child:not(.hero):not(.tete):not(.bandeau){padding-top:7.5rem}
 .corps pre{overflow-x:auto;padding:var(--e-6);background:var(--pierre-20);border:1px solid var(--graphite-20);font-size:.9375rem}
 .corps pre code{background:none;padding:0}
 .corps table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.9375rem;font-variant-numeric:tabular-nums}
+/* Sur téléphone, un tableau large défile dans sa propre boîte au lieu
+   d'élargir toute la page. Vérifié au navigateur à 390 px. */
+@media (max-width:760px){
+  .corps table{display:block;width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .corps table td,.corps table th{white-space:nowrap}
+}
 .corps th{text-align:left;font-weight:600;color:var(--bleu);border-bottom:1px solid var(--bleu-40);padding:.6rem .5rem}
 .corps td{border-bottom:1px solid var(--graphite-20);padding:.6rem .5rem}
 .corps td:not(:first-child),.corps th:not(:first-child){text-align:right}
@@ -344,6 +354,9 @@ footer.site a:hover{color:var(--blanc)}
 .corps figure img,.corps figure svg{width:100%;height:auto;background:var(--blanc)}
 .corps figcaption{margin-top:var(--e-5);font-size:.875rem;line-height:1.55;color:var(--graphite-80)}
 .corps figcaption .source{display:block;margin-top:.35rem;font-size:.8125rem;font-style:italic}
+/* La marge par défaut du navigateur sur figure (40 px à gauche et à droite)
+   sortait les graphiques de la colonne de texte et débordait sur téléphone. */
+.corps figure{margin-inline:0}
 .corps .large{max-width:none;width:100%}
 
 .encadre{
@@ -382,7 +395,10 @@ footer.site a:hover{color:var(--blanc)}
   padding-block:var(--e-8);border-top:1px solid var(--bleu);border-bottom:1px solid var(--graphite-20);
   max-width:none;
 }
-.reperes div{text-align:center}
+@media (max-width:620px){.reperes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:380px){.reperes{grid-template-columns:minmax(0,1fr)}}
+.reperes div{text-align:center;min-width:0}
+.reperes b{overflow-wrap:break-word}
 .reperes b{
   display:block;font-family:var(--serif);font-weight:300;
   font-size:clamp(1.9rem,1.4rem + 1.6vw,2.6rem);line-height:1;color:var(--bleu);
@@ -544,6 +560,16 @@ footer.site a:hover{color:var(--blanc)}
   color: var(--graphite);
   margin-top: .1rem;
 }
+.suivi-notes {
+  list-style: none;
+  margin: .9rem 0 0;
+  padding: .7rem 0 0;
+  border-top: 1px solid var(--or);
+}
+.suivi-notes li { display: flex; justify-content: space-between; gap: 1rem; padding-block: .3rem; }
+.suivi-notes a { font-size: .86rem; color: var(--bleu); }
+.suivi-notes a:hover { color: var(--or); }
+.suivi-notes span { font-size: .78rem; color: var(--graphite-80); white-space: nowrap; }
 
 /* --- lettre d'information --- */
 .visuellement-cache { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -564,5 +590,22 @@ footer.site a:hover{color:var(--blanc)}
 .lettre-rgpd a { color: inherit; text-decoration: underline; }
 @media (max-width: 760px) { .lettre-etat, .lettre-rgpd { grid-column: 1; } }
 .lettre-merci { font-family: var(--serif); font-size: 1.0625rem; }
+
+/* Variante « page » : le même formulaire dans le corps d'une page claire. */
+.lettre--page { grid-template-columns: 1fr; gap: var(--e-5); padding: 0; margin-bottom: 0; border: 0; color: var(--bleu); }
+.lettre--page .lettre-texte h3 { font-size: 1.0625rem; }
+.lettre--page .lettre-texte p { opacity: 1; color: var(--graphite-80); }
+.lettre--page .lettre-champ input { background: #fff; border: 1px solid var(--graphite-20); color: var(--bleu); }
+.lettre--page .lettre-champ input::placeholder { color: var(--graphite-80); opacity: .7; }
+.lettre--page .lettre-etat, .lettre--page .lettre-rgpd { grid-column: 1; color: var(--graphite-80); opacity: 1; }
+.lettre--page .lettre-etat--erreur { color: #8a1e41; }
+.lettre--page .lettre-rgpd { font-size: .78rem; opacity: .8; }
+.lettre--page .lettre-rgpd a { color: var(--bleu); }
+
+.bloc-lettre { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+@media (max-width: 900px) { .bloc-lettre { grid-template-columns: 1fr; gap: var(--e-8); } }
+.bloc-lettre h2 { margin-top: var(--e-6); }
+.bloc-lettre-texte p { margin-top: var(--e-6); line-height: 1.7; max-width: 38rem; }
+.bloc-lettre-detail { font-size: .9375rem; color: var(--graphite-80); }
 .bloc-version { margin-top: .7rem; font-size: .8rem; color: var(--graphite-80); }
 .corps .calculateur .sortie-valeur{font-size:clamp(3rem, 2rem + 3vw, 4rem);line-height:1}

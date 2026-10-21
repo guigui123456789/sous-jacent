@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import EnTetePage from '../components/EnTetePage.astro';
+import Lettre from '../components/Lettre.astro';
 
 /* Le CV reste vide tant que le PDF n'est pas déposé dans public/ :
    le bouton ne s'affiche pas et aucun lien ne tombe en 404. */
@@ -133,6 +134,32 @@ const travaux = [
           Ou directement : <a href={`mailto:${courriel}`}>{courriel}</a>
         </p>
       </aside>
+    </div>
+  </section>
+
+  <section class="section section--pierre">
+    <div class="enveloppe bloc-lettre reveler">
+      <div class="bloc-lettre-texte">
+        <p class="sur">Suivre ce travail</p>
+        <h2>Les études arrivent par courriel</h2>
+        <p>
+          Une étude paraît toutes les six à huit semaines, et chaque société couverte est revue
+          après chacune de ses publications trimestrielles. Si vous voulez lire la suivante sans
+          revenir vérifier, laissez votre adresse : vous recevrez un message à chaque publication,
+          l'étude et sa note de suivi, et rien d'autre.
+        </p>
+        <p class="bloc-lettre-detail">
+          Gratuit, sans contenu réservé ni contrepartie. Pas de lettre hebdomadaire, pas de
+          relance commerciale, désinscription en un clic. C'est le seul moyen que j'ai de savoir
+          que ce travail est lu.
+        </p>
+      </div>
+      <Lettre
+        id="lettre-apropos"
+        variante="page"
+        titre={null}
+        bouton="Je m'inscris"
+      />
     </div>
   </section>
 

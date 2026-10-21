@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import EnTetePage from '../../components/EnTetePage.astro';
+import { getCollection } from 'astro:content';
+
+const entrees = (await getCollection('notes'))
+  .filter((e) => !e.data.brouillon)
+  .sort((a, b) => b.data.date - a.data.date);
+
+const dateFr = (d) =>
+  d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base
+  titre="Les notes de suivi"
+  description="Après chaque publication trimestrielle d’une société couverte, une note qui confronte le trimestre à la thèse de l’étude et révise l’objectif de cours s’il doit l’être."
+  enteteTransparente={true}
+>
+  <EnTetePage
+    sur="Le suivi"
+    titre="Les notes de suivi"
+    intro="Une étude publiée n'est pas une étude close. Après chaque publication trimestrielle, une note confronte le trimestre aux hypothèses retenues, puis confirme ou révise l'objectif de cours. L'étude d'origine n'est jamais réécrite."
+    image="/images/palais-brongniart.webp"
+  />
+
+  <section class="section">
+    <div class="enveloppe">
+      {entrees.length === 0 ? (
+        <p class="corps">La première note arrive après la prochaine publication trimestrielle.</p>
+      ) : (
+        <ul class="notes">
+          {entrees.map((e) => (
+            <li>
+              <a href={`/notes/${e.id}`}>
+                <div class="notes-gauche">
+                  <time datetime={e.data.date.toISOString()}>{dateFr(e.data.date)}</time>
+                  <p class="notes-societe">{e.data.societe}</p>
+                  <p class="notes-trimestre">{e.data.trimestre}</p>
+                </div>
+                <div class="notes-droite">
+                  <h2>{e.data.titre}</h2>
+                  <p class="notes-chapo">{e.data.chapo}</p>
+                  {e.data.objectif && (
+                    <p class="notes-objectif">
+                      <span>Objectif {e.data.sens}</span> {e.data.objectif}
+                    </p>
+                  )}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .notes { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--graphite-20); }
+  .notes > li { border-bottom: 1px solid var(--graphite-20); }
+  .notes a { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: clamp(1.5rem, 4vw, 4rem); padding-block: var(--e-8); text-decoration: none; }
+  @media (max-width: 860px) { .notes a { grid-template-columns: 1fr; gap: var(--e-5); } }
+  .notes time { font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; color: var(--or); }
+  .notes-societe { margin-top: var(--e-4); font-family: var(--serif); font-size: 1.125rem; color: var(--bleu); }
+  .notes-trimestre { margin-top: .25rem; font-size: .8125rem; line-height: 1.45; color: var(--graphite-80); }
+  .notes h2 { font-family: var(--serif); font-weight: 300; font-size: 1.375rem; line-height: 1.25; color: var(--bleu); }
+  .notes a:hover h2 { color: var(--or); }
+  .notes-chapo { margin-top: var(--e-5); font-size: .9375rem; line-height: 1.6; color: var(--graphite-80); }
+  .notes-objectif { margin-top: var(--e-6); font-family: var(--serif); font-size: 1.0625rem; color: var(--bleu); }
+  .notes-objectif span { display: block; font-family: var(--sans); font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; color: var(--or); margin-bottom: .25rem; }
+</style>

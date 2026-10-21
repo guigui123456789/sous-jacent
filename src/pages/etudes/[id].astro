@@ -11,6 +11,13 @@ const { Content } = await render(e);
 const d = new Date(e.data.date);
 const affiche = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
 
+/* Les notes de suivi rattachées à cette étude, de la plus récente à la plus ancienne. */
+const notes = (await getCollection('notes'))
+  .filter((n) => !n.data.brouillon && n.data.etude === e.id)
+  .sort((a, b) => b.data.date - a.data.date);
+const dateCourte = (x) =>
+  x.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+
 const schema = [
   {
     '@type': 'Article',
@@ -123,6 +130,16 @@ const schema = [
           </p>
           {e.data.prochaineRevue && (
             <p class="suivi-prochaine">Prochaine revue : <b>{e.data.prochaineRevue}</b></p>
+          )}
+          {notes.length > 0 && (
+            <ul class="suivi-notes">
+              {notes.map((n) => (
+                <li>
+                  <a href={`/notes/${n.id}`}>{n.data.trimestre.replace(/,.*$/, '')}</a>
+                  <span>{dateCourte(new Date(n.data.date))}</span>
+                </li>
+              ))}
+            </ul>
           )}
           <ol class="suivi-journal">
             <li>
@@ -360,7 +377,7 @@ const schema = [
   .tete-meta { display: flex; gap: var(--e-8); flex-wrap: wrap; margin-top: var(--e-7); padding-top: var(--e-5); border-top: 1px solid rgba(255,255,255,.22); font-size: .875rem; color: rgba(255,255,255,.7); }
 
   .grille-etude { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
-  @media (max-width: 1024px) { .grille-etude { grid-template-columns: 1fr; } .flanc { order: -1; } }
+  @media (max-width: 1024px) { .grille-etude { grid-template-columns: minmax(0, 1fr); } .flanc { order: -1; } }
   .grille-etude .corps { margin-top: 0; max-width: none; }
   .grille-etude .corps > p,
   .grille-etude .corps > h2,

@@ -1,0 +1,106 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const entrees = await getCollection('notes', (e) => !e.data.brouillon);
+  return entrees.map((e) => ({ params: { id: e.id }, props: { e } }));
+}
+const { e } = Astro.props;
+const { Content } = await render(e);
+const d = new Date(e.data.date);
+const affiche = d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+
+const etudes = await getCollection('etudes');
+const etude = etudes.find((x) => x.id === e.data.etude);
+
+const schema = {
+  '@type': 'Article',
+  headline: e.data.titre,
+  description: e.data.chapo,
+  datePublished: d.toISOString(),
+  dateModified: d.toISOString(),
+  articleSection: 'Les notes de suivi',
+  inLanguage: 'fr-FR',
+  isAccessibleForFree: true,
+  about: { '@type': 'Corporation', name: e.data.societe },
+  ...(etude ? { isPartOf: { '@type': 'Article', name: etude.data.titre, url: new URL(`/etudes/${etude.id}`, Astro.site ?? 'https://www.sousjacent.com').href } } : {}),
+  citation: e.data.citations ?? [],
+  keywords: [e.data.societe, 'note de suivi', 'objectif de cours', 'résultats trimestriels', 'equity research'],
+};
+---
+
+<Base titre={e.data.titre} description={e.data.chapo} image={e.data.partage} schema={schema}>
+  <article class="article">
+    <div class="enveloppe">
+      <div class="note-tete">
+        <a class="retour" href="/notes">Toutes les notes de suivi</a>
+        <p class="sur">Note de suivi · {e.data.societe}</p>
+        <h1>{e.data.titre}</h1>
+        <p class="chapo">{e.data.chapo}</p>
+        <div class="article-meta">
+          <time datetime={d.toISOString()}>{affiche}</time>
+          <span>Guillaume Le Merour</span>
+          <span>{e.data.trimestre}</span>
+        </div>
+      </div>
+
+      <div class="bandeau-chiffres">
+        {e.data.objectif && (
+          <div>
+            <dt>Objectif de cours</dt>
+            <dd class="gros">{e.data.objectif}</dd>
+          </div>
+        )}
+        <div><dt>Cours de référence</dt><dd>{e.data.cours}</dd></div>
+        <div><dt>Sens de la révision</dt><dd>Objectif {e.data.sens}</dd></div>
+        {e.data.objectifPrecedent && (
+          <div><dt>Précédemment</dt><dd>{e.data.objectifPrecedent}</dd></div>
+        )}
+      </div>
+
+      <div class="corps"><Content /></div>
+
+      {etude && (
+        <p class="renvoi-etude">
+          <span>L'étude dont cette note assure le suivi</span>
+          <a href={`/etudes/${etude.id}`}>{etude.data.titre}</a>
+        </p>
+      )}
+
+      <div class="article-pied">
+        <p>
+          Construite sous la méthode <a href={`/documents/sous-jacent-methode-v${e.data.methode}.pdf`}>version {e.data.methode}</a>.
+          Historique des objectifs sur <a href="/societes-suivies">les sociétés suivies</a>.
+        </p>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .note-tete { max-width: 46rem; }
+  .note-tete .sur { margin-bottom: var(--e-6); }
+  .retour { display: inline-block; margin-bottom: var(--e-8); font-size: .875rem; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; color: var(--bleu); }
+  .retour:hover { color: var(--or); }
+
+  .bandeau-chiffres {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: var(--e-6) var(--e-8);
+    margin-top: var(--e-9);
+    padding: var(--e-7);
+    background: var(--bleu);
+  }
+  .bandeau-chiffres dt { font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; color: var(--or); }
+  .bandeau-chiffres dd { margin: .4rem 0 0; font-size: .9375rem; line-height: 1.5; color: rgba(255,255,255,.88); }
+  .bandeau-chiffres .gros { font-family: var(--serif); font-size: 1.1875rem; color: #fff; }
+
+  .renvoi-etude { display: grid; gap: var(--e-3); max-width: 36rem; margin-top: var(--e-11); padding-top: var(--e-6); border-top: 1px solid var(--or); }
+  .renvoi-etude span { font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; color: var(--or); }
+  .renvoi-etude a { font-family: var(--serif); font-size: 1.0625rem; line-height: 1.4; color: var(--bleu); }
+  .renvoi-etude a:hover { color: var(--or); }
+
+  .article-pied { max-width: 36rem; margin-top: var(--e-10); padding-top: var(--e-6); border-top: 1px solid var(--graphite-20); font-size: .9375rem; color: var(--graphite-80); }
+  .article-pied a { color: var(--bleu); }
+</style>

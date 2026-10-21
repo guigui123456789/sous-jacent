@@ -17,7 +17,7 @@ Site : https://www.sousjacent.com
 Contact : contact@sousjacent.com
 Langue : français
 Licence d'usage : consultation libre ; citation de courts extraits permise avec
-mention de « Sous-jacent — sousjacent.com » et lien vers la page d'origine ;
+mention de « Sous-jacent, sousjacent.com » et lien vers la page d'origine ;
 reproduction intégrale soumise à autorisation écrite.
 
 ## Les études
@@ -25,9 +25,26 @@ reproduction intégrale soumise à autorisation écrite.
 Analyses longues d'une société cotée sur l'ensemble de son histoire publiée (Vicor 2005-2025, Amundi 2010-2026),
 publiées avec les comptes retraités au format CSV et un résumé de deux pages.
 
-- [Vicor Corporation : le prix d'une entreprise qu'elle n'a jamais été](https://www.sousjacent.com/etudes/vicor-2005-2025): Étude n° 1. Vicor (NASDAQ : VICR) a logé en 2025 un règlement judiciaire de 45 M$ à l'intérieur de son chiffre d'affaires, balisé comme tel dans ses données XBRL déposées auprès de la SEC — 452,7 M$ en donnée structurée contre 407,7 M$ dans les états financiers. Ce produit non récurrent représente 55 % du résultat opérationnel de l'exercice et crée 4,7 points d'écart de présentation sur la marge brute. Vingt et un exercices retraités donnent 4,2 % de croissance annuelle moyenne, 3,5 % de marge opérationnelle courante et 4,6 % de rentabilité du capital employé. Un DCF inversé situe la valeur intrinsèque entre 90 et 116 dollars par action (point central 102) contre un cours de 202,40 dollars au 16 octobre 2026.
+- [Vicor Corporation : le prix d'une entreprise qu'elle n'a jamais été](https://www.sousjacent.com/etudes/vicor-2005-2025): Étude n° 1. Vicor (NASDAQ : VICR) a logé en 2025 un règlement judiciaire de 45 M$ à l'intérieur de son chiffre d'affaires, balisé comme tel dans ses données XBRL déposées auprès de la SEC : 452,7 M$ en donnée structurée contre 407,7 M$ dans les états financiers. Ce produit non récurrent représente 55 % du résultat opérationnel de l'exercice et crée 4,7 points d'écart de présentation sur la marge brute. Vingt et un exercices retraités donnent 4,2 % de croissance annuelle moyenne, 3,5 % de marge opérationnelle courante et 4,6 % de rentabilité du capital employé. Un DCF inversé situe la valeur intrinsèque entre 90 et 116 dollars par action (point central 102) contre un cours de 202,40 dollars au 16 octobre 2026. Révisée le 21 octobre 2026 après les résultats du troisième trimestre : objectif de cours 111 dollars à douze mois, valeur intrinsèque 101 dollars (89 – 115), contre un cours de 190,68 dollars au 19 octobre 2026.
 - [Amundi : l'épargne de l'Europe, et ce que coûte d'appartenir à une banque](https://www.sousjacent.com/etudes/amundi-2010-2026): Étude n° 2, 20/10/2026. Amundi (Euronext Paris : AMUN, ISIN FR0004125920), premier gestionnaire d'actifs européen, 2 581 Md€ d'encours au 30/06/2026, coefficient d'exploitation ajusté de 49,6 % au S1 2026 contre 58 % à 79 % chez DWS, Schroders et Aberdeen. Le contrat de distribution UniCredit expire en juillet 2027 : la marge nette sur la gamme vendue par UniCredit, mesurée dans quarante prospectus italiens, est d'environ 45 pb (111 pb facturés, 59 % au réseau) ; l'étude retient environ 40 pb sur 75 Md€, soit environ 300 M€ de revenus annuels en jeu. Les 636 ETF d'Amundi ont des frais moyens pondérés de 17,5 pb. SBI FM et Victory Capital valent environ 5,3 Md€ au marché. Somme des parties 91,2 €, multiples 85,2 €, valeur intrinsèque 89,2 € ; objectif de cours 94 € à douze mois (20/10/2027) contre un cours de 87,65 € au 19/10/2026. L'auteur ne détient pas de titres Amundi.
 - [Index des études](https://www.sousjacent.com/etudes)
+
+## Les notes de suivi
+
+Après chaque publication trimestrielle d'une société couverte, une note d'une page confronte
+le trimestre aux hypothèses de l'étude, puis confirme ou révise l'objectif de cours. L'étude
+d'origine n'est jamais réécrite : les deux chiffres restent consultables côte à côte.
+
+- [Index des notes de suivi](https://www.sousjacent.com/notes)
+- [Vicor, troisième trimestre 2026 : la contradiction est tranchée, et l'objectif est fixé à 111 dollars](https://www.sousjacent.com/notes/vicor-t3-2026): 21/10/2026. Vicor publie 197,1 M$ au troisième trimestre 2026 (+78,5 % sur un an) contre 129,2 M$ attendus d'après ses propres indications de juillet, dont 66,6 M$ de redevances de licence au lieu des 5 M$ annoncés. Le chiffre d'affaires 2026 ressort à 640,0 M$ contre 639,8 supposés dans l'étude : le point de départ du modèle est confirmé, sa composition non. Marge opérationnelle de 36,6 % sur le trimestre et 27,3 % sur neuf mois, contre 3,5 % de moyenne sur 2005-2025. Rentabilité du capital employé annualisée de 37,2 % contre 4,6 % en historique. Objectif de cours 111 $ à douze mois, valeur intrinsèque 101 $ (89 – 115), contre 190,68 $ au 19 octobre 2026. Pour justifier le cours il faudrait une marge normative de 68 % ou un chiffre d'affaires 2035 de 3 981 M$, soit 9,8 fois celui de 2025.
+
+## Le graphique de la semaine
+
+Un graphique dessiné pour le site à partir de documents publics, sa source exacte, et trois
+phrases pour le lire.
+
+- [Index des graphiques](https://www.sousjacent.com/graphique)
+- [Un quart du chiffre d'affaires de Vicor vient désormais de ses brevets](https://www.sousjacent.com/graphique/2026-10-21-vicor-produits-et-redevances): 21/10/2026. Les redevances de licence de Vicor passent de 3,9 % du chiffre d'affaires en 2023 (15,9 M$) à 25,1 % en 2026 (160,4 M$), tandis que les ventes de produits, après être tombées 10 % sous leur niveau de 2023, ressortent à environ 480 M$ en 2026, soit 23 % au-dessus de 2023.
 
 ## Le mécanisme de la semaine
 

@@ -48,4 +48,40 @@ const fondamentaux = defineCollection({
   schema: z.object({ ...commun, rubrique: z.string() }),
 });
 
-export const collections = { mecanisme, etudes, fondamentaux };
+/* Les notes de suivi : une page après chaque publication trimestrielle d'une
+   société couverte. Elles testent la thèse de l'étude et, le cas échéant,
+   révisent l'objectif de cours. L'étude elle-même n'est jamais réécrite. */
+const notes = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/notes' }),
+  schema: z.object({
+    ...commun,
+    societe: z.string(),
+    etude: z.string(),
+    trimestre: z.string(),
+    cours: z.string(),
+    objectif: z.string().optional(),
+    objectifPrecedent: z.string().optional(),
+    sens: z.enum(['confirmé', 'relevé', 'abaissé', 'initié']).default('confirmé'),
+    methode: z.string().default('1.1'),
+    partage: z.string().optional(),
+    citations: z.array(z.string()).optional(),
+  }),
+});
+
+/* Le graphique de la semaine : un graphique dessiné pour le site, sa source,
+   et trois phrases. Format court, publié entre deux études. */
+const graphique = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/graphique' }),
+  schema: z.object({
+    ...commun,
+    image: z.string(),
+    alt: z.string(),
+    source: z.string(),
+    lecture: z.string().optional(),
+    lien: z.string().optional(),
+    lienLibelle: z.string().optional(),
+    partage: z.string().optional(),
+  }),
+});
+
+export const collections = { mecanisme, etudes, fondamentaux, notes, graphique };

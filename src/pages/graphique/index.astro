@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import EnTetePage from '../../components/EnTetePage.astro';
+import { getCollection } from 'astro:content';
+
+const entrees = (await getCollection('graphique'))
+  .filter((e) => !e.data.brouillon)
+  .sort((a, b) => b.data.date - a.data.date);
+
+const dateFr = (d) =>
+  d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base
+  titre="Le graphique de la semaine"
+  description="Un graphique dessiné pour le site, sa source, et trois phrases. Le format court de sous-jacent, entre deux études."
+  enteteTransparente={true}
+>
+  <EnTetePage
+    sur="Le format court"
+    titre="Le graphique de la semaine"
+    intro="Un seul graphique, dessiné ici à partir de documents publics, avec sa source exacte et trois phrases pour le lire. Aucun graphique de ce site n'est repris d'ailleurs."
+    image="/images/balcon-defense.webp"
+  />
+
+  <section class="section">
+    <div class="enveloppe">
+      {entrees.length === 0 ? (
+        <p class="corps">Le premier graphique arrive.</p>
+      ) : (
+        <ul class="galerie">
+          {entrees.map((e) => (
+            <li>
+              <a href={`/graphique/${e.id}`}>
+                <figure>
+                  <img src={e.data.image} alt={e.data.alt} loading="lazy" />
+                </figure>
+                <div class="galerie-texte">
+                  <time datetime={e.data.date.toISOString()}>{dateFr(e.data.date)}</time>
+                  <h2>{e.data.titre}</h2>
+                  <p>{e.data.chapo}</p>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .galerie { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--e-10); }
+  .galerie > li { border-top: 1px solid var(--graphite-20); padding-top: var(--e-8); }
+  .galerie a { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; text-decoration: none; }
+  @media (max-width: 860px) { .galerie a { grid-template-columns: 1fr; gap: var(--e-6); } }
+  .galerie figure { margin: 0; background: var(--pierre-20); padding: var(--e-6); }
+  .galerie figure img { display: block; width: 100%; height: auto; }
+  .galerie time { font-size: .72rem; letter-spacing: .07em; text-transform: uppercase; color: var(--or); }
+  .galerie h2 { margin-top: var(--e-4); font-family: var(--serif); font-weight: 300; font-size: 1.4rem; line-height: 1.25; color: var(--bleu); }
+  .galerie a:hover h2 { color: var(--or); }
+  .galerie p { margin-top: var(--e-5); font-size: .9375rem; line-height: 1.6; color: var(--graphite-80); }
+</style>
