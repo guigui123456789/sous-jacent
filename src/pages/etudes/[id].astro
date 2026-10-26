@@ -72,7 +72,7 @@ const schema = [
     </div>
     <div class="tete-voile"></div>
     <div class="enveloppe tete-contenu">
-      <a class="retour" href="/etudes">Toutes les études</a>
+      <a class="retour" href="/etudes/">Toutes les études</a>
       <p class="sur">Étude n° {String(e.data.numero).padStart(2, '0')} · {e.data.societe}</p>
       <h1>{e.data.titre}</h1>
       <p class="tete-chapo">{e.data.chapo}</p>
@@ -167,7 +167,7 @@ const schema = [
             d'intérêts et historique des objectifs. L'auteur ne détient aucun titre de la société. Ce
             n'est pas un conseil en investissement personnalisé.
           </p>
-          <a class="lien" href="/informations-legales">Le statut réglementaire</a>
+          <a class="lien" href="/informations-legales/">Le statut réglementaire</a>
           <p class="bloc-version">Construite sous la méthode <a href={`/documents/sous-jacent-methode-v${e.data.methode}.pdf`}>version {e.data.methode}</a>.</p>
         </div>
         ) : (
@@ -178,7 +178,7 @@ const schema = [
             ni horizon, ni avis d'achat ou de vente. Chaque hypothèse se déplace dans le calculateur,
             et la conclusion vous appartient.
           </p>
-          <a class="lien" href="/methode">La méthode</a>
+          <a class="lien" href="/methode/">La méthode</a>
           <p class="bloc-version">Construite sous la méthode <a href={`/documents/sous-jacent-methode-v${e.data.methode}.pdf`}>version {e.data.methode}</a>.</p>
         </div>
         )}

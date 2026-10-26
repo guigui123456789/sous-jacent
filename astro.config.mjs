@@ -3,15 +3,14 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://www.sousjacent.com',
+  /* Une seule forme d'adresse fait foi : avec barre oblique finale, comme le
+     canonical. Vercel renvoie la forme sans barre en 308 (voir vercel.json),
+     ce qui supprime les doublons « Alternate page with proper canonical »
+     relevés dans la Search Console le 26 octobre 2026. */
+  trailingSlash: 'always',
   integrations: [sitemap()],
-  redirects: {
-    '/mentions-legales': '/informations-legales',
-    /* Le graphique de la semaine a d'abord eu sa propre rubrique, le 21 octobre
-       2026. Elle a été repliée dans « Le mécanisme » le jour même, pour ne pas
-       charger le menu. Les adresses soumises à IndexNow restent valables. */
-    '/graphique': '/mecanisme',
-    '/graphique/2026-10-21-vicor-produits-et-redevances':
-      '/mecanisme/2026-10-21-vicor-produits-et-redevances',
-  },
+  /* Les anciennes adresses sont redirigées par Vercel en 308 (vercel.json),
+     et non plus par une page HTML intermédiaire portant un noindex :
+     une vraie redirection transmet l'autorite, la page HTML ne transmet rien. */
   markdown: { shikiConfig: { theme: 'github-light' } }
 });

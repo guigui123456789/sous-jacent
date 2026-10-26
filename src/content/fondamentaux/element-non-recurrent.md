@@ -33,7 +33,7 @@ La règle générale : **recouper systématiquement un chiffre tiré d'un tablea
 
 ## Ce que le retraitement change réellement
 
-Sur les vingt et un exercices de [l'étude Vicor](/etudes/vicor-2005-2025), la marge opérationnelle moyenne passe de **2,8 % publiée à 3,5 % retraitée**. L'écart paraît mince ; il masque deux exercices qui changent de signe.
+Sur les vingt et un exercices de [l'étude Vicor](/etudes/vicor-2005-2025/), la marge opérationnelle moyenne passe de **2,8 % publiée à 3,5 % retraitée**. L'écart paraît mince ; il masque deux exercices qui changent de signe.
 
 | Exercice | Publiée | Retraitée | Cause |
 |---|---|---|---|

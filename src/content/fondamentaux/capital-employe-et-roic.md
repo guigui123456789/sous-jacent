@@ -14,7 +14,7 @@ C'est ce que mesure la rentabilité du capital employé (le *return on invested 
 
 Il existe autant de définitions que de manuels. Une série de ROIC n'est comparable d'une étude à l'autre que si la définition est la même partout, c'est pourquoi elle est écrite ici plutôt que sous-entendue.
 
-**Le numérateur** est le résultat opérationnel courant (donc retraité des [éléments non récurrents](/fondamentaux/element-non-recurrent)) diminué d'un impôt normatif de 21 %. C'est ce que l'exploitation laisse, indépendamment de la façon dont elle est financée.
+**Le numérateur** est le résultat opérationnel courant (donc retraité des [éléments non récurrents](/fondamentaux/element-non-recurrent/)) diminué d'un impôt normatif de 21 %. C'est ce que l'exploitation laisse, indépendamment de la façon dont elle est financée.
 
 **Le dénominateur** est le capital employé moyen de l'exercice : les capitaux propres, augmentés des dettes financières, diminués de la trésorerie.
 
@@ -44,7 +44,7 @@ Le ROIC se décompose en deux termes, et la décomposition désigne le problème
 
 La rotation, c'est le chiffre d'affaires rapporté au capital employé : combien d'euros de ventes un euro de capital permet de produire. Un distributeur vit de rotation avec des marges faibles ; un éditeur de logiciels vit de marge avec peu de capital. Un ROIC médiocre vient de l'un ou de l'autre, et la réponse industrielle n'est pas la même.
 
-Dans [l'étude Vicor](/etudes/vicor-2005-2025), la réponse est nette : la rotation du capital employé est de **2,0 fois** en moyenne, ce qui est correct (l'entreprise fait tourner son capital). C'est la marge qui manque. Le ROIC moyen ressort à **4,6 %** sur les exercices calculables, pour un coût du capital retenu à 10 %, et trois exercices seulement franchissent ce seuil en vingt et un ans.
+Dans [l'étude Vicor](/etudes/vicor-2005-2025/), la réponse est nette : la rotation du capital employé est de **2,0 fois** en moyenne, ce qui est correct (l'entreprise fait tourner son capital). C'est la marge qui manque. Le ROIC moyen ressort à **4,6 %** sur les exercices calculables, pour un coût du capital retenu à 10 %, et trois exercices seulement franchissent ce seuil en vingt et un ans.
 
 ## Ce que cela implique pour une valorisation
 
