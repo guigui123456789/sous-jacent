@@ -2,10 +2,10 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": true,
   "redirects": [
-    { "source": "/mentions-legales", "destination": "/informations-legales/", "permanent": true },
-    { "source": "/graphique", "destination": "/mecanisme/", "permanent": true },
+    { "source": "/mentions-legales/", "destination": "/informations-legales/", "permanent": true },
+    { "source": "/graphique/", "destination": "/mecanisme/", "permanent": true },
     {
-      "source": "/graphique/2026-10-21-vicor-produits-et-redevances",
+      "source": "/graphique/2026-10-21-vicor-produits-et-redevances/",
       "destination": "/mecanisme/2026-10-21-vicor-produits-et-redevances/",
       "permanent": true
     }
